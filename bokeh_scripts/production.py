@@ -3,7 +3,7 @@ from bokeh.plotting import figure
 from bokeh.models.widgets import Slider, TextInput
 from bokeh.layouts import row, column
 from bokeh.models import ColumnDataSource, HoverTool, CustomJS
-from bokeh.embed import components, file_html
+from bokeh.embed import file_html
 from bokeh.resources import CDN
 
 
@@ -14,7 +14,7 @@ def output(l):
     alpha = .25
     beta = 1. - alpha
     k = 10
-    y = a * (k ** beta) * (l ** alpha)
+    y = a * (k ** alpha) * (l ** beta)
     return y
 
 
@@ -36,7 +36,7 @@ callback = CustomJS(args=dict(source=cds), code="""
     l = data['labor']
     y = data['y']
     for (i = 0; i < y.length; i++){
-        y[i] = A * Math.pow(k, beta) * Math.pow(l[i], alpha);
+        y[i] = A * Math.pow(k, alpha) * Math.pow(l[i], beta);
     }
     source.change.emit();
 """)
@@ -52,7 +52,7 @@ callback.args['alpha'] = alpha_input
 callback.args['capital'] = capital_input
 
 # create figure with labor on the x-axis
-f = figure(title='Cobb-Douglas', width=500, height=500)
+f = figure(title='Cobb-Douglas', width=550, height=500)
 f.line(x='labor', y='y', line_width=2, source=cds)
 hover = HoverTool(tooltips=[('Output', '@y'), ('Labor', '@labor')])
 f.add_tools(hover)
@@ -60,16 +60,14 @@ f.legend.location = 'bottom_right'
 f.xaxis.axis_label = 'Labor'
 f.yaxis.axis_label = 'Production'
 
-# alpha_input.on_change('value', update)
-# capital_input.on_change('value', update)
-# productivity_input.on_change('value', update)
 
 input_column = column(productivity_input, capital_input, alpha_input)
 layout = row(f, input_column)
 
+# used for development purposes
 curdoc().add_root(layout)
-# export components
-# js, div = components(layout)
+
+# export HTML file to embed
 html = file_html(layout, CDN, 'production')
 html_file = open('../_includes/production.html', 'w')
 html_file.writelines(html)
