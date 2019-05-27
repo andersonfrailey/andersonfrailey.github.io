@@ -1,0 +1,57 @@
+.container{
+    max-width: 45em;
+}
+.blog_link{
+    color: black;
+}
+nav{
+    margin-bottom: 3em;
+}
+div{
+    max-width: 45em;
+}
+#nav{
+    height: 5em;
+    color: black;
+}
+body{
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+hr{
+    border-width: 0.2em;
+    border-color: dodgerblue;
+}
+#leftcol{
+    width: 80%;
+    padding-left: 5%;
+}
+#rightcol{
+    width: 10%;
+}
+.row{
+    padding-top: 5%;
+}
+.heading_link{
+    color: rgb(105, 112, 119);
+}
+#home_link{
+    font-size: 2em;
+    color: rgb(93, 98, 102);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+a{
+    color: rgb(64, 64, 211);
+}
+.navbar-header{
+    color: rgb(105, 112, 119);
+}
+code{
+    color: rgba(0, 0, 0, 0.541);
+}
+img{
+    max-width: 40em;
+}
+.contact-link{
+    color: black;
+}

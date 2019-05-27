@@ -1,1 +1,1 @@
-Repo for my personal GitHub Pages site. Based entirely off of [Jekyll Now](https://github.com/barryclark/jekyll-now).
+Repo for my personal GitHub Pages site.

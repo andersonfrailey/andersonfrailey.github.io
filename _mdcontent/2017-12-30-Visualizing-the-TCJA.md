@@ -1,6 +1,5 @@
----
-layout: post
-title: Visualizing the TCJA with Bokeh
+# Visualizing the TCJA with Bokeh
+
 ---
 
 Throughout tax reform season a seemingly endless stream of tables, plots, and charts filled Twitter to show the distributional effects of the Tax Cuts and Jobs Act. I particularly liked [Jonathan Schwabish’s piece](https://www.urban.org/urban-wire/how-we-can-better-visualize-analysis-tax-reform-legislation) on how he created a graph to make a report by the Joint Committee on Taxation (JCT) more engaging. I decided to recreate his work using [Bokeh](https://bokeh.pydata.org/en/latest/) and the open-source [Tax-Calculator](https://github.com/open-source-economics/Tax-Calculator/).
@@ -33,17 +32,18 @@ Once the functions have been defined, all that is left to do is loop through eac
 
 <script src="https://gist.github.com/andersonfrailey/285ca68b7e7f54dcc4f4c15c22fc777f.js"></script>
 
-![_config.yml]({{ site.baseurl }}/images/tcja2018.png)
-![_config.yml]({{ site.baseurl }}/images/tcja2019.png)
-![_config.yml]({{ site.baseurl }}/images/tcja2020.png)
-![_config.yml]({{ site.baseurl }}/images/tcja2021.png)
-![_config.yml]({{ site.baseurl }}/images/tcja2022.png)
-![_config.yml]({{ site.baseurl }}/images/tcja2023.png)
-![_config.yml]({{ site.baseurl }}/images/tcja2024.png)
-![_config.yml]({{ site.baseurl }}/images/tcja2025.png)
-![_config.yml]({{ site.baseurl }}/images/tcja2026.png)
-![_config.yml]({{ site.baseurl }}/images/tcja2027.png)
+<img src="../images/tcja2018.png" style="max-width:900px; max-height:800px; object-fit:contain"/>
+<img src="../images/tcja2019.png" style="max-width:900px; max-height:800px; object-fit:contain"/>
+<img src="../images/tcja2020.png" style="max-width:900px; max-height:800px; object-fit:contain"/>
+<img src="../images/tcja2021.png" style="max-width:900px; max-height:800px; object-fit:contain"/>
+<img src="../images/tcja2022.png" style="max-width:900px; max-height:800px; object-fit:contain"/>
+<img src="../images/tcja2023.png" style="max-width:900px; max-height:800px; object-fit:contain"/>
+<img src="../images/tcja2024.png" style="max-width:900px; max-height:800px; object-fit:contain"/>
+<img src="../images/tcja2025.png" style="max-width:900px; max-height:800px; object-fit:contain"/>
+<img src="../images/tcja2026.png" style="max-width:900px; max-height:800px; object-fit:contain"/>
+<img src="../images/tcja2027.png" style="max-width:900px; max-height:800px; object-fit:contain"/>
 
 ### Resources:
+
 [Bokeh](https://bokeh.pydata.org/en/latest/index.html)  
 [Tax-Calculator](https://github.com/open-source-economics/Tax-Calculator/)
