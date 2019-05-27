@@ -1,0 +1,18 @@
+{
+    "Building Dashboards with PyBaseball and Bokeh": {
+        "author": "Anderson Frailey",
+        "template": "post_template.html",
+        "written": "March 21, 2018",
+        "last_modified": "March 21, 2018",
+        "cdn": [],
+        "md_file": "2018-3-21-matchup.md"
+    },
+    "Visualizing the TCJA with Bokeh": {
+        "author": "Anderson Frailey",
+        "template": "post_template.html",
+        "written": "December 30, 2017",
+        "last_modified": "December 30, 2017",
+        "cdn": [],
+        "md_file": "2017-12-30-Visualizing-the-TCJA.md"
+    }
+}
