@@ -99,6 +99,14 @@ class PageBuilder():
         about_pathout = Path(HOME_PATH, "about.html")
         self.write_page(about_pathout, about_template, content=about_content)
 
+        # create speaking page
+        speaking_md_text = Path(CONTENT_PATH, "speaking.md").open("r").read()
+        speaking_content = markdown.markdown(speaking_md_text)
+        speaking_template = Path(TEMPLATE_PATH, "speaking_template.html")
+        speaking_pathout = Path(HOME_PATH, "speaking.html")
+        self.write_page(speaking_pathout, speaking_template,
+                        content=speaking_content)
+
     def write_page(self, pathout, template_path, **kwargs):
         """
         Render the HTML template with the markdown text
