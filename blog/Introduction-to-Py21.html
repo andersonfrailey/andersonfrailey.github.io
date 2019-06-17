@@ -153,20 +153,18 @@
 <p>To make changing the rules of the game easy, I enlisted a package called  <a href="https://paramtools.org/">ParamTools</a> . ParamTools is a Python library centered around handling parameter processing and validation for computational models. With ParamTools, I was able to set the basic rules of the game as defaults and provide a simple method for changing them to run simulations under different conditions all while validating any user input.</p>
 <p>Take as an example the number of decks used in a game. Using a simple JSON format, I can set the default value for this parameter (<code>num_decks</code>) to 8, and set minimum and maximum values used for input validation:</p>
 <div class=".highlight"><pre><span></span>&quot;num_decks&quot;: {
-  &quot;title&quot;: &quot;Number of decks the game will be played with&quot;,
-  &quot;description&quot;: &quot;Number of decks used in the game.&quot;,
-  &quot;notes&quot;: &quot;&quot;,
-  &quot;section_1&quot;: &quot;Game&quot;,
-  &quot;section_2&quot;: &quot;Deck&quot;,
-  &quot;type&quot;: &quot;int&quot;,
-  &quot;number_dims&quot;: 0,
-  &quot;value&quot;: [{&quot;value&quot;: 8}],
-  &quot;validators&quot;: {
-      &quot;range&quot;: {
-          &quot;min&quot;: 1,
-          &quot;max&quot;: 9e+99
-      }
-  }
+    &quot;title&quot;: &quot;Number of decks the game will be played with&quot;,
+    &quot;description&quot;: &quot;Number of decks used in the game.&quot;,
+    &quot;section_1&quot;: &quot;Game&quot;,
+    &quot;section_2&quot;: &quot;Deck&quot;,
+    &quot;type&quot;: &quot;int&quot;,
+    &quot;value&quot;: 8,
+    &quot;validators&quot;: {
+        &quot;range&quot;: {
+            &quot;min&quot;: 1,
+            &quot;max&quot;: 9e+99
+        }
+    }
 }
 </pre></div>
 
@@ -176,7 +174,7 @@
 <h2>Closing Thoughts</h2>
 <p>In short, Py21 is a basic package for running blackjack simulations. It is flexible enough to be tailored for each users needs, while still being powerful enough to run a million simulations in around a minute<sup>1</sup>. At this stage, Py21 is stable and I do not foresee any major changes to its core. Future development will focus on adding new features such as additional graphing capabilities, strategies, and greater data collection. I’m also open to any requests from users.</p>
 <p>You can install Py21 using <code>pip install py21</code>, or by downloading the source code from <a href="https://github.com/andersonfrailey/blackjack">GitHub</a>.</p>
-<h5><em>Footnotes</em></h5>
+<h5><u><em>Footnotes</em></u></h5>
 <p><sup>1</sup> The exact amount of time needed to run your simulations depends on how complex your strategies and the number of players involved in the game.  I was able to run a million hands in around a minute with one player using basic strategy.</p>
             </div>
             <p>

@@ -2,8 +2,8 @@
     "Introduction to Py21": {
         "author": "Anderson Frailey",
         "template": "post_template.html",
-        "written": "June 16, 2019",
-        "last_modified": "June 16, 2019",
+        "written": "June 17, 2019",
+        "last_modified": "June 17, 2019",
         "cdn": [
             "https://cdn.jsdelivr.net/npm//vega@5",
             "https://cdn.jsdelivr.net/npm//vega-lite@3",

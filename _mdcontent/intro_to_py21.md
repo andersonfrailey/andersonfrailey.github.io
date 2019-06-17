@@ -132,20 +132,18 @@ Take as an example the number of decks used in a game. Using a simple JSON forma
 
 ```
 "num_decks": {
-  "title": "Number of decks the game will be played with",
-  "description": "Number of decks used in the game.",
-  "notes": "",
-  "section_1": "Game",
-  "section_2": "Deck",
-  "type": "int",
-  "number_dims": 0,
-  "value": [{"value": 8}],
-  "validators": {
-      "range": {
-          "min": 1,
-          "max": 9e+99
-      }
-  }
+    "title": "Number of decks the game will be played with",
+    "description": "Number of decks used in the game.",
+    "section_1": "Game",
+    "section_2": "Deck",
+    "type": "int",
+    "value": 8,
+    "validators": {
+        "range": {
+            "min": 1,
+            "max": 9e+99
+        }
+    }
 }
 ```
 
@@ -158,6 +156,6 @@ In short, Py21 is a basic package for running blackjack simulations. It is flexi
 
 You can install Py21 using `pip install py21`, or by downloading the source code from [GitHub](https://github.com/andersonfrailey/blackjack).
 
-##### _Footnotes_
+##### <u>_Footnotes_</u>
 
 <sup>1</sup> The exact amount of time needed to run your simulations depends on how complex your strategies and the number of players involved in the game.  I was able to run a million hands in around a minute with one player using basic strategy.
