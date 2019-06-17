@@ -1,4 +1,16 @@
 {
+    "Introduction to Py21": {
+        "author": "Anderson Frailey",
+        "template": "post_template.html",
+        "written": "June 16, 2019",
+        "last_modified": "June 16, 2019",
+        "cdn": [
+            "https://cdn.jsdelivr.net/npm//vega@5",
+            "https://cdn.jsdelivr.net/npm//vega-lite@3",
+            "https://cdn.jsdelivr.net/npm//vega-embed@4"
+        ],
+        "md_file": "intro_to_py21.md"
+    },
     "Building Dashboards with PyBaseball and Bokeh": {
         "author": "Anderson Frailey",
         "template": "post_template.html",
