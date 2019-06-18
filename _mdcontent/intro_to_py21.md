@@ -63,7 +63,7 @@ outcome = outcome_bars([player.history, player2.history],
       .catch(error => showError(el, error));
   </script>
 
-The second creates a heat map showing the percentage of times a given outcome occurs, grouped by the player’s total and the dealer’s up card. The heat map can be made for
+The second creates a heat map showing the percentage of times a given outcome (win, loss, or push) occurs, grouped by the player’s total and the dealer’s up card.
 
 ```python
 from py21 import Player, Game
@@ -126,7 +126,7 @@ game = Game([player], rules=new_rules)
 Internally, Py21 will take this dictionary and update each parameter it contains accordingly. This is handled using a package called ParamTools.
 
 ## Using ParamTools
-To make changing the rules of the game easy, I enlisted a package called  [ParamTools](https://paramtools.org/) . ParamTools is a Python library centered around handling parameter processing and validation for computational models. With ParamTools, I was able to set the basic rules of the game as defaults and provide a simple method for changing them to run simulations under different conditions all while validating any user input.
+To make changing the rules of the game easy, I enlisted a package called  [ParamTools](https://paramtools.org/) . ParamTools is a Python library centered around handling parameter processing and validation for computational models. With ParamTools, I was able to set the basic rules of the game as defaults and provide a simple method for changing them to run simulations under different conditions, all while validating any user input.
 
 Take as an example the number of decks used in a game. Using a simple JSON format, I can set the default value for this parameter (`num_decks`) to 8, and set minimum and maximum values used for input validation:
 
@@ -147,7 +147,7 @@ Take as an example the number of decks used in a game. Using a simple JSON forma
 }
 ```
 
-The user can then create their own custom rules using the format discussed above. Note that this is a rather verbose example of parameter setting. ParamTools allows you to slim this down if you would like.
+The user can then customize these rules using the format discussed above. Note that this is a rather verbose example of parameter setting. ParamTools allows you to slim this down if you would like.
 
 A major advantage of using ParamTools is that if a user were to try and pass an invalid modification to the rules — such as setting the number of decks to zero — ParamTools will catch this and throw and error so I do not need to write my own code for input validation.
 

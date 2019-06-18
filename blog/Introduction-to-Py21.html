@@ -30,7 +30,7 @@
         </div>
         <div class="container">
             <div class="container" max-width=500px>
-                <i><p>June 16, 2019</p></i>
+                <i><p>June 17, 2019</p></i>
                 <h1>Intro to Py21</h1>
 <p>Blackjack has long been one of the most popular games you’ll find in a casino. Its simplicity makes it an easy option for beginners and the relatively modest house edge appeals to more seasoned gamblers. The game also has a strong history of detailed computational analysis. Ed Thorpe’s classic, <em>Beat the Dealer</em>, has been regarded as the gold standard in blackjack analysis since its publication in 1966. In it, Thorpe uses an IBM 704 to simulate games of blackjack, ultimately determining the best strategy for a player (now known as basic strategy). Inspired by Thorpe (and <em>The Perfect Bet</em> by Adam Kucharski), I set out to create a modern blackjack simulator. The result is Py21.</p>
 <h2>Usage</h2>
@@ -92,7 +92,7 @@
       .catch(error => showError(el, error));
   </script>
 
-<p>The second creates a heat map showing the percentage of times a given outcome occurs, grouped by the player’s total and the dealer’s up card. The heat map can be made for</p>
+<p>The second creates a heat map showing the percentage of times a given outcome (win, loss, or push) occurs, grouped by the player’s total and the dealer’s up card.</p>
 <div class=".highlight"><pre><span></span><span class="kn">from</span> <span class="nn">py21</span> <span class="kn">import</span> <span class="n">Player</span><span class="p">,</span> <span class="n">Game</span>
 <span class="kn">from</span> <span class="nn">py21.utils</span> <span class="kn">import</span> <span class="n">result_heatmap</span>
 
@@ -150,7 +150,7 @@
 
 <p>Internally, Py21 will take this dictionary and update each parameter it contains accordingly. This is handled using a package called ParamTools.</p>
 <h2>Using ParamTools</h2>
-<p>To make changing the rules of the game easy, I enlisted a package called  <a href="https://paramtools.org/">ParamTools</a> . ParamTools is a Python library centered around handling parameter processing and validation for computational models. With ParamTools, I was able to set the basic rules of the game as defaults and provide a simple method for changing them to run simulations under different conditions all while validating any user input.</p>
+<p>To make changing the rules of the game easy, I enlisted a package called  <a href="https://paramtools.org/">ParamTools</a> . ParamTools is a Python library centered around handling parameter processing and validation for computational models. With ParamTools, I was able to set the basic rules of the game as defaults and provide a simple method for changing them to run simulations under different conditions, all while validating any user input.</p>
 <p>Take as an example the number of decks used in a game. Using a simple JSON format, I can set the default value for this parameter (<code>num_decks</code>) to 8, and set minimum and maximum values used for input validation:</p>
 <div class=".highlight"><pre><span></span>&quot;num_decks&quot;: {
     &quot;title&quot;: &quot;Number of decks the game will be played with&quot;,
@@ -169,7 +169,7 @@
 </pre></div>
 
 
-<p>The user can then create their own custom rules using the format discussed above. Note that this is a rather verbose example of parameter setting. ParamTools allows you to slim this down if you would like.</p>
+<p>The user can then customize these rules using the format discussed above. Note that this is a rather verbose example of parameter setting. ParamTools allows you to slim this down if you would like.</p>
 <p>A major advantage of using ParamTools is that if a user were to try and pass an invalid modification to the rules — such as setting the number of decks to zero — ParamTools will catch this and throw and error so I do not need to write my own code for input validation.</p>
 <h2>Closing Thoughts</h2>
 <p>In short, Py21 is a basic package for running blackjack simulations. It is flexible enough to be tailored for each users needs, while still being powerful enough to run a million simulations in around a minute<sup>1</sup>. At this stage, Py21 is stable and I do not foresee any major changes to its core. Future development will focus on adding new features such as additional graphing capabilities, strategies, and greater data collection. I’m also open to any requests from users.</p>
@@ -178,7 +178,7 @@
 <p><sup>1</sup> The exact amount of time needed to run your simulations depends on how complex your strategies and the number of players involved in the game.  I was able to run a million hands in around a minute with one player using basic strategy.</p>
             </div>
             <p>
-                <i>Last Updated: June 16, 2019</i>
+                <i>Last Updated: June 17, 2019</i>
             </p>
             <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-via="andersonfrailey" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
