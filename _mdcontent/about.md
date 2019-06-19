@@ -15,12 +15,12 @@ Core Maintainer
 
 * [Tax-Brain](https://github.com/PSLmodels/Tax-Brain)
 * [TaxData](https://github.com/PSLmodels/taxdata)
+* [PSL-Infrastructure](https://github.com/PSLmodels/PSL-Infrastructure)
 * [Py21](https://github.com/andersonfrailey/blackjack)
 
 Contributor
 
 * [Tax-Calculator](https://github.com/PSLmodels/Tax-Calculator)
-* [PSL-Infrastructure](https://github.com/PSLmodels/PSL-Infrastructure)
 * [pybaseball](https://github.com/jldbc/pybaseball)
 
 I have also given multiple talks on projects I work on, which can be found [here](https://andersonfrailey.github.io/speaking).
