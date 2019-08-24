@@ -2,12 +2,12 @@
 
 ---
 
-I'm currently a research associate in the [Open Source Policy Center](https://www.ospc.org)
-at the [American Enterprise Institute](www.aei.org). I work on open source policy
-modeling with a primary focus on tax models.
+I'm currently an Economics PhD student at the University of Virginia. I work on open source policy
+modeling with a primary focus on tax models in the [Policy Simulation Library](https://www.pslmodels.org)
+(PSL). Prevoiusly, I worked as a research associate in the
+[Open Source Policy Center](https://www.ospc.org) at the [American Enterprise Institute](www.aei.org).
 
-I earned a BA in Economics from The University of Texas at Austin and will be
-joining the Economics PhD program at the University of Virginia this fall.
+I earned a BA in Economics from The University of Texas at Austin.
 
 **Open Source Work**
 
