@@ -25,6 +25,11 @@ Contributor
 
 I have also given multiple talks on projects I work on, which can be found [here](https://andersonfrailey.github.io/speaking).
 
+**Affiliations**
+
+* [Open Research Group](https://www.openrg.com/experts/frailey.html)
+* [Policy Simulation Library](https://www.pslmodels.org/index.html)
+
 **Contact**
 
 * Email: <a class="contact-link" href="mailto:andersonfrailey@gmail.com">andersonfrailey@gmail.com</a>
