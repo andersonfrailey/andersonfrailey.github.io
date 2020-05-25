@@ -58,7 +58,7 @@ img{
 pre{
     border-style: solid;
     border-width: 0.0001em;
-    background-color: rgb(235, 238, 240);
+    border-color: black;
     margin: 2em;
     max-width: 40em;
 }

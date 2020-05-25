@@ -16,8 +16,7 @@ def replace_code_blocks(text):
     ----------
     text: Markdown text with code blocks
     """
-    # patterns used by markdown code blocks
-    pattern = r'```[^`]*```'
+    # pattern used by markdown code blocks
     grouped_pattern = r'(```[\w]+\n)([^`]+)(```)'
     # replace code blocks with language specification
     code_blocks = re.findall(grouped_pattern, text)

@@ -23,7 +23,7 @@ Contributor
 * [Tax-Calculator](https://github.com/PSLmodels/Tax-Calculator)
 * [pybaseball](https://github.com/jldbc/pybaseball)
 
-I have also given multiple talks on projects I work on, which can be found [here](https://andersonfrailey.github.io/speaking).
+I have also given multiple conference talks on projects I work on, which can be found [here](https://andersonfrailey.github.io/speaking).
 
 **Affiliations**
 
