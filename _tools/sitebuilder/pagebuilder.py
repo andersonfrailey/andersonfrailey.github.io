@@ -1,10 +1,9 @@
 import json
 import markdown
-from markdown.extensions.codehilite import CodeHiliteExtension
-from markdown.extensions.fenced_code import FencedCodeExtension, FencedBlockPreprocessor
 from jinja2 import Template
 from bs4 import BeautifulSoup
 from pathlib import Path
+from utils import replace_code_blocks
 
 
 CUR_PATH = Path(__file__).resolve().parent
@@ -60,17 +59,9 @@ class PageBuilder():
             pathout = Path(BLOG_PATH, web_page)
             template_path = Path(TEMPLATE_PATH, attrs["template"])
             md_text = Path(CONTENT_PATH, attrs["md_file"]).open("r").read()
+            _md_text = replace_code_blocks(md_text)
             md = markdown.Markdown()
-            fenced_extension = FencedCodeExtension()
-            fenced_extension.extendMarkdown(md)
-            code_hilite = CodeHiliteExtension(css_class=".highlight")
-            code_hilite.extendMarkdown(md)
-            content = md.convert(md_text)
-            # md_extentions = [
-            #     CodeHiliteExtension(),
-            #     FencedCodeExtension()
-            # ]
-            # content = markdown.markdown(md_text, extentions=md_extentions)
+            content = md.convert(_md_text)
 
             # write page
             post_attrs = {
@@ -118,6 +109,14 @@ class PageBuilder():
         speaking_pathout = Path(HOME_PATH, "speaking.html")
         self.write_page(speaking_pathout, speaking_template,
                         content=speaking_content)
+
+        # create research page
+        research_md_text = Path(CONTENT_PATH, "research.md").open("r").read()
+        research_content = markdown.markdown(research_md_text)
+        research_template = Path(TEMPLATE_PATH, "research_template.html")
+        research_pathout = Path(HOME_PATH, "research.html")
+        self.write_page(research_pathout, research_template,
+                        content=research_content)
 
     def write_page(self, pathout, template_path, **kwargs):
         """

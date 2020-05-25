@@ -6,7 +6,10 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="../css/post_css.css">
-        <link rel="stylesheet" href="css/syles.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/atom-one-light.min.css">
+
         {% for cdn in cdns %}
         <script type="text/javascript" src="{{ cdn }}"></script>
         {% endfor %}
@@ -21,6 +24,7 @@
                     <li class="nav-item"><a href="../about.html" class="nav-link">About</a></li>
                     <li class="nav-item"><a href="index.html" class="nav-link">Blog</a></li>
                     <li class="nav-item"><a href="../speaking.html" class="nav-link">Speaking</a></li>
+                    <li class="nav-item"><a href="../research.html" class="nav-link">Research</a></li>
                 </ul>
             </nav>
         </div>
@@ -40,4 +44,5 @@
             <a href="https://twitter.com/andersonfrailey?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @andersonfrailey</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
     </body>
+    <script>hljs.initHighlightingOnLoad();</script>
 </html>
