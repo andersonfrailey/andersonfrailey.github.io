@@ -1,4 +1,6 @@
 # Intro to Py21
+---
+
 Blackjack has long been one of the most popular games you’ll find in a casino. Its simplicity makes it an easy option for beginners and the relatively modest house edge appeals to more seasoned gamblers. The game also has a strong history of detailed computational analysis. Ed Thorpe’s classic, _Beat the Dealer_, has been regarded as the gold standard in blackjack analysis since its publication in 1966. In it, Thorpe uses an IBM 704 to simulate games of blackjack, ultimately determining the best strategy for a player (now known as basic strategy). Inspired by Thorpe (and _[The Perfect Bet](https://www.basicbooks.com/titles/adam-kucharski/the-perfect-bet/9781541697232/)_ by Adam Kucharski), I set out to create a modern blackjack simulator. The result is Py21.
 
 ## Usage
