@@ -7,7 +7,8 @@ modeling with a primary focus on tax models in the [Policy Simulation Library](h
 (PSL). Prevoiusly, I worked as a research associate in the
 [Open Source Policy Center](https://www.ospc.org) at the [American Enterprise Institute](https://www.aei.org).
 
-I earned a BA in Economics from The University of Texas at Austin.
+I earned a BA in Economics from The University of Texas at Austin and MA in
+Economics from the University of Virginia.
 
 **Open Source Work**
 
