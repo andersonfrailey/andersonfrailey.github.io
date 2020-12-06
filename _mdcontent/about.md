@@ -33,6 +33,5 @@ I have also given multiple conference talks on projects I work on, which can be 
 
 **Contact**
 
-* Email: <a class="contact-link" href="mailto:andersonfrailey@gmail.com">andersonfrailey@gmail.com</a>
 * Twitter: <a class="contact-link" href="https://twitter.com/andersonfrailey">@andersonfrailey</a>
 * GitHub: <a class="contact-link" href="https://github.com/andersonfrailey">andersonfrailey</a>
