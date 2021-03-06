@@ -1,4 +1,12 @@
 {
+    "Building an MLB Prediction Model in an Evening": {
+        "author": "Anderson Frailey",
+        "template": "post_template.html",
+        "written": "March 5, 2021",
+        "last_modified": "March 5, 2021",
+        "cdn": [],
+        "md_file": "building-a-baseball-model.md"
+    },
     "Introduction to Py21": {
         "author": "Anderson Frailey",
         "template": "post_template.html",
