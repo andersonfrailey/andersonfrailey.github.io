@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Building an MLB Prediction Model in an Evening | Anderson Frailey</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="../css/post_css.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/atom-one-light.min.css">
+
+        
+    </head>
+    <body>
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="navbar-header">
+                    <a href="../index.html" class="navbar-brand" id="home_link">Anderson Frailey</a>
+                </div>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a href="../about.html" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="index.html" class="nav-link">Blog</a></li>
+                    <li class="nav-item"><a href="../speaking.html" class="nav-link">Speaking</a></li>
+                    <li class="nav-item"><a href="../research.html" class="nav-link">Research</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="container">
+            <div class="container" max-width=500px>
+                <i><p>March 5, 2021</p></i>
+                <h1>Building a Baseball Model in An Evening</h1>
+<hr />
+<p>Spring Training is here and that means so are the MLB prediction models! Here is
+how to build one in just a few hours based on the
+Bradley-Terry model framework from <a href="https://www.amazon.com/Analyzing-Baseball-Data-Chapman-Hall/dp/1466570229"><em>Analyzing Baseball Data with R</em></a>.</p>
+<p>From a high level, the model looks at the matchups for all 2,430 games in a season
+then flips a coin to determine
+the winner. The coin flips are weighted based on the probability
+each team has of winning a given game, which is determined using the Bradley-Terry
+model. In a game between team <em>A</em> and <em>B</em>, the probability of
+team <em>A</em> winning is given by:</p>
+<p><center><i>P(A Wins) = exp(T<sub>A</sub>) &#247; [exp(T<sub>A</sub>) + exp(T<sub>B</sub>)]</i></center></p>
+<p>where <em><span>T<sub>i</sub></span></em> is the talent level of team <em>i</em>.</p>
+<p>To calculate talent I use the average of the ZiPS and Steamer WAR projections from
+<a href="https://www.fangraphs.com/projections.aspx?pos=all&amp;stats=bat&amp;type=zips">FanGraphs</a>
+for individual players and sum up by team. A team's talent level
+is the percentage above or below median total team WAR they are. Given a median WAR of
+30.85, the table below shows each team's talent level going into the 2021 season
+(as of March 5th, 2021).</p>
+<table>
+<thead>
+<tr><th>Team  </th><th style="text-align: right;">  Total WAR</th><th style="text-align: right;">    Talent</th></tr>
+</thead>
+<tbody>
+<tr><td>ARI   </td><td style="text-align: right;">      29.25</td><td style="text-align: right;">-0.0518639</td></tr>
+<tr><td>ATL   </td><td style="text-align: right;">      39.5 </td><td style="text-align: right;"> 0.280389 </td></tr>
+<tr><td>BAL   </td><td style="text-align: right;">      17.05</td><td style="text-align: right;">-0.447326 </td></tr>
+<tr><td>BOS   </td><td style="text-align: right;">      36.8 </td><td style="text-align: right;"> 0.192869 </td></tr>
+<tr><td>CHC   </td><td style="text-align: right;">      29.45</td><td style="text-align: right;">-0.0453809</td></tr>
+<tr><td>CHW   </td><td style="text-align: right;">      38.3 </td><td style="text-align: right;"> 0.241491 </td></tr>
+<tr><td>CIN   </td><td style="text-align: right;">      21.4 </td><td style="text-align: right;">-0.306321 </td></tr>
+<tr><td>CLE   </td><td style="text-align: right;">      29.1 </td><td style="text-align: right;">-0.0567261</td></tr>
+<tr><td>COL   </td><td style="text-align: right;">       8.6 </td><td style="text-align: right;">-0.721232 </td></tr>
+<tr><td>DET   </td><td style="text-align: right;">      20.3 </td><td style="text-align: right;">-0.341977 </td></tr>
+<tr><td>HOU   </td><td style="text-align: right;">      38.95</td><td style="text-align: right;"> 0.262561 </td></tr>
+<tr><td>KCR   </td><td style="text-align: right;">      20.75</td><td style="text-align: right;">-0.327391 </td></tr>
+<tr><td>LAA   </td><td style="text-align: right;">      34.05</td><td style="text-align: right;"> 0.103728 </td></tr>
+<tr><td>LAD   </td><td style="text-align: right;">      51.5 </td><td style="text-align: right;"> 0.669368 </td></tr>
+<tr><td>MIA   </td><td style="text-align: right;">      12.35</td><td style="text-align: right;">-0.599676 </td></tr>
+<tr><td>MIL   </td><td style="text-align: right;">      33.15</td><td style="text-align: right;"> 0.0745543</td></tr>
+<tr><td>MIN   </td><td style="text-align: right;">      43.5 </td><td style="text-align: right;"> 0.410049 </td></tr>
+<tr><td>NYM   </td><td style="text-align: right;">      39.9 </td><td style="text-align: right;"> 0.293355 </td></tr>
+<tr><td>NYY   </td><td style="text-align: right;">      49.1 </td><td style="text-align: right;"> 0.591572 </td></tr>
+<tr><td>OAK   </td><td style="text-align: right;">      30.45</td><td style="text-align: right;">-0.012966 </td></tr>
+<tr><td>PHI   </td><td style="text-align: right;">      30.3 </td><td style="text-align: right;">-0.0178282</td></tr>
+<tr><td>PIT   </td><td style="text-align: right;">      15.1 </td><td style="text-align: right;">-0.510535 </td></tr>
+<tr><td>SDP   </td><td style="text-align: right;">      44.2 </td><td style="text-align: right;"> 0.432739 </td></tr>
+<tr><td>SEA   </td><td style="text-align: right;">      27.15</td><td style="text-align: right;">-0.119935 </td></tr>
+<tr><td>SFG   </td><td style="text-align: right;">      20.85</td><td style="text-align: right;">-0.324149 </td></tr>
+<tr><td>STL   </td><td style="text-align: right;">      31.6 </td><td style="text-align: right;"> 0.0243112</td></tr>
+<tr><td>TBR   </td><td style="text-align: right;">      42.2 </td><td style="text-align: right;"> 0.367909 </td></tr>
+<tr><td>TEX   </td><td style="text-align: right;">      13.95</td><td style="text-align: right;">-0.547812 </td></tr>
+<tr><td>TOR   </td><td style="text-align: right;">      45.45</td><td style="text-align: right;"> 0.473258 </td></tr>
+<tr><td>WSN   </td><td style="text-align: right;">      31.25</td><td style="text-align: right;"> 0.012966 </td></tr>
+</tbody>
+</table>
+
+<p><br></p>
+<p>As an example of how the probabilities are calculated, the Houston Astros open
+their season against the Oakland A's. Based on
+each team's talent, the probability the Astros win is</p>
+<p><center> <i>P(Astros Win) = exp(0.273917) &#247; [exp(0.273917) + exp(-0.017171)] = 0.568.</i></center></p>
+<p>Using the same talent level for each simulated season would be boring, so in the
+actual simulations I add some noise by randomly increasing or decreasing each team's talent
+in each one. You can think of this as teams over or under performing relative
+to their projections for the year.</p>
+<p>Finally, we simulate the post season using the same method as the regular season
+for each playoff series. </p>
+<p>After 10,000 simulations, here are the results of the model along with the <a href="https://www.fangraphs.com/depthcharts.aspx?position=Standings">FanGraphs
+projections</a> for comparison:</p>
+<h4>AL West</h4>
+<table>
+<thead>
+<tr><th>Team  </th><th style="text-align: right;">  Mean Wins</th><th style="text-align: right;">  Mean Losses</th><th style="text-align: right;">  Max Wins</th><th style="text-align: right;">  Min Wins</th><th style="text-align: right;">  Win Division (%)</th><th style="text-align: right;">  Make Wild Card (%)</th><th style="text-align: right;">  Make Playoffs (%)</th><th style="text-align: right;">  Win League (%)</th><th style="text-align: right;">  Win WS (%)</th><th style="text-align: right;">  FanGraphs Wins</th></tr>
+</thead>
+<tbody>
+<tr><td>HOU   </td><td style="text-align: right;">    91.888 </td><td style="text-align: right;">      70.112 </td><td style="text-align: right;">       116</td><td style="text-align: right;">        69</td><td style="text-align: right;">             71.65</td><td style="text-align: right;">                2.82</td><td style="text-align: right;">              74.47</td><td style="text-align: right;">           24.85</td><td style="text-align: right;">       10.83</td><td style="text-align: right;">              88</td></tr>
+<tr><td>LAA   </td><td style="text-align: right;">    84.4918</td><td style="text-align: right;">      77.5082</td><td style="text-align: right;">       108</td><td style="text-align: right;">        61</td><td style="text-align: right;">             19.29</td><td style="text-align: right;">                4.06</td><td style="text-align: right;">              23.35</td><td style="text-align: right;">            9.74</td><td style="text-align: right;">        5.41</td><td style="text-align: right;">              84</td></tr>
+<tr><td>OAK   </td><td style="text-align: right;">    80.17  </td><td style="text-align: right;">      81.83  </td><td style="text-align: right;">       102</td><td style="text-align: right;">        57</td><td style="text-align: right;">              7.12</td><td style="text-align: right;">                1.5 </td><td style="text-align: right;">               8.62</td><td style="text-align: right;">            4.23</td><td style="text-align: right;">        2.45</td><td style="text-align: right;">              83</td></tr>
+<tr><td>SEA   </td><td style="text-align: right;">    75.4513</td><td style="text-align: right;">      86.5487</td><td style="text-align: right;">        99</td><td style="text-align: right;">        42</td><td style="text-align: right;">              1.94</td><td style="text-align: right;">                0.38</td><td style="text-align: right;">               2.32</td><td style="text-align: right;">            1.27</td><td style="text-align: right;">        0.79</td><td style="text-align: right;">              74</td></tr>
+<tr><td>TEX   </td><td style="text-align: right;">    57.7197</td><td style="text-align: right;">     104.28  </td><td style="text-align: right;">        80</td><td style="text-align: right;">        38</td><td style="text-align: right;">              0   </td><td style="text-align: right;">                0   </td><td style="text-align: right;">               0   </td><td style="text-align: right;">            0   </td><td style="text-align: right;">        0   </td><td style="text-align: right;">              72</td></tr>
+</tbody>
+</table>
+
+<p><br></p>
+<h4>AL Central</h4>
+<table>
+<thead>
+<tr><th>Team  </th><th style="text-align: right;">  Mean Wins</th><th style="text-align: right;">  Mean Losses</th><th style="text-align: right;">  Max Wins</th><th style="text-align: right;">  Min Wins</th><th style="text-align: right;">  Win Division (%)</th><th style="text-align: right;">  Make Wild Card (%)</th><th style="text-align: right;">  Make Playoffs (%)</th><th style="text-align: right;">  Win League (%)</th><th style="text-align: right;">  Win WS (%)</th><th style="text-align: right;">  FanGraphs Wins</th></tr>
+</thead>
+<tbody>
+<tr><td>MIN   </td><td style="text-align: right;">    98.2415</td><td style="text-align: right;">      63.7585</td><td style="text-align: right;">       122</td><td style="text-align: right;">        75</td><td style="text-align: right;">             77.66</td><td style="text-align: right;">               11.5 </td><td style="text-align: right;">              89.16</td><td style="text-align: right;">           17.91</td><td style="text-align: right;">        6.69</td><td style="text-align: right;">              87</td></tr>
+<tr><td>CHW   </td><td style="text-align: right;">    91.4366</td><td style="text-align: right;">      70.5634</td><td style="text-align: right;">       113</td><td style="text-align: right;">        68</td><td style="text-align: right;">             21.69</td><td style="text-align: right;">               30.41</td><td style="text-align: right;">              52.1 </td><td style="text-align: right;">           11.96</td><td style="text-align: right;">        5.77</td><td style="text-align: right;">              87</td></tr>
+<tr><td>CLE   </td><td style="text-align: right;">    78.2207</td><td style="text-align: right;">      83.7793</td><td style="text-align: right;">       105</td><td style="text-align: right;">        56</td><td style="text-align: right;">              0.65</td><td style="text-align: right;">                1.62</td><td style="text-align: right;">               2.27</td><td style="text-align: right;">            0.73</td><td style="text-align: right;">        0.46</td><td style="text-align: right;">              80</td></tr>
+<tr><td>KCR   </td><td style="text-align: right;">    66.3395</td><td style="text-align: right;">      95.6605</td><td style="text-align: right;">        90</td><td style="text-align: right;">        43</td><td style="text-align: right;">              0   </td><td style="text-align: right;">                0.03</td><td style="text-align: right;">               0.03</td><td style="text-align: right;">            0.01</td><td style="text-align: right;">        0.01</td><td style="text-align: right;">              77</td></tr>
+<tr><td>DET   </td><td style="text-align: right;">    66.1495</td><td style="text-align: right;">      95.8505</td><td style="text-align: right;">        90</td><td style="text-align: right;">        43</td><td style="text-align: right;">              0   </td><td style="text-align: right;">                0.02</td><td style="text-align: right;">               0.02</td><td style="text-align: right;">            0.01</td><td style="text-align: right;">        0.01</td><td style="text-align: right;">              72</td></tr>
+</tbody>
+</table>
+
+<p><br></p>
+<h4>AL East</h4>
+<table>
+<thead>
+<tr><th>Team  </th><th style="text-align: right;">  Mean Wins</th><th style="text-align: right;">  Mean Losses</th><th style="text-align: right;">  Max Wins</th><th style="text-align: right;">  Min Wins</th><th style="text-align: right;">  Win Division (%)</th><th style="text-align: right;">  Make Wild Card (%)</th><th style="text-align: right;">  Make Playoffs (%)</th><th style="text-align: right;">  Win League (%)</th><th style="text-align: right;">  Win WS (%)</th><th style="text-align: right;">  FanGraphs Wins</th></tr>
+</thead>
+<tbody>
+<tr><td>NYY   </td><td style="text-align: right;">   101.465 </td><td style="text-align: right;">      60.5349</td><td style="text-align: right;">       124</td><td style="text-align: right;">        78</td><td style="text-align: right;">             63.51</td><td style="text-align: right;">               31.08</td><td style="text-align: right;">              94.59</td><td style="text-align: right;">            9.44</td><td style="text-align: right;">        2.59</td><td style="text-align: right;">              96</td></tr>
+<tr><td>TOR   </td><td style="text-align: right;">    96.5399</td><td style="text-align: right;">      65.4601</td><td style="text-align: right;">       120</td><td style="text-align: right;">        73</td><td style="text-align: right;">             24.79</td><td style="text-align: right;">               55.48</td><td style="text-align: right;">              80.27</td><td style="text-align: right;">            8.71</td><td style="text-align: right;">        3.16</td><td style="text-align: right;">              88</td></tr>
+<tr><td>TBR   </td><td style="text-align: right;">    92.7891</td><td style="text-align: right;">      69.2109</td><td style="text-align: right;">       119</td><td style="text-align: right;">        67</td><td style="text-align: right;">             10.64</td><td style="text-align: right;">               48.95</td><td style="text-align: right;">              59.59</td><td style="text-align: right;">            9.03</td><td style="text-align: right;">        3.79</td><td style="text-align: right;">              83</td></tr>
+<tr><td>BOS   </td><td style="text-align: right;">    84.4039</td><td style="text-align: right;">      77.5961</td><td style="text-align: right;">       111</td><td style="text-align: right;">        63</td><td style="text-align: right;">              1.06</td><td style="text-align: right;">               12.15</td><td style="text-align: right;">              13.21</td><td style="text-align: right;">            2.11</td><td style="text-align: right;">        1.14</td><td style="text-align: right;">              85</td></tr>
+<tr><td>BAL   </td><td style="text-align: right;">    57.3638</td><td style="text-align: right;">     104.636 </td><td style="text-align: right;">        80</td><td style="text-align: right;">        35</td><td style="text-align: right;">              0   </td><td style="text-align: right;">                0   </td><td style="text-align: right;">               0   </td><td style="text-align: right;">            0   </td><td style="text-align: right;">        0   </td><td style="text-align: right;">              66</td></tr>
+</tbody>
+</table>
+
+<p><br></p>
+<h4>NL West</h4>
+<table>
+<thead>
+<tr><th>Team  </th><th style="text-align: right;">  Mean Wins</th><th style="text-align: right;">  Mean Losses</th><th style="text-align: right;">  Max Wins</th><th style="text-align: right;">  Min Wins</th><th style="text-align: right;">  Win Division (%)</th><th style="text-align: right;">  Make Wild Card (%)</th><th style="text-align: right;">  Make Playoffs (%)</th><th style="text-align: right;">  Win League (%)</th><th style="text-align: right;">  Win WS (%)</th><th style="text-align: right;">  FanGraphs Wins</th></tr>
+</thead>
+<tbody>
+<tr><td>LAD   </td><td style="text-align: right;">   110.268 </td><td style="text-align: right;">      51.732 </td><td style="text-align: right;">       132</td><td style="text-align: right;">        88</td><td style="text-align: right;">             84.38</td><td style="text-align: right;">               15.57</td><td style="text-align: right;">              99.95</td><td style="text-align: right;">            6.82</td><td style="text-align: right;">        2.07</td><td style="text-align: right;">              98</td></tr>
+<tr><td>SDP   </td><td style="text-align: right;">   100.945 </td><td style="text-align: right;">      61.0548</td><td style="text-align: right;">       123</td><td style="text-align: right;">        80</td><td style="text-align: right;">             15.59</td><td style="text-align: right;">               81.8 </td><td style="text-align: right;">              97.39</td><td style="text-align: right;">            7.68</td><td style="text-align: right;">        3.43</td><td style="text-align: right;">              95</td></tr>
+<tr><td>ARI   </td><td style="text-align: right;">    80.1856</td><td style="text-align: right;">      81.8144</td><td style="text-align: right;">       103</td><td style="text-align: right;">        54</td><td style="text-align: right;">              0.03</td><td style="text-align: right;">                6.97</td><td style="text-align: right;">               7   </td><td style="text-align: right;">            1.68</td><td style="text-align: right;">        1.2 </td><td style="text-align: right;">              74</td></tr>
+<tr><td>SFG   </td><td style="text-align: right;">    68.8702</td><td style="text-align: right;">      93.1298</td><td style="text-align: right;">        94</td><td style="text-align: right;">        48</td><td style="text-align: right;">              0   </td><td style="text-align: right;">                0.12</td><td style="text-align: right;">               0.12</td><td style="text-align: right;">            0.07</td><td style="text-align: right;">        0.05</td><td style="text-align: right;">              77</td></tr>
+<tr><td>COL   </td><td style="text-align: right;">    52.3235</td><td style="text-align: right;">     109.677 </td><td style="text-align: right;">        74</td><td style="text-align: right;">        33</td><td style="text-align: right;">              0   </td><td style="text-align: right;">                0   </td><td style="text-align: right;">               0   </td><td style="text-align: right;">            0   </td><td style="text-align: right;">        0   </td><td style="text-align: right;">              66</td></tr>
+</tbody>
+</table>
+
+<p><br></p>
+<h4>NL Central</h4>
+<table>
+<thead>
+<tr><th>Team  </th><th style="text-align: right;">  Mean Wins</th><th style="text-align: right;">  Mean Losses</th><th style="text-align: right;">  Max Wins</th><th style="text-align: right;">  Min Wins</th><th style="text-align: right;">  Win Division (%)</th><th style="text-align: right;">  Make Wild Card (%)</th><th style="text-align: right;">  Make Playoffs (%)</th><th style="text-align: right;">  Win League (%)</th><th style="text-align: right;">  Win WS (%)</th><th style="text-align: right;">  FanGraphs Wins</th></tr>
+</thead>
+<tbody>
+<tr><td>MIL   </td><td style="text-align: right;">    87.7649</td><td style="text-align: right;">      74.2351</td><td style="text-align: right;">       111</td><td style="text-align: right;">        66</td><td style="text-align: right;">             46.97</td><td style="text-align: right;">                6.07</td><td style="text-align: right;">              53.04</td><td style="text-align: right;">           19.96</td><td style="text-align: right;">       12.39</td><td style="text-align: right;">              79</td></tr>
+<tr><td>STL   </td><td style="text-align: right;">    85.9834</td><td style="text-align: right;">      76.0166</td><td style="text-align: right;">       109</td><td style="text-align: right;">        64</td><td style="text-align: right;">             36.37</td><td style="text-align: right;">                6.9 </td><td style="text-align: right;">              43.27</td><td style="text-align: right;">           16.49</td><td style="text-align: right;">       10.9 </td><td style="text-align: right;">              80</td></tr>
+<tr><td>CHC   </td><td style="text-align: right;">    82.0682</td><td style="text-align: right;">      79.9318</td><td style="text-align: right;">       103</td><td style="text-align: right;">        59</td><td style="text-align: right;">             15.95</td><td style="text-align: right;">                4.1 </td><td style="text-align: right;">              20.05</td><td style="text-align: right;">            8.48</td><td style="text-align: right;">        5.84</td><td style="text-align: right;">              78</td></tr>
+<tr><td>CIN   </td><td style="text-align: right;">    71.2318</td><td style="text-align: right;">      90.7682</td><td style="text-align: right;">        95</td><td style="text-align: right;">        48</td><td style="text-align: right;">              0.69</td><td style="text-align: right;">                0.12</td><td style="text-align: right;">               0.81</td><td style="text-align: right;">            0.52</td><td style="text-align: right;">        0.42</td><td style="text-align: right;">              77</td></tr>
+<tr><td>PIT   </td><td style="text-align: right;">    62.6362</td><td style="text-align: right;">      99.3638</td><td style="text-align: right;">        87</td><td style="text-align: right;">        39</td><td style="text-align: right;">              0.02</td><td style="text-align: right;">                0   </td><td style="text-align: right;">               0.02</td><td style="text-align: right;">            0.02</td><td style="text-align: right;">        0.02</td><td style="text-align: right;">              65</td></tr>
+</tbody>
+</table>
+
+<p><br></p>
+<h4>NL East</h4>
+<table>
+<thead>
+<tr><th>Team  </th><th style="text-align: right;">  Mean Wins</th><th style="text-align: right;">  Mean Losses</th><th style="text-align: right;">  Max Wins</th><th style="text-align: right;">  Min Wins</th><th style="text-align: right;">  Win Division (%)</th><th style="text-align: right;">  Make Wild Card (%)</th><th style="text-align: right;">  Make Playoffs (%)</th><th style="text-align: right;">  Win League (%)</th><th style="text-align: right;">  Win WS (%)</th><th style="text-align: right;">  FanGraphs Wins</th></tr>
+</thead>
+<tbody>
+<tr><td>NYM   </td><td style="text-align: right;">    93.7153</td><td style="text-align: right;">      68.2847</td><td style="text-align: right;">       119</td><td style="text-align: right;">        65</td><td style="text-align: right;">             49.24</td><td style="text-align: right;">               30.41</td><td style="text-align: right;">              79.65</td><td style="text-align: right;">           16.33</td><td style="text-align: right;">        8.77</td><td style="text-align: right;">              92</td></tr>
+<tr><td>ATL   </td><td style="text-align: right;">    93.3949</td><td style="text-align: right;">      68.6051</td><td style="text-align: right;">       117</td><td style="text-align: right;">        68</td><td style="text-align: right;">             44.9 </td><td style="text-align: right;">               33.56</td><td style="text-align: right;">              78.46</td><td style="text-align: right;">           16.1 </td><td style="text-align: right;">        8.2 </td><td style="text-align: right;">              89</td></tr>
+<tr><td>WSN   </td><td style="text-align: right;">    81.9628</td><td style="text-align: right;">      80.0372</td><td style="text-align: right;">       108</td><td style="text-align: right;">        57</td><td style="text-align: right;">              3.33</td><td style="text-align: right;">                8.43</td><td style="text-align: right;">              11.76</td><td style="text-align: right;">            3.51</td><td style="text-align: right;">        2.15</td><td style="text-align: right;">              83</td></tr>
+<tr><td>PHI   </td><td style="text-align: right;">    80.4196</td><td style="text-align: right;">      81.5804</td><td style="text-align: right;">       106</td><td style="text-align: right;">        59</td><td style="text-align: right;">              2.53</td><td style="text-align: right;">                5.95</td><td style="text-align: right;">               8.48</td><td style="text-align: right;">            2.34</td><td style="text-align: right;">        1.46</td><td style="text-align: right;">              81</td></tr>
+<tr><td>MIA   </td><td style="text-align: right;">    55.56  </td><td style="text-align: right;">     106.44  </td><td style="text-align: right;">        79</td><td style="text-align: right;">        33</td><td style="text-align: right;">              0   </td><td style="text-align: right;">                0   </td><td style="text-align: right;">               0   </td><td style="text-align: right;">            0   </td><td style="text-align: right;">        0   </td><td style="text-align: right;">              73</td></tr>
+</tbody>
+</table>
+
+<p><br></p>
+<p>This model is very simple and I have a long list of improvements I'd like to make,
+but for only a few hours of work it does a fairly solid job. I'll post an update
+to these projections the day before Opening Day with a more detailed look at the results
+as well as a retrospective at the end of the season to see how it did. In the
+meantime, all of the code can be
+found <a href="https://gist.github.com/andersonfrailey/6553b36cb00eec81709d396931e30820">here</a>.</p>
+            </div>
+            <p>
+                <i>Last Updated: March 5, 2021</i>
+            </p>
+            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-via="andersonfrailey" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+        <!-- Social media stuff -->
+        <div class="container">
+            <hr class="bottom-div">
+            <a href="https://twitter.com/andersonfrailey?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @andersonfrailey</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+    </body>
+    <script>hljs.initHighlightingOnLoad();</script>
+</html>
