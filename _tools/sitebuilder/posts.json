@@ -1,4 +1,12 @@
 {
+    "2021 MLB Season Projections": {
+        "author": "Anderson Frailey",
+        "template": "post_template.html",
+        "written": "March 29, 2021",
+        "last_modified": "March 29, 2021",
+        "cdn": [],
+        "md_file": "mlb-season-projections-2021.md"
+    },
     "Building an MLB Prediction Model in an Evening": {
         "author": "Anderson Frailey",
         "template": "post_template.html",
