@@ -320,7 +320,7 @@ Here are the final division standings along with projections from Satchel and Fa
 
 On average, both Satchel and the FanGraphs model were spot on in projecting team wins, although each had their big misses. The two biggest misses for both models were the Giants and Diamondbacks. San Francisco wildly over performed their expectations, beating Satchel by about 35 wins and FanGraphs by 30. Arizona, on the other hand, had a rough year to say the least and underperformed Satchel and FanGraphs by 23.6 and 22 wins, respectively.
 
-This performance similarity is not particularly surprising to me. As I mentioned at the top of this post and in my [original post](https://andersonfrailey.github.io/blog/Building-an-MLB-Prediction-Model-in-an-Evening.html) about the model, the individual player projection data I used in the model comes from the ZIPS and Steamer projections on FanGraphs. While I'm not familiar with the internals of the FanGraphs model, I'd imagine it use these individual projections as well in some capacity. It makes sense then that two models with similar (if not identical) inputs have similar outputs as well. Here is a summary of the differences between the number of wins each model projected and the actual wins we saw:
+This performance similarity is not particularly surprising to me. As I mentioned at the top of this post and in my [original post](https://andersonfrailey.github.io/blog/Building-an-MLB-Prediction-Model-in-an-Evening.html) about the model, the individual player projection data I used in the model came from the ZIPS and Steamer projections on FanGraphs. While I'm not familiar with the internals of the FanGraphs model, I'd imagine it also use these individual projections in some capacity. It makes sense then that two models with similar (if not identical) inputs have similar outputs as well. Here is a summary of the differences between the number of wins each model projected and the actual wins we saw:
 
 <table class="table table-bordered table-hover table-condensed">
 <thead><tr><th title="Field #1"></th>
@@ -361,11 +361,11 @@ This performance similarity is not particularly surprising to me. As I mentioned
 
 ## Division Winners and the Postseason
 
-Of the six divisions, Satchel correctly predicted the winners of two: the AL West and NL Central. Satchel had both the AL Central and NL East as effectively toss ups with the second place teams being the eventual division championships. In both cases the projected first and second place winners were within a game of each other. Despite doing a fantastic job projecting the Dodgers, Satchel (like everyone else) did not see the Giants posting a 107 win season to take the NL West. Similarly, Satchel significantly underestimated the Rays in the AL East.
+Of the six divisions, Satchel correctly predicted the winners of two: the AL West and NL Central. Satchel had both the AL Central and NL East as toss ups with the projected second place teams being the actual division champions. In both cases the projected first and second place winners were within a game of each other. Despite doing a fantastic job projecting the Dodgers, Satchel (like everyone else) did not see the Giants posting a 107 win season to take the NL West. Similarly, Satchel significantly underestimated the Rays in the AL East.
 
-Of the eventual division winners, only the Giants had a less than 48% chance to make the most season at all, and they only won the division in _1.4 percent_ of all simulations. This is yet another way of saying they wildly outperformed expectations this year.
+Of the eventual division winners, only the Giants had a less than 48% chance to make the postseason at all, and they only won the division in _1.4 percent_ of all simulations. This is yet another way of saying they wildly outperformed expectations this year.
 
-#### Playoffs
+#### Division Winners
 <table class="table table-bordered table-hover table-condensed">
 <thead><tr><th title="Field #1"></th>
 <th title="Field #2">Make Playoffs</th>
@@ -432,24 +432,11 @@ Of the eventual division winners, only the Giants had a less than 48% chance to 
 </tr>
 </tbody></table>
 
-The eventual champion Braves came into the season with a 4.7% chance of winning the World Series according to Satchel, making them the 9th most likely team to win. For comparison, the Dodgers were the overwhelming favorites with a 21.6% chance of winning. Preseason World Series odds and talent levels (as measured by projected team WAR) are highly correlated. This should come as no surprise given that the model uses relative talent measures to pick winners in every game.
+The eventual champion Braves came into the season with a 4.7% chance of winning the World Series according to Satchel, making them the 9th most likely team to win. For comparison, the Dodgers were the overwhelming favorites with a 21.6% chance of winning it all. Preseason World Series odds and talent levels (as measured by projected team WAR) are almost perfectly correlated. This should come as no surprise given that the model uses relative talent measures to pick winners in every game.
 
 Projected World Series odds provide a great example of the "all models are wrong, but some are useful" aphorism. For a model to be "right" it should at the very least be expected to pick the eventual World Series winner as the preseason favorite.<sup>1</sup> But by the very nature of how these models work, the preseason World Series favorite is going to be the team with the most projected talent. Of course, this is not always the team that is eventually crowned champion due to the inherent randomness of sports. It would however be a fool's errand to try and include all of the randomness necessary for a "lesser" team to be the projected World Series favorite in a model. This leaves us simply hoping that our models can be useful.
 
-A useful model is one which can provide unbiased projections of each team's season outcome, which can then be used to contextualize their actual performance. Given that, on average, Satchel did a very good job projecting team wins, I feel fairly comfortable using its results to say that Atlanta's championship was unlikely, but not so unlikely that it could only be achieved through divine intervention. Additionally, the model's results can be used to discuss what percentile of their expectations each team performed.
-
-<!-- This of course is based solely on how the team looked on opening day. It does not account for the effects of losing Ronald Acuña Jr. or the Braves being one of the best teams in the league down the stretch.  -->
-
-<!-- For a model to be "right," it would need to produce a single (correct) prediction of who will win the World Series. But offering a singular World Series pick would ignore the uncertainty that is inherent to sports. In every model that I am familiar with, the World Series favorite is the team with the highest projected talent. Of course, the most talented team at the start of the year (or even the start of the postseason!) does not always win. But it would be a fool's errand to try and include all of the uncertainty leading to any other team being the eventual World Series winner. -->
-
- <!-- If they did baseball would be boring. It would be incredibly difficult to build a model in which any other team is the solo pick for World Series champion, and have that pick be consistently right.<sup>1</sup> Therefore, it would take something just shy of a -->
-
-<!-- Projected World Series odds provide a great example of how models should aim to be good, rather than right, and the difference between the two concepts. My definition of a model that is "right" is one that produces a single World Series pick at the beginning of the season and gets it correct.  -->
-
-<!-- In that sense, 
-
-What makes a model like Satchel useful, is that they can provide some insight into that underlying uncertainty. In the baseball context, a useful model can provide unbiased estimates of each  -->
-
+My definition of a useful model is one that can provide unbiased projections of each team's season outcome, which can then be used to contextualize their actual performance. Given that, on average, Satchel did a very good job projecting team wins, I feel fairly comfortable using its results to say that Atlanta's championship was unlikely, but not so unlikely that it could only be achieved through divine intervention.<sup>2</sup> Moreover, Satchel's results can be used to discuss how far above or below their expectations each team performed.
 
 ## Season Percentiles
 
@@ -612,16 +599,22 @@ One of Satchel's new features allows us to look at where each team's season fall
 </tr>
 </tbody></table>
 
+The struggles of the Diamondbacks, Nationals, and Padres are also highlighted by this feature, with each team finishing in the bottom ten percent of where they were projected. Of the three teams whose managers lost their job so far this offseason (Padres, Mets, Cardinals), only St. Louis performed above their expectations.
+
 ## 2022
 
-Assuming there is a next season, I have made a few updates to Satchel to prepare for it. Most of these are internal to help with maintenance and reproducibility, but two are particularly important because they can change the model's output. First, instead of combining the ZIPS and Steamer projections myself, I've begun just using the FanGraphs depth chart projections, which effectively do the same thing, to make maintenance more simple. Additionally, I've added a new feature that allows a user to simulate trades and free agent signings, as well as easily see the effects of those transactions. As an example, here's how Detroit's projections change if they sign Carlos Correa:
+Assuming there is a next season, I have made a few updates to Satchel to prepare for it. Most of these are internal to help with maintenance and reproducibility, but two are particularly important because they can change the model's output. First, instead of combining the ZIPS and Steamer projections myself, I've begun just using the FanGraphs depth chart projections, which effectively do the same thing, to make maintenance more simple. I've also added a new feature that allows a user to simulate trades and free agent signings, and easily visualize the effects of those transactions. As an example, here's how Detroit's projections change if they sign Carlos Correa:
 
 ![Correa Figure](../images/correa_det.png)
 
-I'm still tweaking this feature and making it a bit more flexible so that you can also simulate mid-season transactions. I should have it fully ready to go by Opening Day, whenever that may be. I will also once again be posting season projections for each team the night before Opening Day.
+I'm still tweaking this feature and making it a bit more flexible so that you can also simulate mid-season transactions. I should have it ready to go by Opening Day, whenever that may be. I will also once again be posting season projections for each team the night before Opening Day.
 
-I still haven't open sourced the project because I'm not ready to offer the level of support I would want to if it were open source. If you have any methodology questions, I haven't changed much since my [original post](https://andersonfrailey.github.io/blog/Building-an-MLB-Prediction-Model-in-an-Evening.html) about the model. I'm also open to any feedback or ideas about features you'd like to see in the future. 
+## Open Sourcing Satchel
+
+I still haven't open sourced this project because I'm not ready to offer the level of support I would want to if it were open source. If you have any methodology questions, I haven't changed much since my [original post](https://andersonfrailey.github.io/blog/Building-an-MLB-Prediction-Model-in-an-Evening.html) about the model. I'm also open to any feedback or ideas about features you'd like to see in the future. 
 
 ##### <u>_Footnotes_</u>
 
 <sup>1</sup> I would argue that it would need to go even further and correctly pick a single team as the World Series winner.
+
+<sup>2</sup> The preseason model naturally did not account for the Braves losing Ronald Acuña Jr. midway through the season or becoming one of the hottest teams in baseball down the stretch. Additionally, it's unlikely that _any_ team wins the World Series in a given year. It's an incredibly difficult achievement even for the best teams, as exemplified by the fact that in 80% of all simulations the Dodgers still didn't win.
