@@ -1,4 +1,12 @@
 {
+    "Satchel 2021 Autopsy": {
+        "author":"Anderson Frailey",
+        "template": "post_template.html",
+        "written": "December 21, 2021",
+        "last_modified": "December 21, 2021",
+        "cdn": [],
+        "md_file": "satchel-review-2021.md"
+    },
     "2021 MLB Season Projections": {
         "author": "Anderson Frailey",
         "template": "post_template.html",
