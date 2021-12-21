@@ -599,7 +599,7 @@ One of Satchel's new features allows us to look at where each team's season fall
 </tr>
 </tbody></table>
 
-The struggles of the Diamondbacks, Nationals, and Padres are also highlighted by this feature, with each team finishing in the bottom ten percent of where they were projected. Of the three teams whose managers lost their job so far this offseason (Padres, Mets, Cardinals), only St. Louis performed above their expectations.
+The struggles of the Diamondbacks, Nationals, and Padres are also highlighted by this feature, with each team finishing in the bottom ten percent of where they were projected. Of the three teams whose managers have lost their job so far this offseason (Padres, Mets, Cardinals), only St. Louis performed above their expectations.
 
 ## 2022
 
