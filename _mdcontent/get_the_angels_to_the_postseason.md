@@ -331,7 +331,7 @@ games of the year, increasing the probability they make the postseason to 52.43%
 What have we learned? It is technically not impossible for the Angels to make
 the postseason this year. All they need to do is trade nine of their top 25
 prospects and send $31 million to other teams to make it happen. This would of
-course require a few GM's losing their mind and accepting trades that
+course require a few GMs losing their mind and accepting trades that
 would alienate the fan base and almost certainly cost them their jobs. So, unfortunately
 for Angels fans, they will probably need to wait a bit longer to see October
 baseball.
