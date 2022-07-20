@@ -21,7 +21,7 @@ Additionally, I had to rely a lot on adding cash to make deals happen. This was 
 because the trade simulator has a cap on the number of players that can be included
 in a trade, and partially because I simply ran out of high value players in the
 Angels' system to trade.
-With that in mind, here are the six trades I made.
+With that in mind, here are the six deals I made.
 
 
 ## Trade 1: Washington Nationals
@@ -29,8 +29,8 @@ With that in mind, here are the six trades I made.
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: center;">
-      <th>Nationals</th>
-      <th>Angels</th>
+      <th>Angels Get</th>
+      <th>Nationals Get</th>
     </tr>
   </thead>
   <tbody>
@@ -68,8 +68,8 @@ more work to be done.
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: center;">
-      <th>Cubs</th>
-      <th>Angels</th>
+      <th>Angels Get</th>
+      <th>Cubs Get</th>
     </tr>
   </thead>
   <tbody>
@@ -113,8 +113,8 @@ of getting the Angels to the postseason this year, it was worth it.
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: center;">
-      <th>Reds</th>
-      <th>Angels</th>
+      <th>Angels Get</th>
+      <th>Reds Get</th>
     </tr>
   </thead>
   <tbody>
@@ -146,8 +146,8 @@ starter.
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: center;">
-      <th>Mariners</th>
-      <th>Angels</th>
+      <th>Angels Get</th>
+      <th>Mariners Get</th>
     </tr>
   </thead>
   <tbody>
@@ -194,8 +194,8 @@ huge because it significantly weakens the Mariners lineup.
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: center;">
-      <th>Rays</th>
-      <th>Angels</th>
+      <th>Angels Get</th>
+      <th>Rays Get</th>
     </tr>
   </thead>
   <tbody>
@@ -235,8 +235,8 @@ in cash is another bribe for the Rays to throw in the towel on this season.
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: center;">
-      <th>Mariners</th>
-      <th>Angels</th>
+      <th>Angels Get</th>
+      <th>Mariners Get</th>
     </tr>
   </thead>
   <tbody>
