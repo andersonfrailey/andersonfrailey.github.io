@@ -10,6 +10,9 @@ to Satchel, my MLB projections model.
 I gave myself two constraints on the trades I could make. First, Ohtani and Trout
 could not be traded. Second, I could only make trades that were approved in the
 [Baseball Trade Values Trade Simulator](https://www.baseballtradevalues.com/trade-simulator/).
+All trade values mentioned in the rest of this article were taken from the trade
+simulator.
+
 Trying to determine which teams consider themselves sellers at the deadline
 and which front offices are willing to give up major league talent for prospects
 is beyond the scope of this project, though I did initially attempt to trade primarily with
