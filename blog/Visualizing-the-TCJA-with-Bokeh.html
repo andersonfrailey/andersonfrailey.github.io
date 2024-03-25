@@ -1,35 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title>Visualizing the TCJA with Bokeh | Anderson Frailey</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="../css/post_css.css">
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/atom-one-light.min.css">
 
-        
-    </head>
-    <body>
-        <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="navbar-header">
-                    <a href="../index.html" class="navbar-brand" id="home_link">Anderson Frailey</a>
-                </div>
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="../about.html" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="index.html" class="nav-link">Blog</a></li>
-                    <li class="nav-item"><a href="../speaking.html" class="nav-link">Speaking</a></li>
-                    <li class="nav-item"><a href="../research.html" class="nav-link">Research</a></li>
-                </ul>
-            </nav>
-        </div>
-        <div class="container">
-            <div class="container" max-width=500px>
-                <i><p>December 30, 2017</p></i>
-                <h1>Visualizing the TCJA with Bokeh</h1>
+<head>
+    <meta charset="utf-8">
+    <title>Visualizing the TCJA with Bokeh | Anderson Frailey</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/post_css.css">
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/atom-one-light.min.css">
+
+    
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="navbar-header">
+                <a href="../index.html" class="navbar-brand" id="home_link">Anderson Frailey</a>
+            </div>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a href="../about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="index.html" class="nav-link">Blog</a></li>
+                <li class="nav-item"><a href="../speaking.html" class="nav-link">Speaking</a></li>
+                <li class="nav-item"><a href="../research.html" class="nav-link">Research</a></li>
+                <li class="nav-item"><a href="../mlb_projections.html" class="nav-link">MLB Projections</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="container">
+        <div class="container" max-width=500px>
+            <i>
+                <p>December 30, 2017</p>
+            </i>
+            <h1>Visualizing the TCJA with Bokeh</h1>
 <hr />
 <p>Throughout tax reform season a seemingly endless stream of tables, plots, and charts filled Twitter to show the distributional effects of the Tax Cuts and Jobs Act. I particularly liked <a href="https://www.urban.org/urban-wire/how-we-can-better-visualize-analysis-tax-reform-legislation">Jonathan Schwabish’s piece</a> on how he created a graph to make a report by the Joint Committee on Taxation (JCT) more engaging. I decided to recreate his work using <a href="https://bokeh.pydata.org/en/latest/">Bokeh</a> and the open-source <a href="https://github.com/open-source-economics/Tax-Calculator/">Tax-Calculator</a>.</p>
 <p>The following work was conducted using Tax-Calculator version 0.14.3 and Bokeh version 0.12.13.</p>
@@ -64,17 +74,22 @@
 <h3>Resources:</h3>
 <p><a href="https://bokeh.pydata.org/en/latest/index.html">Bokeh</a><br />
 <a href="https://github.com/open-source-economics/Tax-Calculator/">Tax-Calculator</a></p>
-            </div>
-            <p>
-                <i>Last Updated: December 30, 2017</i>
-            </p>
-            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-via="andersonfrailey" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
-        <!-- Social media stuff -->
-        <div class="container">
-            <hr class="bottom-div">
-            <a href="https://twitter.com/andersonfrailey?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @andersonfrailey</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-        </div>
-    </body>
-    <script>hljs.initHighlightingOnLoad();</script>
+        <p>
+            <i>Last Updated: December 30, 2017</i>
+        </p>
+        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-via="andersonfrailey"
+            data-show-count="false">Tweet</a>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+    <!-- Social media stuff -->
+    <div class="container">
+        <hr class="bottom-div">
+        <a href="https://twitter.com/andersonfrailey?ref_src=twsrc%5Etfw" class="twitter-follow-button"
+            data-show-count="false">Follow @andersonfrailey</a>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+</body>
+<script>hljs.initHighlightingOnLoad();</script>
+
 </html>
