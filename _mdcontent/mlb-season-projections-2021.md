@@ -1302,7 +1302,7 @@ Finally, we have the most likely matchups for each round of the post season:
 
 And the distribution of outcomes for each team:
 
-![Results Distribuition](../images/resultsgrid2021.png)
+![Results Distribution](../images/resultsgrid2021.png)
 
 There we have it. The 2021 MLB season As Told by <del>Ginger</del> Satchel. After the season I'll write up an autopsy of the model to see how we do, and if time permits I'll post updated projections as we go. If you want to learn more about the changes made to the model since it was first introduced, I've listed them below.
 

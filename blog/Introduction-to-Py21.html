@@ -1,41 +1,51 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title>Introduction to Py21 | Anderson Frailey</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="../css/post_css.css">
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/atom-one-light.min.css">
 
-        
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
-        
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@3"></script>
-        
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@4"></script>
-        
-    </head>
-    <body>
-        <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="navbar-header">
-                    <a href="../index.html" class="navbar-brand" id="home_link">Anderson Frailey</a>
-                </div>
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="../about.html" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="index.html" class="nav-link">Blog</a></li>
-                    <li class="nav-item"><a href="../speaking.html" class="nav-link">Speaking</a></li>
-                    <li class="nav-item"><a href="../research.html" class="nav-link">Research</a></li>
-                </ul>
-            </nav>
-        </div>
-        <div class="container">
-            <div class="container" max-width=500px>
-                <i><p>June 17, 2019</p></i>
-                <h1>Intro to Py21</h1>
+<head>
+    <meta charset="utf-8">
+    <title>Introduction to Py21 | Anderson Frailey</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/post_css.css">
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/atom-one-light.min.css">
+
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@3"></script>
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@4"></script>
+    
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="navbar-header">
+                <a href="../index.html" class="navbar-brand" id="home_link">Anderson Frailey</a>
+            </div>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a href="../about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="index.html" class="nav-link">Blog</a></li>
+                <li class="nav-item"><a href="../speaking.html" class="nav-link">Speaking</a></li>
+                <li class="nav-item"><a href="../research.html" class="nav-link">Research</a></li>
+                <li class="nav-item"><a href="../mlb-projections.html" class="nav-link">MLB Projections</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="container">
+        <div class="container" max-width=500px>
+            <i>
+                <p>June 17, 2019</p>
+            </i>
+            <h1>Intro to Py21</h1>
 <hr />
 <p>Blackjack has long been one of the most popular games you’ll find in a casino. Its simplicity makes it an easy option for beginners and the relatively modest house edge appeals to more seasoned gamblers. The game also has a strong history of detailed computational analysis. Ed Thorpe’s classic, <em>Beat the Dealer</em>, has been regarded as the gold standard in blackjack analysis since its publication in 1966. In it, Thorpe uses an IBM 704 to simulate games of blackjack, ultimately determining the best strategy for a player (now known as basic strategy). Inspired by Thorpe (and <em><a href="https://www.basicbooks.com/titles/adam-kucharski/the-perfect-bet/9781541697232/">The Perfect Bet</a></em> by Adam Kucharski), I set out to create a modern blackjack simulator. The result is Py21.</p>
 <h2>Usage</h2>
@@ -169,17 +179,22 @@ game = Game([player], rules=new_rules)
 <p>You can install Py21 using <code>pip install py21</code>, or by downloading the source code from <a href="https://github.com/andersonfrailey/blackjack">GitHub</a>.</p>
 <h5><u><em>Footnotes</em></u></h5>
 <p><sup>1</sup> The exact amount of time needed to run your simulations depends on how complex your strategies and the number of players involved in the game.  I was able to run a million hands in around a minute with one player using basic strategy.</p>
-            </div>
-            <p>
-                <i>Last Updated: June 17, 2019</i>
-            </p>
-            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-via="andersonfrailey" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
-        <!-- Social media stuff -->
-        <div class="container">
-            <hr class="bottom-div">
-            <a href="https://twitter.com/andersonfrailey?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @andersonfrailey</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-        </div>
-    </body>
-    <script>hljs.initHighlightingOnLoad();</script>
+        <p>
+            <i>Last Updated: June 17, 2019</i>
+        </p>
+        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-via="andersonfrailey"
+            data-show-count="false">Tweet</a>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+    <!-- Social media stuff -->
+    <div class="container">
+        <hr class="bottom-div">
+        <a href="https://twitter.com/andersonfrailey?ref_src=twsrc%5Etfw" class="twitter-follow-button"
+            data-show-count="false">Follow @andersonfrailey</a>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+</body>
+<script>hljs.initHighlightingOnLoad();</script>
+
 </html>

@@ -1,35 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title>Building Dashboards with PyBaseball and Bokeh | Anderson Frailey</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="../css/post_css.css">
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/atom-one-light.min.css">
 
-        
-    </head>
-    <body>
-        <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="navbar-header">
-                    <a href="../index.html" class="navbar-brand" id="home_link">Anderson Frailey</a>
-                </div>
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="../about.html" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="index.html" class="nav-link">Blog</a></li>
-                    <li class="nav-item"><a href="../speaking.html" class="nav-link">Speaking</a></li>
-                    <li class="nav-item"><a href="../research.html" class="nav-link">Research</a></li>
-                </ul>
-            </nav>
-        </div>
-        <div class="container">
-            <div class="container" max-width=500px>
-                <i><p>March 21, 2018</p></i>
-                <h1>Building Dashboards with PyBaseball and Bokeh</h1>
+<head>
+    <meta charset="utf-8">
+    <title>Building Dashboards with PyBaseball and Bokeh | Anderson Frailey</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/post_css.css">
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/atom-one-light.min.css">
+
+    
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="navbar-header">
+                <a href="../index.html" class="navbar-brand" id="home_link">Anderson Frailey</a>
+            </div>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a href="../about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="index.html" class="nav-link">Blog</a></li>
+                <li class="nav-item"><a href="../speaking.html" class="nav-link">Speaking</a></li>
+                <li class="nav-item"><a href="../research.html" class="nav-link">Research</a></li>
+                <li class="nav-item"><a href="../mlb-projections.html" class="nav-link">MLB Projections</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="container">
+        <div class="container" max-width=500px>
+            <i>
+                <p>March 21, 2018</p>
+            </i>
+            <h1>Building Dashboards with PyBaseball and Bokeh</h1>
 <hr />
 <p>Since the adoption of Statcast by Major League Baseball, fans have had access to pitch-by-pitch data for every regular season game.
 These data include pitch velocity and location, the result of the pitch, even who was playing left field at the time.
@@ -62,7 +72,7 @@ I'm considering using some of the other search modules in PyBaseball to find a p
 <p>The other two modules used - <code>statcast_pitcher</code> and <code>statcast_batter</code> both pull Statcast data for the players.
 Using the MLBAM ID and start and end dates for your query, they fetch pitch level data from Statcast and return it in a nice DataFrame.
 Once you have that, it can be filtered as needed.</p>
-<p>I found that anytime I tried to run a query for before the 2017 season I hit ran into a variety of errors. I haven't done enough digging to find their root cause at this time. For now I simply restricted the earlies search date to be April 2017.</p>
+<p>I found that anytime I tried to run a query for before the 2017 season I hit ran into a variety of errors. I haven't done enough digging to find their root cause at this time. For now I simply restricted the earliest search date to be April 2017.</p>
 <h2>Bokeh</h2>
 <p>The entire UI of the dashboard was built using <a href="https://bokeh.pydata.org/en/latest/docs/user_guide/interaction/widgets.html">Bokeh widgets</a>. The text inputs, dropdowns, and buttons are all mapped to functions that retrieve and analyze data before pushing it to the plots.</p>
 <h2>Future Improvements</h2>
@@ -83,17 +93,22 @@ very similar information to what I've created.</p>
 <p>One last thing, I promise I don't type as slow as the GIF included earlier in this
 post makes it look. For some reason when I converted the screen capture from an 
 MP4 to a GIF everything became slower.</p>
-            </div>
-            <p>
-                <i>Last Updated: March 21, 2018</i>
-            </p>
-            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-via="andersonfrailey" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
-        <!-- Social media stuff -->
-        <div class="container">
-            <hr class="bottom-div">
-            <a href="https://twitter.com/andersonfrailey?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @andersonfrailey</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-        </div>
-    </body>
-    <script>hljs.initHighlightingOnLoad();</script>
+        <p>
+            <i>Last Updated: March 21, 2018</i>
+        </p>
+        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-via="andersonfrailey"
+            data-show-count="false">Tweet</a>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+    <!-- Social media stuff -->
+    <div class="container">
+        <hr class="bottom-div">
+        <a href="https://twitter.com/andersonfrailey?ref_src=twsrc%5Etfw" class="twitter-follow-button"
+            data-show-count="false">Follow @andersonfrailey</a>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+</body>
+<script>hljs.initHighlightingOnLoad();</script>
+
 </html>

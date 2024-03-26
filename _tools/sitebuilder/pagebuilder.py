@@ -1,9 +1,11 @@
 import json
 import markdown
+import pandas as pd
+from datetime import datetime
 from jinja2 import Template
 from bs4 import BeautifulSoup
 from pathlib import Path
-from utils import replace_code_blocks
+from utils import replace_code_blocks, MLB_PROJECTION_COLUMNS
 
 
 CUR_PATH = Path(__file__).resolve().parent
@@ -11,9 +13,10 @@ TEMPLATE_PATH = Path(CUR_PATH, "templates")
 CONTENT_PATH = Path(CUR_PATH, "..", "..", "_mdcontent")
 BLOG_PATH = Path(CUR_PATH, "..", "..", "blog")
 HOME_PATH = Path(CUR_PATH, "..", "..")
+SATCHEL_URL = "https://raw.githubusercontent.com/andersonfrailey/satchel/main/2024projections/satchel.csv"
 
 
-class PageBuilder():
+class PageBuilder:
     """
     Receives a path to a JSON file containing metadata for a list of web pages
     to be built. The metadata contains information on where the final HTML
@@ -30,6 +33,7 @@ class PageBuilder():
         }
     }
     """
+
     def __init__(self, pages: dict, num_recent: int = 3):
         """
         This class is used to create generic web pages for PSL
@@ -43,8 +47,14 @@ class PageBuilder():
         """
         self.pages = pages
         self.num_recent = num_recent
-        self.required_attributes = {"author", "template", "written",
-                                    "last_modified", "cdn", "md_file"}
+        self.required_attributes = {
+            "author",
+            "template",
+            "written",
+            "last_modified",
+            "cdn",
+            "md_file",
+        }
 
     def build_site(self):
         """
@@ -70,7 +80,7 @@ class PageBuilder():
                 "written": attrs["written"],
                 "cdns": attrs["cdn"],
                 "last_modified": attrs["last_modified"],
-                "content": content
+                "content": content,
             }
             self.write_page(pathout, template_path, **post_attrs)
 
@@ -78,22 +88,28 @@ class PageBuilder():
             soup = BeautifulSoup(content, "lxml")
             first_graph = soup.find("p")
             heading = str(soup.find("h1")).replace("h1", "h3")
-            first_graphs.append({"heading": heading, "graph": first_graph,
-                                 "link": web_page})
+            first_graphs.append(
+                {"heading": heading, "graph": first_graph, "link": web_page}
+            )
 
-        # create blog index
+        # create blog index page
         blog_index_pathout = Path(BLOG_PATH, "index.html")
         blog_index_template = Path(TEMPLATE_PATH, "blog_index_template.html")
-        self.write_page(blog_index_pathout, blog_index_template,
-                        posts=first_graphs)
+        self.write_page(blog_index_pathout, blog_index_template, posts=first_graphs)
 
         # create home page
         # only use three most recent posts for home index
+        index_md_text = Path(CONTENT_PATH, "index.md").open("r").read()
+        index_content = markdown.markdown(index_md_text)
         recent_posts = first_graphs[: self.num_recent]
         home_index_pathout = Path(HOME_PATH, "index.html")
         home_index_template = Path(TEMPLATE_PATH, "index_template.html")
-        self.write_page(home_index_pathout, home_index_template,
-                        posts=recent_posts)
+        self.write_page(
+            home_index_pathout,
+            home_index_template,
+            content=index_content,
+            posts=recent_posts,
+        )
 
         # create about page
         about_md_text = Path(CONTENT_PATH, "about.md").open("r").read()
@@ -107,16 +123,41 @@ class PageBuilder():
         speaking_content = markdown.markdown(speaking_md_text)
         speaking_template = Path(TEMPLATE_PATH, "speaking_template.html")
         speaking_pathout = Path(HOME_PATH, "speaking.html")
-        self.write_page(speaking_pathout, speaking_template,
-                        content=speaking_content)
+        self.write_page(speaking_pathout, speaking_template, content=speaking_content)
 
         # create research page
         research_md_text = Path(CONTENT_PATH, "research.md").open("r").read()
         research_content = markdown.markdown(research_md_text)
         research_template = Path(TEMPLATE_PATH, "research_template.html")
         research_pathout = Path(HOME_PATH, "research.html")
-        self.write_page(research_pathout, research_template,
-                        content=research_content)
+        self.write_page(research_pathout, research_template, content=research_content)
+
+        # create MLB projections page
+        mlb_projections_text = Path(CONTENT_PATH, "mlb-projections.md").open("r").read()
+        mlb_projections_content = markdown.markdown(mlb_projections_text)
+        mlb_projections = pd.read_csv(SATCHEL_URL, index_col=None)
+        mlb_projections.sort_values("Projected Wins", ascending=False, inplace=True)
+        mlb_projections.columns = pd.MultiIndex.from_tuples(MLB_PROJECTION_COLUMNS)
+        mlb_projections_table = mlb_projections.to_html(index=False)
+        mlb_projections_table = mlb_projections_table.replace(
+            'halign="left"', 'halign="center"'
+        )
+        mlb_projections_table = mlb_projections_table.replace(
+            "<tr>", '<tr class="bottomheader">', 2
+        )
+        mlb_projections_table = mlb_projections_table.replace(
+            '<tr class="bottomheader">', '<tr class="topheader">', 1
+        )
+        today = datetime.today().strftime("%B %d, %Y")
+        mlb_projections_template = Path(TEMPLATE_PATH, "mlb_projections_template.html")
+        mlb_projections_pathout = Path(HOME_PATH, "mlb-projections.html")
+        self.write_page(
+            mlb_projections_pathout,
+            mlb_projections_template,
+            content=mlb_projections_content,
+            projections=mlb_projections_table,
+            last_modified=today,
+        )
 
     def write_page(self, pathout, template_path, **kwargs):
         """

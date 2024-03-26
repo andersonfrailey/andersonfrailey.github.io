@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Speaking | Anderson Frailey</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/projections_css.css">
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="navbar-header">
+                <a href="index.html" class="navbar-brand" id="home_link">Anderson Frailey</a>
+            </div>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="blog/index.html" class="nav-link">Blog</a></li>
+                <li class="nav-item"><a href="speaking.html" class="nav-link">Speaking</a></li>
+                <li class="nav-item"><a href="research.html" class="nav-link">Research</a></li>
+                <li class="nav-item"><a href="mlb_projections.html" class="nav-link">MLB Projections</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="container">
+        <h1>MLB Projections</h1>
+<hr />
+<p>My MLB projections are generated using the Satchel projection model. I wrote a brief description of how the model works <a href="https://andersonfrailey.github.io/blog/Building-an-MLB-Prediction-Model-in-an-Evening.html">in an earlier post</a>, and it has since grown into a more substantive project. The source code is available on my <a href="https://github.com/andersonfrailey/satchel/tree/main">GitHub</a>.</p>
+    </div>
+    <div class="container">
+
+
+        <table border="1" class="dataframe">
+  <thead>
+    <tr class="topheader">
+      <th></th>
+      <th colspan="2" halign="center">To Date</th>
+      <th colspan="2" halign="center">Rest of Season</th>
+      <th colspan="7" halign="center">Total</th>
+    </tr>
+    <tr class="bottomheader">
+      <th>Team</th>
+      <th>W</th>
+      <th>L</th>
+      <th>W</th>
+      <th>L</th>
+      <th>W</th>
+      <th>L</th>
+      <th>Make Playoffs (%)</th>
+      <th>Make Wild Card (%)</th>
+      <th>Win Division (%)</th>
+      <th>Win League (%)</th>
+      <th>Win World Series (%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ATL</td>
+      <td>0</td>
+      <td>0</td>
+      <td>98</td>
+      <td>64</td>
+      <td>98</td>
+      <td>64</td>
+      <td>89.81</td>
+      <td>24.07</td>
+      <td>65.74</td>
+      <td>28.47</td>
+      <td>17.08</td>
+    </tr>
+    <tr>
+      <td>LAD</td>
+      <td>1</td>
+      <td>1</td>
+      <td>94</td>
+      <td>66</td>
+      <td>95</td>
+      <td>67</td>
+      <td>83.08</td>
+      <td>24.19</td>
+      <td>58.88</td>
+      <td>21.66</td>
+      <td>12.23</td>
+    </tr>
+    <tr>
+      <td>HOU</td>
+      <td>0</td>
+      <td>0</td>
+      <td>91</td>
+      <td>71</td>
+      <td>91</td>
+      <td>71</td>
+      <td>72.41</td>
+      <td>27.99</td>
+      <td>44.42</td>
+      <td>16.79</td>
+      <td>8.72</td>
+    </tr>
+    <tr>
+      <td>NYY</td>
+      <td>0</td>
+      <td>0</td>
+      <td>90</td>
+      <td>72</td>
+      <td>90</td>
+      <td>72</td>
+      <td>68.48</td>
+      <td>33.58</td>
+      <td>34.91</td>
+      <td>14.79</td>
+      <td>7.66</td>
+    </tr>
+    <tr>
+      <td>MIN</td>
+      <td>0</td>
+      <td>0</td>
+      <td>88</td>
+      <td>74</td>
+      <td>88</td>
+      <td>74</td>
+      <td>64.07</td>
+      <td>14.76</td>
+      <td>49.30</td>
+      <td>11.34</td>
+      <td>4.94</td>
+    </tr>
+    <tr>
+      <td>PHI</td>
+      <td>0</td>
+      <td>0</td>
+      <td>87</td>
+      <td>75</td>
+      <td>87</td>
+      <td>75</td>
+      <td>59.35</td>
+      <td>40.07</td>
+      <td>19.28</td>
+      <td>8.39</td>
+      <td>4.19</td>
+    </tr>
+    <tr>
+      <td>TOR</td>
+      <td>0</td>
+      <td>0</td>
+      <td>86</td>
+      <td>76</td>
+      <td>86</td>
+      <td>76</td>
+      <td>56.11</td>
+      <td>32.16</td>
+      <td>23.95</td>
+      <td>9.89</td>
+      <td>4.86</td>
+    </tr>
+    <tr>
+      <td>SEA</td>
+      <td>0</td>
+      <td>0</td>
+      <td>85</td>
+      <td>77</td>
+      <td>85</td>
+      <td>77</td>
+      <td>52.58</td>
+      <td>29.18</td>
+      <td>23.40</td>
+      <td>8.49</td>
+      <td>3.90</td>
+    </tr>
+    <tr>
+      <td>TBR</td>
+      <td>0</td>
+      <td>0</td>
+      <td>85</td>
+      <td>77</td>
+      <td>85</td>
+      <td>77</td>
+      <td>48.91</td>
+      <td>30.74</td>
+      <td>18.18</td>
+      <td>7.56</td>
+      <td>3.56</td>
+    </tr>
+    <tr>
+      <td>TEX</td>
+      <td>0</td>
+      <td>0</td>
+      <td>85</td>
+      <td>77</td>
+      <td>85</td>
+      <td>77</td>
+      <td>53.41</td>
+      <td>28.82</td>
+      <td>24.59</td>
+      <td>8.41</td>
+      <td>3.98</td>
+    </tr>
+    <tr>
+      <td>SDP</td>
+      <td>1</td>
+      <td>1</td>
+      <td>83</td>
+      <td>77</td>
+      <td>84</td>
+      <td>78</td>
+      <td>46.91</td>
+      <td>31.24</td>
+      <td>15.67</td>
+      <td>6.05</td>
+      <td>2.75</td>
+    </tr>
+    <tr>
+      <td>STL</td>
+      <td>0</td>
+      <td>0</td>
+      <td>84</td>
+      <td>78</td>
+      <td>84</td>
+      <td>78</td>
+      <td>51.23</td>
+      <td>17.95</td>
+      <td>33.28</td>
+      <td>6.67</td>
+      <td>3.14</td>
+    </tr>
+    <tr>
+      <td>BAL</td>
+      <td>0</td>
+      <td>0</td>
+      <td>84</td>
+      <td>78</td>
+      <td>84</td>
+      <td>78</td>
+      <td>45.71</td>
+      <td>29.54</td>
+      <td>16.17</td>
+      <td>7.13</td>
+      <td>3.31</td>
+    </tr>
+    <tr>
+      <td>CLE</td>
+      <td>0</td>
+      <td>0</td>
+      <td>84</td>
+      <td>78</td>
+      <td>84</td>
+      <td>78</td>
+      <td>48.13</td>
+      <td>17.39</td>
+      <td>30.75</td>
+      <td>6.83</td>
+      <td>3.06</td>
+    </tr>
+    <tr>
+      <td>NYM</td>
+      <td>0</td>
+      <td>0</td>
+      <td>83</td>
+      <td>79</td>
+      <td>83</td>
+      <td>79</td>
+      <td>43.56</td>
+      <td>32.46</td>
+      <td>11.10</td>
+      <td>5.23</td>
+      <td>2.46</td>
+    </tr>
+    <tr>
+      <td>ARI</td>
+      <td>0</td>
+      <td>0</td>
+      <td>83</td>
+      <td>79</td>
+      <td>83</td>
+      <td>79</td>
+      <td>42.16</td>
+      <td>28.52</td>
+      <td>13.64</td>
+      <td>4.92</td>
+      <td>2.17</td>
+    </tr>
+    <tr>
+      <td>CHC</td>
+      <td>0</td>
+      <td>0</td>
+      <td>83</td>
+      <td>79</td>
+      <td>83</td>
+      <td>79</td>
+      <td>42.74</td>
+      <td>17.52</td>
+      <td>25.22</td>
+      <td>5.19</td>
+      <td>2.41</td>
+    </tr>
+    <tr>
+      <td>SFG</td>
+      <td>0</td>
+      <td>0</td>
+      <td>81</td>
+      <td>81</td>
+      <td>81</td>
+      <td>81</td>
+      <td>38.39</td>
+      <td>26.77</td>
+      <td>11.62</td>
+      <td>4.18</td>
+      <td>2.08</td>
+    </tr>
+    <tr>
+      <td>MIL</td>
+      <td>0</td>
+      <td>0</td>
+      <td>80</td>
+      <td>82</td>
+      <td>80</td>
+      <td>82</td>
+      <td>33.48</td>
+      <td>15.04</td>
+      <td>18.45</td>
+      <td>3.36</td>
+      <td>1.47</td>
+    </tr>
+    <tr>
+      <td>CIN</td>
+      <td>0</td>
+      <td>0</td>
+      <td>78</td>
+      <td>84</td>
+      <td>78</td>
+      <td>84</td>
+      <td>25.66</td>
+      <td>12.56</td>
+      <td>13.10</td>
+      <td>2.37</td>
+      <td>1.09</td>
+    </tr>
+    <tr>
+      <td>BOS</td>
+      <td>0</td>
+      <td>0</td>
+      <td>78</td>
+      <td>84</td>
+      <td>78</td>
+      <td>84</td>
+      <td>24.93</td>
+      <td>18.14</td>
+      <td>6.79</td>
+      <td>3.08</td>
+      <td>1.29</td>
+    </tr>
+    <tr>
+      <td>LAA</td>
+      <td>0</td>
+      <td>0</td>
+      <td>76</td>
+      <td>86</td>
+      <td>76</td>
+      <td>86</td>
+      <td>20.23</td>
+      <td>14.06</td>
+      <td>6.17</td>
+      <td>2.02</td>
+      <td>0.88</td>
+    </tr>
+    <tr>
+      <td>PIT</td>
+      <td>0</td>
+      <td>0</td>
+      <td>76</td>
+      <td>86</td>
+      <td>76</td>
+      <td>86</td>
+      <td>20.24</td>
+      <td>10.28</td>
+      <td>9.96</td>
+      <td>1.66</td>
+      <td>0.66</td>
+    </tr>
+    <tr>
+      <td>DET</td>
+      <td>0</td>
+      <td>0</td>
+      <td>76</td>
+      <td>86</td>
+      <td>76</td>
+      <td>86</td>
+      <td>20.58</td>
+      <td>9.84</td>
+      <td>10.75</td>
+      <td>1.89</td>
+      <td>0.83</td>
+    </tr>
+    <tr>
+      <td>MIA</td>
+      <td>0</td>
+      <td>0</td>
+      <td>76</td>
+      <td>86</td>
+      <td>76</td>
+      <td>86</td>
+      <td>19.63</td>
+      <td>16.01</td>
+      <td>3.62</td>
+      <td>1.63</td>
+      <td>0.60</td>
+    </tr>
+    <tr>
+      <td>KCR</td>
+      <td>0</td>
+      <td>0</td>
+      <td>73</td>
+      <td>89</td>
+      <td>73</td>
+      <td>89</td>
+      <td>13.61</td>
+      <td>6.76</td>
+      <td>6.84</td>
+      <td>1.02</td>
+      <td>0.40</td>
+    </tr>
+    <tr>
+      <td>OAK</td>
+      <td>0</td>
+      <td>0</td>
+      <td>68</td>
+      <td>94</td>
+      <td>68</td>
+      <td>94</td>
+      <td>5.79</td>
+      <td>4.36</td>
+      <td>1.43</td>
+      <td>0.41</td>
+      <td>0.12</td>
+    </tr>
+    <tr>
+      <td>CHW</td>
+      <td>0</td>
+      <td>0</td>
+      <td>67</td>
+      <td>95</td>
+      <td>67</td>
+      <td>95</td>
+      <td>5.05</td>
+      <td>2.70</td>
+      <td>2.35</td>
+      <td>0.33</td>
+      <td>0.10</td>
+    </tr>
+    <tr>
+      <td>WSN</td>
+      <td>0</td>
+      <td>0</td>
+      <td>64</td>
+      <td>98</td>
+      <td>64</td>
+      <td>98</td>
+      <td>2.65</td>
+      <td>2.38</td>
+      <td>0.27</td>
+      <td>0.17</td>
+      <td>0.06</td>
+    </tr>
+    <tr>
+      <td>COL</td>
+      <td>0</td>
+      <td>0</td>
+      <td>60</td>
+      <td>102</td>
+      <td>60</td>
+      <td>102</td>
+      <td>1.11</td>
+      <td>0.94</td>
+      <td>0.18</td>
+      <td>0.05</td>
+      <td>0.01</td>
+    </tr>
+  </tbody>
+</table>
+
+
+        Last Updated: March 26, 2024
+    </div>
+    <p>
+        <!-- <i>Last Updated: March 26, 2024</i> -->
+    </p>
+    <!-- Social media stuff -->
+    <div class="container">
+        <hr class="bottom-div">
+        <a href="https://twitter.com/andersonfrailey?ref_src=twsrc%5Etfw" class="twitter-follow-button"
+            data-show-count="false">Follow @andersonfrailey</a>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+</body>
+
+</html>
