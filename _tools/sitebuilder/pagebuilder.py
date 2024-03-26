@@ -1,9 +1,11 @@
 import json
 import markdown
+import pandas as pd
+from datetime import datetime
 from jinja2 import Template
 from bs4 import BeautifulSoup
 from pathlib import Path
-from utils import replace_code_blocks
+from utils import replace_code_blocks, MLB_PROJECTION_COLUMNS
 
 
 CUR_PATH = Path(__file__).resolve().parent
@@ -90,14 +92,10 @@ class PageBuilder:
                 {"heading": heading, "graph": first_graph, "link": web_page}
             )
 
-        # create home/index page
-        # index_md_text = Path(CONTENT_PATH, "index.md").open("r").read()
-        # index_content = markdown.markdown(index_md_text)
-        # index_pathout = Path(BLOG_PATH, "index.html")
-        # index_template = Path(TEMPLATE_PATH, "blog_index_template.html")
-        # self.write_page(
-        #     index_pathout, index_template, content=index_content, posts=first_graphs
-        # )
+        # create blog index page
+        blog_index_pathout = Path(BLOG_PATH, "index.html")
+        blog_index_template = Path(TEMPLATE_PATH, "blog_index_template.html")
+        self.write_page(blog_index_pathout, blog_index_template, posts=first_graphs)
 
         # create home page
         # only use three most recent posts for home index
@@ -135,9 +133,31 @@ class PageBuilder:
         self.write_page(research_pathout, research_template, content=research_content)
 
         # create MLB projections page
+        mlb_projections_text = Path(CONTENT_PATH, "mlb-projections.md").open("r").read()
+        mlb_projections_content = markdown.markdown(mlb_projections_text)
+        mlb_projections = pd.read_csv(SATCHEL_URL, index_col=None)
+        mlb_projections.sort_values("Projected Wins", ascending=False, inplace=True)
+        mlb_projections.columns = pd.MultiIndex.from_tuples(MLB_PROJECTION_COLUMNS)
+        mlb_projections_table = mlb_projections.to_html(index=False)
+        mlb_projections_table = mlb_projections_table.replace(
+            'halign="left"', 'halign="center"'
+        )
+        mlb_projections_table = mlb_projections_table.replace(
+            "<tr>", '<tr class="bottomheader">', 2
+        )
+        mlb_projections_table = mlb_projections_table.replace(
+            '<tr class="bottomheader">', '<tr class="topheader">', 1
+        )
+        today = datetime.today().strftime("%B %d, %Y")
         mlb_projections_template = Path(TEMPLATE_PATH, "mlb_projections_template.html")
         mlb_projections_pathout = Path(HOME_PATH, "mlb-projections.html")
-        self.write_page(mlb_projections_pathout, mlb_projections_template)
+        self.write_page(
+            mlb_projections_pathout,
+            mlb_projections_template,
+            content=mlb_projections_content,
+            projections=mlb_projections_table,
+            last_modified=today,
+        )
 
     def write_page(self, pathout, template_path, **kwargs):
         """

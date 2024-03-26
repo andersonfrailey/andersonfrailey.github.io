@@ -1,6 +1,7 @@
 """
 Helper functions for the page builder utility
 """
+
 import re
 
 
@@ -17,15 +18,31 @@ def replace_code_blocks(text):
     text: Markdown text with code blocks
     """
     # pattern used by markdown code blocks
-    grouped_pattern = r'(```[\w]+\n)([^`]+)(```)'
+    grouped_pattern = r"(```[\w]+\n)([^`]+)(```)"
     # replace code blocks with language specification
     code_blocks = re.findall(grouped_pattern, text)
-    end_html = '</code></pre>\n'
+    end_html = "</code></pre>\n"
     for block in code_blocks:
-        lang = block[0].lstrip('```').rstrip()
+        lang = block[0].lstrip("```").rstrip()
         start_html = f'<pre><code class="{lang}">'
         new_str = start_html + block[1] + end_html
         old_str = block[0] + block[1] + block[2]
         text = text.replace(old_str, new_str)
 
     return text
+
+
+MLB_PROJECTION_COLUMNS = [
+    ("", "Team"),
+    ("To Date", "W"),
+    ("To Date", "L"),
+    ("Rest of Season", "W"),
+    ("Rest of Season", "L"),
+    ("Total", "W"),
+    ("Total", "L"),
+    ("Total", "Make Playoffs (%)"),
+    ("Total", "Make Wild Card (%)"),
+    ("Total", "Win Division (%)"),
+    ("Total", "Win League (%)"),
+    ("Total", "Win World Series (%)"),
+]
