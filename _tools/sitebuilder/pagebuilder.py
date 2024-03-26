@@ -135,7 +135,12 @@ class PageBuilder:
         # create MLB projections page
         mlb_projections_text = Path(CONTENT_PATH, "mlb-projections.md").open("r").read()
         mlb_projections_content = markdown.markdown(mlb_projections_text)
-        mlb_projections = pd.read_csv(SATCHEL_URL, index_col=None)
+        mlb_projections = pd.read_csv(SATCHEL_URL, index_col=None, parse_dates=["date"])
+        # only use the most recent projections
+        mlb_projections = mlb_projections[
+            mlb_projections["date"] == mlb_projections["date"].max()
+        ]
+        mlb_projections.drop("date", axis=1, inplace=True)
         mlb_projections.sort_values("Projected Wins", ascending=False, inplace=True)
         mlb_projections.columns = pd.MultiIndex.from_tuples(MLB_PROJECTION_COLUMNS)
         mlb_projections_table = mlb_projections.to_html(index=False)
