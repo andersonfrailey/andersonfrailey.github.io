@@ -13,6 +13,8 @@ Economics from the University of Virginia.
 
 Core Maintainer
 
+* [Statstables](https://github.com/andersonfrailey/statstables)
+* [Satchel](https://github.com/andersonfrailey/satchel)
 * [Tax-Brain](https://github.com/PSLmodels/Tax-Brain)
 * [TaxData](https://github.com/PSLmodels/taxdata)
 * [PSL-Infrastructure](https://github.com/PSLmodels/PSL-Infrastructure)
