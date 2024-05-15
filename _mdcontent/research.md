@@ -2,6 +2,8 @@
 
 ---
 
+My research broadly falls under the field of public economics. Currently, I am focused on the economics of crime and privacy, with a particular interest on cybercrime. In my dissertation I study the impact of public policy and technology shifts on the market for stolen data. Previously, I have worked on issues related to tax and transfer programs.
+
 ## _Revenue and Macroeconomic Effects of a 70% Marginal Tax Rate_
 _March 4, 2019_
 
