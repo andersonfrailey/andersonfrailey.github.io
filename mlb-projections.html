@@ -31,6 +31,7 @@
         <h1>MLB Projections</h1>
 <hr />
 <p>My MLB projections are generated using the Satchel projection model. I wrote a brief description of how the model works <a href="https://andersonfrailey.github.io/blog/Building-an-MLB-Prediction-Model-in-an-Evening.html">in an earlier post</a>, and it has since grown into a more substantive project. The source code is available on my <a href="https://github.com/andersonfrailey/satchel/tree/main">GitHub</a>.</p>
+<p>These projections are updated every morning during the season. The last column, "Season Percentile", grades how the team is projected to finish (in terms of total wins) relative to their opening day projections. A team that exactly meets expectations would have a season percentile of 50. Those that underperform will be below 50, and those that overperform will be above 50.</p>
     </div>
     <div class="container">
 
@@ -41,7 +42,7 @@
       <th></th>
       <th colspan="2" halign="center">To Date</th>
       <th colspan="2" halign="center">Rest of Season</th>
-      <th colspan="7" halign="center">Total</th>
+      <th colspan="8" halign="center">Total</th>
     </tr>
     <tr class="bottomheader">
       <th>Team</th>
@@ -56,6 +57,7 @@
       <th>Win Division (%)</th>
       <th>Win League (%)</th>
       <th>Win World Series (%)</th>
+      <th>Season Percentile</th>
     </tr>
   </thead>
   <tbody>
@@ -72,6 +74,7 @@
       <td>67.21</td>
       <td>29.53</td>
       <td>17.39</td>
+      <td>52.30</td>
     </tr>
     <tr>
       <td>LAD</td>
@@ -86,6 +89,7 @@
       <td>81.52</td>
       <td>26.02</td>
       <td>14.52</td>
+      <td>56.68</td>
     </tr>
     <tr>
       <td>NYY</td>
@@ -100,6 +104,7 @@
       <td>61.82</td>
       <td>20.76</td>
       <td>10.18</td>
+      <td>68.43</td>
     </tr>
     <tr>
       <td>PHI</td>
@@ -114,6 +119,7 @@
       <td>30.28</td>
       <td>11.22</td>
       <td>5.32</td>
+      <td>72.84</td>
     </tr>
     <tr>
       <td>BAL</td>
@@ -128,6 +134,7 @@
       <td>19.84</td>
       <td>9.21</td>
       <td>4.17</td>
+      <td>64.85</td>
     </tr>
     <tr>
       <td>CLE</td>
@@ -142,6 +149,7 @@
       <td>45.65</td>
       <td>9.87</td>
       <td>4.24</td>
+      <td>65.55</td>
     </tr>
     <tr>
       <td>MIN</td>
@@ -156,6 +164,7 @@
       <td>37.13</td>
       <td>10.82</td>
       <td>5.08</td>
+      <td>45.25</td>
     </tr>
     <tr>
       <td>SEA</td>
@@ -170,6 +179,7 @@
       <td>36.74</td>
       <td>9.65</td>
       <td>4.46</td>
+      <td>49.24</td>
     </tr>
     <tr>
       <td>HOU</td>
@@ -184,6 +194,7 @@
       <td>31.19</td>
       <td>11.91</td>
       <td>6.46</td>
+      <td>28.18</td>
     </tr>
     <tr>
       <td>CHC</td>
@@ -198,6 +209,7 @@
       <td>37.15</td>
       <td>5.61</td>
       <td>2.63</td>
+      <td>55.48</td>
     </tr>
     <tr>
       <td>TEX</td>
@@ -212,6 +224,7 @@
       <td>29.29</td>
       <td>8.29</td>
       <td>3.85</td>
+      <td>45.42</td>
     </tr>
     <tr>
       <td>TBR</td>
@@ -226,6 +239,7 @@
       <td>9.25</td>
       <td>6.49</td>
       <td>2.99</td>
+      <td>45.61</td>
     </tr>
     <tr>
       <td>MIL</td>
@@ -240,6 +254,7 @@
       <td>31.25</td>
       <td>3.79</td>
       <td>1.52</td>
+      <td>67.75</td>
     </tr>
     <tr>
       <td>SDP</td>
@@ -254,6 +269,7 @@
       <td>9.34</td>
       <td>6.38</td>
       <td>3.16</td>
+      <td>48.00</td>
     </tr>
     <tr>
       <td>TOR</td>
@@ -268,6 +284,7 @@
       <td>6.54</td>
       <td>6.13</td>
       <td>2.83</td>
+      <td>31.97</td>
     </tr>
     <tr>
       <td>STL</td>
@@ -282,6 +299,7 @@
       <td>20.41</td>
       <td>4.42</td>
       <td>2.23</td>
+      <td>36.20</td>
     </tr>
     <tr>
       <td>NYM</td>
@@ -296,6 +314,7 @@
       <td>2.40</td>
       <td>3.50</td>
       <td>1.67</td>
+      <td>40.12</td>
     </tr>
     <tr>
       <td>ARI</td>
@@ -310,6 +329,7 @@
       <td>5.36</td>
       <td>4.15</td>
       <td>2.11</td>
+      <td>45.27</td>
     </tr>
     <tr>
       <td>SFG</td>
@@ -324,6 +344,7 @@
       <td>3.79</td>
       <td>2.92</td>
       <td>1.34</td>
+      <td>41.98</td>
     </tr>
     <tr>
       <td>KCR</td>
@@ -338,6 +359,7 @@
       <td>10.08</td>
       <td>1.73</td>
       <td>0.60</td>
+      <td>73.43</td>
     </tr>
     <tr>
       <td>BOS</td>
@@ -352,6 +374,7 @@
       <td>2.54</td>
       <td>2.23</td>
       <td>0.96</td>
+      <td>47.12</td>
     </tr>
     <tr>
       <td>DET</td>
@@ -366,6 +389,7 @@
       <td>7.07</td>
       <td>2.02</td>
       <td>0.77</td>
+      <td>55.91</td>
     </tr>
     <tr>
       <td>CIN</td>
@@ -380,6 +404,7 @@
       <td>6.71</td>
       <td>1.30</td>
       <td>0.60</td>
+      <td>36.94</td>
     </tr>
     <tr>
       <td>PIT</td>
@@ -394,6 +419,7 @@
       <td>4.47</td>
       <td>0.91</td>
       <td>0.40</td>
+      <td>37.94</td>
     </tr>
     <tr>
       <td>LAA</td>
@@ -408,6 +434,7 @@
       <td>2.27</td>
       <td>0.74</td>
       <td>0.32</td>
+      <td>32.98</td>
     </tr>
     <tr>
       <td>OAK</td>
@@ -422,6 +449,7 @@
       <td>0.51</td>
       <td>0.14</td>
       <td>0.07</td>
+      <td>44.90</td>
     </tr>
     <tr>
       <td>MIA</td>
@@ -436,6 +464,7 @@
       <td>0.06</td>
       <td>0.16</td>
       <td>0.07</td>
+      <td>18.27</td>
     </tr>
     <tr>
       <td>WSN</td>
@@ -450,6 +479,7 @@
       <td>0.06</td>
       <td>0.09</td>
       <td>0.05</td>
+      <td>58.56</td>
     </tr>
     <tr>
       <td>CHW</td>
@@ -464,6 +494,7 @@
       <td>0.06</td>
       <td>0.03</td>
       <td>0.01</td>
+      <td>31.18</td>
     </tr>
     <tr>
       <td>COL</td>
@@ -478,6 +509,7 @@
       <td>0.00</td>
       <td>0.01</td>
       <td>0.00</td>
+      <td>44.79</td>
     </tr>
   </tbody>
 </table>

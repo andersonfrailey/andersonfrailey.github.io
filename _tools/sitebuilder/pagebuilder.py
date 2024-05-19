@@ -13,6 +13,7 @@ TEMPLATE_PATH = Path(CUR_PATH, "templates")
 CONTENT_PATH = Path(CUR_PATH, "..", "..", "_mdcontent")
 BLOG_PATH = Path(CUR_PATH, "..", "..", "blog")
 HOME_PATH = Path(CUR_PATH, "..", "..")
+DATA_PATH = Path(CUR_PATH, "..", "..", "code", "data")
 SATCHEL_URL = "https://raw.githubusercontent.com/andersonfrailey/satchel/main/2024projections/satchel.csv"
 
 
@@ -142,6 +143,11 @@ class PageBuilder:
         ]
         mlb_projections.drop("date", axis=1, inplace=True)
         mlb_projections.sort_values("Projected Wins", ascending=False, inplace=True)
+        results = json.load(Path(DATA_PATH, "2024percentiles.json").open())
+        mlb_projections["Season Percentile"] = mlb_projections.apply(
+            lambda x: round(results[x["Team"]][str(x["Projected Wins"])] * 100, 2),
+            axis=1,
+        )
         mlb_projections.columns = pd.MultiIndex.from_tuples(MLB_PROJECTION_COLUMNS)
         mlb_projections_table = mlb_projections.to_html(index=False)
         mlb_projections_table = mlb_projections_table.replace(

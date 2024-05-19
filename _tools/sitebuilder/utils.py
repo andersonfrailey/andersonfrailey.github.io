@@ -45,4 +45,5 @@ MLB_PROJECTION_COLUMNS = [
     ("Total", "Win Division (%)"),
     ("Total", "Win League (%)"),
     ("Total", "Win World Series (%)"),
+    ("Total", "Season Percentile"),
 ]
