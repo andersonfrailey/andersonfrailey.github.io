@@ -138,9 +138,8 @@ class PageBuilder:
         mlb_projections_content = markdown.markdown(mlb_projections_text)
         mlb_projections = pd.read_csv(SATCHEL_URL, index_col=None, parse_dates=["date"])
         # only use the most recent projections
-        mlb_projections = mlb_projections[
-            mlb_projections["date"] == mlb_projections["date"].max()
-        ]
+        max_date = mlb_projections["date"].max()
+        mlb_projections = mlb_projections[mlb_projections["date"] == max_date]
         mlb_projections.drop("date", axis=1, inplace=True)
         mlb_projections.sort_values("Projected Wins", ascending=False, inplace=True)
         results = json.load(Path(DATA_PATH, "2024percentiles.json").open())
@@ -159,7 +158,6 @@ class PageBuilder:
         mlb_projections_table = mlb_projections_table.replace(
             '<tr class="bottomheader">', '<tr class="topheader">', 1
         )
-        today = datetime.today().strftime("%B %d, %Y")
         mlb_projections_template = Path(TEMPLATE_PATH, "mlb_projections_template.html")
         mlb_projections_pathout = Path(HOME_PATH, "mlb-projections.html")
         self.write_page(
@@ -167,7 +165,7 @@ class PageBuilder:
             mlb_projections_template,
             content=mlb_projections_content,
             projections=mlb_projections_table,
-            last_modified=today,
+            last_modified=max_date.strftime("%B %d, %Y"),
         )
 
     def write_page(self, pathout, template_path, **kwargs):
