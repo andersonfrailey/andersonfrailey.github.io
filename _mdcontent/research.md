@@ -28,6 +28,6 @@ Will Ensor, Anderson Frailey, Matt Jensen, and Amy Xu
 
 [Read](https://www.aei.org/research-products/working-paper/a-budget-neutral-universal-basic-income/)
 
-## Media Coverage:
+## Media Coverage and Features:
 
 New York Times: [_Tax Bill Calculator: Will Your Taxes Go Up or Down?_](https://www.nytimes.com/interactive/2017/12/17/upshot/tax-calculator.html)
