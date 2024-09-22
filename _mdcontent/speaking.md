@@ -2,16 +2,35 @@
 
 ---
 
-## _Death, Taxes, and GUIs_
+**2025**
 
-AnacondaCON 2019 with Hank Doupe
+Allied Social Sciences Association Annual Meeting, San Francisco, CA (Scheduled)
+
+**2024**
+
+American Economic Association Summer Mentoring Pipeline Conference, 	Washington, DC
+
+**2023**
+
+Western Economic Association International Annual Conference, San Diego, CA
+
+American Economic Association Summer Mentoring Pipeline Conference, 	Washington, DC
+
+**2022**
+Southern Economic Association Annual Conference, Fort Lauderdale, FL
+	
+American Economic Association Summer Mentoring Pipeline Conference, 	Washington, DC
+
+**2019**
+
+AnacondaCON (with Hank Doupe): _Death, Taxes, and GUIs_
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/MQMaJGwBOsM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 [Slides](https://speakerdeck.com/andersonfrailey/death-taxes-and-guis)
 
-## _Open Source Policy Making - Challenges and Opportunities_
+**2018**
 
-PyGotham 2018
+PyGotham: _Open Source Policy Making - Challenges and Opportunities_
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/KJNMT196Z7I" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
