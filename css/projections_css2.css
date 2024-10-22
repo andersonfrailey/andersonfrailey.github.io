@@ -4,6 +4,8 @@
 
 .projections {
     max-width: 60em;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .blog_link {
@@ -126,15 +128,31 @@ td {
     text-align: center;
 }
 
-td:nth-child(3) {
+td:nth-child(8) {
     border-right-width: 3px;
 }
 
-td:nth-child(5) {
+td:nth-child(11) {
     border-right-width: 3px;
 }
 
-tr.bottomheader {
+tr th:nth-child(8) {
+    border-right-width: 3px;
+}
+
+tr th:nth-child(11) {
+    border-right-width: 3px;
+}
+
+tr th {
+    border-bottom-width: 2px;
+}
+
+tr th {
+    border-top-width: 3px;
+}
+
+/* tr.bottomheader {
     border-bottom: 3px solid black;
     border-top: none;
 }
@@ -161,4 +179,4 @@ tr.topheader th:nth-child(1) {
 
 tr.bottomheader th:nth-child(1) {
     border-top: 0px;
-}
+} */
