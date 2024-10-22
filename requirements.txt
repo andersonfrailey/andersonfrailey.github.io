@@ -3,3 +3,5 @@ markdown
 Jinja2
 beautifulsoup4
 lxml
+statstables
+pybaseball

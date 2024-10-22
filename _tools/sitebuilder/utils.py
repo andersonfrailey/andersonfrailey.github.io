@@ -47,3 +47,38 @@ MLB_PROJECTION_COLUMNS = [
     ("Total", "Win World Series (%)"),
     ("Total", "Season Percentile"),
 ]
+
+ABBR_TO_NAME = {
+    "ARI": "Arizona Diamondbacks",
+    "ATL": "Atlanta Braves",
+    "BAL": "Baltimore Orioles",
+    "BOS": "Boston Red Sox",
+    "CHC": "Chicago Cubs",
+    "CHW": "Chicago White Sox",
+    "CIN": "Cincinnati Reds",
+    "CLE": "Cleveland Guardians",
+    "COL": "Colorado Rockies",
+    "DET": "Detroit Tigers",
+    "MIA": "Miami Marlins",
+    "HOU": "Houston Astros",
+    "KCR": "Kansas City Royals",
+    "LAD": "Los Angeles Dodgers",
+    "MIL": "Milwaukee Brewers",
+    "NYM": "New York Mets",
+    "PHI": "Philadelphia Phillies",
+    "PIT": "Pittsburgh Pirates",
+    "SDP": "San Diego Padres",
+    "SFG": "San Francisco Giants",
+    "STL": "St. Louis Cardinals",
+    "WSN": "Washington Nationals",
+    "LAA": "Los Angeles Angels",
+    "MIN": "Minnesota Twins",
+    "NYY": "New York Yankees",
+    "OAK": "Oakland Athletics",
+    "SEA": "Seattle Mariners",
+    "TBR": "Tampa Bay Rays",
+    "TEX": "Texas Rangers",
+    "TOR": "Toronto Blue Jays",
+}
+
+NAME_TO_ABBR = {name: abbr for abbr, name in ABBR_TO_NAME.items()}
