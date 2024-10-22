@@ -215,12 +215,12 @@ class PageBuilder:
             ].values
             max_under_team = ", ".join(max_under_team)
             summary_stats = (
-                f"Average difference: {avg_diff_all:.2f}<br>"
-                f"Average difference (absolute value): {avg_diff:.2f}<br>"
-                f"Largest over projection: {max_over} ({max_over_team})<br>"
-                f"Largest under projection: {max_under} ({max_under_team})<br>"
-                f"Maximum difference (absolute value): {max_diff} ({max_diff_team})<br>"
-                f"Minimum difference (absolute value): {min_diff} ({min_diff_team})<br>"
+                f"Average difference between projected and actual wins: {avg_diff_all:.2f} wins<br>"
+                f"Average difference between projected and actual wins (absolute value): {avg_diff:.2f} wins<br>"
+                f"Largest over projection: {max_over} wins ({max_over_team})<br>"
+                f"Largest under projection: {max_under} wins ({max_under_team})<br>"
+                f"Maximum difference between projected and actual wins (absolute value): {max_diff} wins ({max_diff_team})<br>"
+                f"Minimum difference between projected and actual wins (absolute value): {min_diff} wins ({min_diff_team})<br>"
             )
             last_modified_date = datetime.today().strftime("%B %d, %Y")
             css = "projections_css2.css"
