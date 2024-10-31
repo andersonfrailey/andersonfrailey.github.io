@@ -63,7 +63,7 @@ class PageBuilder:
             "md_file",
         }
 
-    def build_site(self, season_summary=False):
+    def build_site(self, season_summary=False, skip_projections=False):
         """
         Function for building the blog portion of the site
         """
@@ -140,125 +140,139 @@ class PageBuilder:
         self.write_page(research_pathout, research_template, content=research_content)
 
         # create MLB projections page
-        mlb_projections_text = Path(CONTENT_PATH, "mlb-projections.md").open("r").read()
-        mlb_projections_content = markdown.markdown(mlb_projections_text)
-        mlb_projections = pd.read_csv(SATCHEL_URL, index_col=None, parse_dates=["date"])
-        results = json.load(Path(DATA_PATH, "2024percentiles.json").open())
-        if season_summary:
-            mlb_projections["date"] = mlb_projections["date"].apply(
-                lambda x: x.replace(hour=0, minute=0, second=0, microsecond=0)
+        if not skip_projections:
+            mlb_projections_text = (
+                Path(CONTENT_PATH, "mlb-projections.md").open("r").read()
             )
-            opening_day = mlb_projections[
-                mlb_projections["date"] == datetime.strptime(OPENING_DAY, "%m%d%Y")
-            ]
-            final_standings = pd.concat(standings(YEAR))
-            final_standings["Team"] = final_standings["Tm"].map(NAME_TO_ABBR)
-            final_standings["W"] = final_standings["W"].astype(int)
-            final_standings["L"] = final_standings["L"].astype(int)
-            proj_columns = [
-                "Team",
-                "Projected Wins",
-                "Projected Losses",
-                "Make Playoffs (%)",
-                "Make Wild Card (%)",
-                "Win Division (%)",
-                "Win League (%)",
-                "Win WS (%)",
-            ]
-            comparison_data = pd.merge(
-                opening_day[proj_columns],
-                final_standings[["Team", "W", "L", "W-L%"]],
-                on="Team",
+            mlb_projections_content = markdown.markdown(mlb_projections_text)
+            mlb_projections = pd.read_csv(
+                SATCHEL_URL, index_col=None, parse_dates=["date"]
             )
-            comparison_data["Season Percentile"] = comparison_data.apply(
-                lambda x: round(results[x["Team"]][str(x["W"])] * 100, 2),
-                axis=1,
+            results = json.load(Path(DATA_PATH, "2024percentiles.json").open())
+            if season_summary:
+                mlb_projections["date"] = mlb_projections["date"].apply(
+                    lambda x: x.replace(hour=0, minute=0, second=0, microsecond=0)
+                )
+                opening_day = mlb_projections[
+                    mlb_projections["date"] == datetime.strptime(OPENING_DAY, "%m%d%Y")
+                ]
+                final_standings = pd.concat(standings(YEAR))
+                final_standings["Team"] = final_standings["Tm"].map(NAME_TO_ABBR)
+                final_standings["W"] = final_standings["W"].astype(int)
+                final_standings["L"] = final_standings["L"].astype(int)
+                proj_columns = [
+                    "Team",
+                    "Projected Wins",
+                    "Projected Losses",
+                    "Make Playoffs (%)",
+                    "Make Wild Card (%)",
+                    "Win Division (%)",
+                    "Win League (%)",
+                    "Win WS (%)",
+                ]
+                comparison_data = pd.merge(
+                    opening_day[proj_columns],
+                    final_standings[["Team", "W", "L", "W-L%"]],
+                    on="Team",
+                )
+                comparison_data["Season Percentile"] = comparison_data.apply(
+                    lambda x: round(results[x["Team"]][str(x["W"])] * 100, 2),
+                    axis=1,
+                )
+                comparison_data["Projected - Actual Wins"] = (
+                    comparison_data["Projected Wins"] - comparison_data["W"]
+                )
+                comparison_data.sort_values("W", inplace=True, ascending=False)
+                comparison_table = st.tables.GenericTable(comparison_data)
+                comparison_table.sig_digits = 2
+                comparison_table.include_index = False
+                comparison_table.rename_columns(
+                    {"Projected Wins": "W", "Projected Losses": "L"}
+                )
+                comparison_table.add_multicolumns(
+                    columns=["", "Projected Outcomes", "Actual", ""],
+                    spans=[1, 7, 3, 2],
+                    underline=False,
+                )
+                mlb_projections_table = comparison_table.render_html(
+                    table_class="dataframe"
+                )
+                max_diff = comparison_data["Projected - Actual Wins"].abs().max()
+                max_diff_team = comparison_data["Team"][
+                    comparison_data["Projected - Actual Wins"] == max_diff
+                ].values
+                max_diff_team = ", ".join(max_diff_team)
+                min_diff = comparison_data["Projected - Actual Wins"].abs().min()
+                min_diff_team = comparison_data["Team"][
+                    comparison_data["Projected - Actual Wins"] == min_diff
+                ].values
+                min_diff_team = ", ".join(min_diff_team)
+                avg_diff = comparison_data["Projected - Actual Wins"].abs().mean()
+                avg_diff_all = comparison_data["Projected - Actual Wins"].mean()
+                max_over = comparison_data["Projected - Actual Wins"].max()
+                max_over_team = comparison_data["Team"][
+                    comparison_data["Projected - Actual Wins"] == max_over
+                ].values
+                max_over_team = ", ".join(max_over_team)
+                max_under = comparison_data["Projected - Actual Wins"].min()
+                max_under_team = comparison_data["Team"][
+                    comparison_data["Projected - Actual Wins"] == max_under
+                ].values
+                max_under_team = ", ".join(max_under_team)
+                summary_stats = (
+                    f"Average difference between projected and actual wins: {avg_diff_all:.2f} wins<br>"
+                    f"Average difference between projected and actual wins (absolute value): {avg_diff:.2f} wins<br>"
+                    f"Largest over projection: {max_over} wins ({max_over_team})<br>"
+                    f"Largest under projection: {max_under} wins ({max_under_team})<br>"
+                    f"Maximum difference between projected and actual wins (absolute value): {max_diff} wins ({max_diff_team})<br>"
+                    f"Minimum difference between projected and actual wins (absolute value): {min_diff} wins ({min_diff_team})<br>"
+                )
+                last_modified_date = datetime.today().strftime("%B %d, %Y")
+                css = "projections_css2.css"
+            else:
+                # only use the most recent projections
+                max_date = mlb_projections["date"].max()
+                mlb_projections = mlb_projections[mlb_projections["date"] == max_date]
+                mlb_projections.drop("date", axis=1, inplace=True)
+                mlb_projections.sort_values(
+                    "Projected Wins", ascending=False, inplace=True
+                )
+                mlb_projections["Season Percentile"] = mlb_projections.apply(
+                    lambda x: round(
+                        results[x["Team"]][str(x["Projected Wins"])] * 100, 2
+                    ),
+                    axis=1,
+                )
+                mlb_projections.columns = pd.MultiIndex.from_tuples(
+                    MLB_PROJECTION_COLUMNS
+                )
+                mlb_projections_table = mlb_projections.to_html(index=False)
+                mlb_projections_table = mlb_projections_table.replace(
+                    'halign="left"', 'halign="center"'
+                )
+                mlb_projections_table = mlb_projections_table.replace(
+                    "<tr>", '<tr class="bottomheader">', 2
+                )
+                mlb_projections_table = mlb_projections_table.replace(
+                    '<tr class="bottomheader">', '<tr class="topheader">', 1
+                )
+                last_modified_date = max_date.strftime("%B %d, %Y")
+                css = "projections_css.css"
+                summary_stats = None
+            mlb_projections_template = Path(
+                TEMPLATE_PATH, "mlb_projections_template.html"
             )
-            comparison_data["Projected - Actual Wins"] = (
-                comparison_data["Projected Wins"] - comparison_data["W"]
+            mlb_projections_pathout = Path(HOME_PATH, "mlb-projections.html")
+
+            self.write_page(
+                mlb_projections_pathout,
+                mlb_projections_template,
+                content=mlb_projections_content,
+                projections=mlb_projections_table,
+                last_modified=last_modified_date,
+                css=css,
+                summary_stats=summary_stats,
             )
-            comparison_data.sort_values("W", inplace=True, ascending=False)
-            comparison_table = st.tables.GenericTable(comparison_data)
-            comparison_table.sig_digits = 2
-            comparison_table.include_index = False
-            comparison_table.rename_columns(
-                {"Projected Wins": "W", "Projected Losses": "L"}
-            )
-            comparison_table.add_multicolumns(
-                columns=["", "Projected Outcomes", "Actual", ""],
-                spans=[1, 7, 3, 2],
-                underline=False,
-            )
-            mlb_projections_table = comparison_table.render_html(
-                table_class="dataframe"
-            )
-            max_diff = comparison_data["Projected - Actual Wins"].abs().max()
-            max_diff_team = comparison_data["Team"][
-                comparison_data["Projected - Actual Wins"] == max_diff
-            ].values
-            max_diff_team = ", ".join(max_diff_team)
-            min_diff = comparison_data["Projected - Actual Wins"].abs().min()
-            min_diff_team = comparison_data["Team"][
-                comparison_data["Projected - Actual Wins"] == min_diff
-            ].values
-            min_diff_team = ", ".join(min_diff_team)
-            avg_diff = comparison_data["Projected - Actual Wins"].abs().mean()
-            avg_diff_all = comparison_data["Projected - Actual Wins"].mean()
-            max_over = comparison_data["Projected - Actual Wins"].max()
-            max_over_team = comparison_data["Team"][
-                comparison_data["Projected - Actual Wins"] == max_over
-            ].values
-            max_over_team = ", ".join(max_over_team)
-            max_under = comparison_data["Projected - Actual Wins"].min()
-            max_under_team = comparison_data["Team"][
-                comparison_data["Projected - Actual Wins"] == max_under
-            ].values
-            max_under_team = ", ".join(max_under_team)
-            summary_stats = (
-                f"Average difference between projected and actual wins: {avg_diff_all:.2f} wins<br>"
-                f"Average difference between projected and actual wins (absolute value): {avg_diff:.2f} wins<br>"
-                f"Largest over projection: {max_over} wins ({max_over_team})<br>"
-                f"Largest under projection: {max_under} wins ({max_under_team})<br>"
-                f"Maximum difference between projected and actual wins (absolute value): {max_diff} wins ({max_diff_team})<br>"
-                f"Minimum difference between projected and actual wins (absolute value): {min_diff} wins ({min_diff_team})<br>"
-            )
-            last_modified_date = datetime.today().strftime("%B %d, %Y")
-            css = "projections_css2.css"
-        else:
-            # only use the most recent projections
-            max_date = mlb_projections["date"].max()
-            mlb_projections = mlb_projections[mlb_projections["date"] == max_date]
-            mlb_projections.drop("date", axis=1, inplace=True)
-            mlb_projections.sort_values("Projected Wins", ascending=False, inplace=True)
-            mlb_projections["Season Percentile"] = mlb_projections.apply(
-                lambda x: round(results[x["Team"]][str(x["Projected Wins"])] * 100, 2),
-                axis=1,
-            )
-            mlb_projections.columns = pd.MultiIndex.from_tuples(MLB_PROJECTION_COLUMNS)
-            mlb_projections_table = mlb_projections.to_html(index=False)
-            mlb_projections_table = mlb_projections_table.replace(
-                'halign="left"', 'halign="center"'
-            )
-            mlb_projections_table = mlb_projections_table.replace(
-                "<tr>", '<tr class="bottomheader">', 2
-            )
-            mlb_projections_table = mlb_projections_table.replace(
-                '<tr class="bottomheader">', '<tr class="topheader">', 1
-            )
-            last_modified_date = max_date.strftime("%B %d, %Y")
-            css = "projections_css.css"
-            summary_stats = None
-        mlb_projections_template = Path(TEMPLATE_PATH, "mlb_projections_template.html")
-        mlb_projections_pathout = Path(HOME_PATH, "mlb-projections.html")
-        self.write_page(
-            mlb_projections_pathout,
-            mlb_projections_template,
-            content=mlb_projections_content,
-            projections=mlb_projections_table,
-            last_modified=last_modified_date,
-            css=css,
-            summary_stats=summary_stats,
-        )
 
     def write_page(self, pathout, template_path, **kwargs):
         """
@@ -285,7 +299,14 @@ if __name__ == "__main__":
         action="store_true",
         help="Make the MLB Projections table a comparison of the open day projections to end of season results.",
     )
+    parser.add_argument(
+        "--skip-projections",
+        action="store_true",
+        help="If included, MLB projections are skipped",
+    )
     args = parser.parse_args()
     pages = json.loads(Path(CUR_PATH, "posts.json").open("r").read())
     builder = PageBuilder(pages)
-    builder.build_site(season_summary=args.season_summary)
+    builder.build_site(
+        season_summary=args.season_summary, skip_projections=args.skip_projections
+    )

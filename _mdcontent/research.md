@@ -4,9 +4,9 @@
 
 My research broadly falls under the field of public economics. Currently, I am focused on the economics of crime and privacy, with a particular interest on cybercrime. In my dissertation I study the impact of public policy and technology shifts on the market for stolen data. Previously, I have worked on issues related to tax and transfer programs.
 
-## Works in Progress
+## Research in Progress
 
-**_The Effects of Privacy Regulation on the Supply of Stolen Data_** (job market paper)
+**_The Effects of Privacy Regulation on the Supply of Stolen Data_** (Job Market Paper)
 
 **_Stock Market Reactions to Cybersecurity Incident Disclosures_**
 
