@@ -6,7 +6,7 @@ My research broadly falls under the field of public economics. Currently, I am f
 
 ## Research in Progress
 
-**_The Effects of Privacy Regulation on the Supply of Stolen Data_** (Job Market Paper)
+[**_The Effects of Privacy Regulation on the Supply of Stolen Data_**](https://andersonfrailey.github.io/files/supply_of_stolen_data.pdf) (Job Market Paper)
 
 Abstract: _Individuals are constantly generating streams of data collected by businesses, educational institutions, data brokers, and many other organizations. These organizations are regularly targeted by cyber criminals attempting to steal that data in order to exploit or sell it in online markets. In this paper I use a novel dataset of data breaches to study the effects of the European Union's General Data Protection Regulation (GDPR), a policy governing the collection and storage of user data, on the quantity of data available in the illicit market. Using a difference-in-differences design, I find that the GDPR caused a 61 percent reduction in the number of data breaches traded, but no reduction in the aggregate amount of data available. Analyzing the contents of the individual breaches, I find a nearly 70 percent increase in the amount of data they contain. The model I present in the paper shows that these results are consistent with low-value hacking targets becoming disproportionally less valuable after the GDPR, which in turn causes higher-value targets to make up a larger portion of post-GDPR data breaches._
 
@@ -16,7 +16,7 @@ Abstract: _Individuals are constantly generating streams of data collected by bu
 
 [**_Revenue and Macroeconomic Effects of a 70% Marginal Tax Rate_**](http://www.openrg.com/reports/70pctMTR_QN.pdf) (with Jason DeBacker) _Open Research Group Quantitative Note, March 4, 2019_
 
-[**_A Budget-Neutral Universal Basic Income_**](https://www.aei.org/research-products/working-paper/a-budget-neutral-universal-basic-income/) (with Will Ensor, Anderson Frailey, Matt Jensen, and Amy Xu) _AEI Economics Working Paper 2017-03, May 30, 2017_
+[**_A Budget-Neutral Universal Basic Income_**](https://www.aei.org/research-products/working-paper/a-budget-neutral-universal-basic-income/) (with Will Ensor, Matt Jensen, and Amy Xu) _AEI Economics Working Paper 2017-03, May 30, 2017_
 
 ## Media Coverage and Features:
 
