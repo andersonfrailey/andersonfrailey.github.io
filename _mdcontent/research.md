@@ -8,6 +8,8 @@ My research broadly falls under the field of public economics. Currently, I am f
 
 **_The Effects of Privacy Regulation on the Supply of Stolen Data_** (Job Market Paper)
 
+Abstract: _Individuals are constantly generating streams of data collected by businesses, educational institutions, data brokers, and many other organizations. These organizations are regularly targeted by cyber criminals attempting to steal that data in order to exploit or sell it in online markets. In this paper I use a novel dataset of data breaches to study the effects of the European Union's General Data Protection Regulation (GDPR), a policy governing the collection and storage of user data, on the quantity of data available in the illicit market. Using a difference-in-differences design, I find that the GDPR caused a 61 percent reduction in the number of data breaches traded, but no reduction in the aggregate amount of data available. Analyzing the contents of the individual breaches, I find a nearly 70 percent increase in the amount of data they contain. The model I present in the paper shows that these results are consistent with low-value hacking targets becoming disproportionally less valuable after the GDPR, which in turn causes higher-value targets to make up a larger portion of post-GDPR data breaches._
+
 **_Stock Market Reactions to Cybersecurity Incident Disclosures_**
 
 ## Other Publications
@@ -22,7 +24,7 @@ Jason DeBacker and Anderson Frailey
 
 **_A Budget-Neutral Universal Basic Income_**
 
-_May 30, 2017_
+_ AEI Economics Working Paper 2017-03, May 30, 2017_
 
 Will Ensor, Anderson Frailey, Matt Jensen, and Amy Xu
 

@@ -9,6 +9,8 @@ I'm currently an Economics PhD candidate at the University of Virginia. In my sp
 I earned a BA in Economics from The University of Texas at Austin and MA in
 Economics from the University of Virginia.
 
+My CV can be found [here](https://drive.google.com/file/d/1lVFmPya0iHnaV6ptNQFdAu7LKA4hGFuA/view?usp=sharing).
+
 **Open Source Work**
 
 Core Maintainer
