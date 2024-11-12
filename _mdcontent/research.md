@@ -2,7 +2,7 @@
 
 ---
 
-My research broadly falls under the field of public economics. Currently, I am focused on the economics of crime and privacy, with a particular interest on cybercrime. In my dissertation I study the impact of public policy and technology shifts on the market for stolen data. Previously, I have worked on issues related to tax and transfer programs.
+My research broadly falls under the field of public economics. Currently, I am focused on the economics of crime and privacy, with a particular interest on cybercrime. In my job market paper, I study the impact of public policy on the market for stolen data. Previously, I have worked on issues related to tax and transfer programs.
 
 ## Research in Progress
 
@@ -12,23 +12,11 @@ Abstract: _Individuals are constantly generating streams of data collected by bu
 
 **_Stock Market Reactions to Cybersecurity Incident Disclosures_**
 
-## Other Publications
+## Publications
 
-**_Revenue and Macroeconomic Effects of a 70% Marginal Tax Rate_**
+[**_Revenue and Macroeconomic Effects of a 70% Marginal Tax Rate_**](http://www.openrg.com/reports/70pctMTR_QN.pdf) (with Jason DeBacker) _Open Research Group Quantitative Note, March 4, 2019_
 
-_March 4, 2019_
-
-Jason DeBacker and Anderson Frailey
-
-[Read](http://www.openrg.com/reports/70pctMTR_QN.pdf)
-
-**_A Budget-Neutral Universal Basic Income_**
-
-_ AEI Economics Working Paper 2017-03, May 30, 2017_
-
-Will Ensor, Anderson Frailey, Matt Jensen, and Amy Xu
-
-[Read](https://www.aei.org/research-products/working-paper/a-budget-neutral-universal-basic-income/)
+[**_A Budget-Neutral Universal Basic Income_**](https://www.aei.org/research-products/working-paper/a-budget-neutral-universal-basic-income/) (with Will Ensor, Anderson Frailey, Matt Jensen, and Amy Xu) _AEI Economics Working Paper 2017-03, May 30, 2017_
 
 ## Media Coverage and Features:
 
