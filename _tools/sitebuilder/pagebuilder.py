@@ -108,6 +108,8 @@ class PageBuilder:
         # only use three most recent posts for home index
         index_md_text = Path(CONTENT_PATH, "index.md").open("r").read()
         index_content = markdown.markdown(index_md_text)
+        jmp_md_text = Path(CONTENT_PATH, "jmp_content.md").open("r").read()
+        jmp_content = markdown.markdown(jmp_md_text)
         recent_posts = first_graphs[: self.num_recent]
         home_index_pathout = Path(HOME_PATH, "index.html")
         home_index_template = Path(TEMPLATE_PATH, "index_template.html")
@@ -116,6 +118,7 @@ class PageBuilder:
             home_index_template,
             content=index_content,
             posts=recent_posts,
+            jmp_content=jmp_content,
         )
 
         # create about page
