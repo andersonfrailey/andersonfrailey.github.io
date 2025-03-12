@@ -162,3 +162,26 @@ tr.topheader th:nth-child(1) {
 tr.bottomheader th:nth-child(1) {
     border-top: 0px;
 }
+
+.bluesky-follow-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #0085ff;
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 18px;
+    transition: background-color 0.2s;
+}
+
+.bluesky-follow-button:hover {
+    background-color: #0068ca;
+}
+
+.bluesky-follow-button svg {
+    stroke: white;
+}

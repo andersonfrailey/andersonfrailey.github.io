@@ -36,5 +36,5 @@ I have also given multiple conference talks on projects I work on, which can be 
 
 **Contact**
 
-* Twitter: <a class="contact-link" href="https://twitter.com/andersonfrailey">@andersonfrailey</a>
+* Bluesky: <a class="contact-link" href="https://bsky.app/profile/andersonfrailey.bsky.social">@andersonfrailey.bsky.social</a>
 * GitHub: <a class="contact-link" href="https://github.com/andersonfrailey">andersonfrailey</a>
