@@ -6,4 +6,4 @@ My MLB projections are generated using the Satchel projection model. I wrote a b
 
 These projections are updated automatically every morning during the season around 10AM Eastern. The "Season Percentile" column grades how the team is projected to finish (in terms of total wins) relative to their opening day projections. A team that's roughly meeting expectations will have a percentile around 50. Those that dramatically over or underperform will have scores significantly higher and lower than 50, respectively.
 
-After the regular season ends, the table below compares the start of season projections to how each team finished the year. Below the table are a few stats summarizing how the model performed.
+<!-- After the regular season ends, the table below compares the start of season projections to how each team finished the year. Below the table are a few stats summarizing how the model performed. -->

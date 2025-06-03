@@ -4,6 +4,8 @@
 
 .projections {
     max-width: 60em;
+    text-align: center;
+    margin: 0 auto;
 }
 
 .blog_link {
@@ -113,6 +115,8 @@ table {
 table.dataframe {
     margin-left: auto;
     margin-right: auto;
+    display: inline-block;
+    text-align: left;
 }
 
 th,
@@ -184,4 +188,59 @@ tr.bottomheader th:nth-child(1) {
 
 .bluesky-follow-button svg {
     stroke: white;
+}
+
+/* remove lines between first and second header row */
+th,
+td {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-left: none;
+    border-right: none;
+    border-collapse: collapse;
+    padding-right: 0.5em;
+    padding-left: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+thead tr:first-child th {
+    border-bottom: none;
+    border-top: 3px solid black;
+}
+
+/* thead tr:nth-child(2) th {
+    border-top: none;
+} */
+
+/* Add right border to 3rd column */
+td:nth-child(3) {
+    border-right: 2px solid black;
+}
+
+td:nth-child(1) {
+    border-right: 2px solid black;
+}
+
+/* Add right border to 6th column */
+td:nth-child(5) {
+    border-right: 2px solid black;
+}
+
+tr:nth-child(1) th:nth-child(2) {
+    border-right: 2px solid black;
+}
+
+th:nth-child(3) {
+    border-right: 2px solid black;
+}
+
+/* Add right border to 6th column */
+th:nth-child(5) {
+    border-right: 2px solid black;
+}
+
+th:nth-child(1) {
+    border-right: 2px solid black;
 }

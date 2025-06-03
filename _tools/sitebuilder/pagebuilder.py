@@ -1,5 +1,6 @@
 import argparse
 import json
+import requests
 import markdown
 import pandas as pd
 import statstables as st
@@ -17,10 +18,11 @@ CONTENT_PATH = Path(CUR_PATH, "..", "..", "_mdcontent")
 BLOG_PATH = Path(CUR_PATH, "..", "..", "blog")
 HOME_PATH = Path(CUR_PATH, "..", "..")
 DATA_PATH = Path(CUR_PATH, "..", "..", "code", "data")
-SATCHEL_URL = "https://raw.githubusercontent.com/andersonfrailey/satchel/main/2024projections/satchel.csv"
-YEAR = 2024
-OPENING_DAY = "03282024"
-FINAL_DAY = "09302024"
+YEAR = 2025
+OPENING_DAY = "03272025"
+FINAL_DAY = "09282025"
+SATCHEL_URL = f"https://raw.githubusercontent.com/andersonfrailey/satchel/refs/heads/main/projections/satchel{YEAR}.csv"
+PERCENTILES_URL = f"https://raw.githubusercontent.com/andersonfrailey/satchel/refs/heads/main/projections/percentiles{YEAR}.json"
 
 
 class PageBuilder:
@@ -148,10 +150,12 @@ class PageBuilder:
                 Path(CONTENT_PATH, "mlb-projections.md").open("r").read()
             )
             mlb_projections_content = markdown.markdown(mlb_projections_text)
+            # fetch projections
             mlb_projections = pd.read_csv(
                 SATCHEL_URL, index_col=None, parse_dates=["date"]
             )
-            results = json.load(Path(DATA_PATH, "2024percentiles.json").open())
+            r = requests.get(PERCENTILES_URL)
+            results = json.loads(r.text)
             if season_summary:
                 mlb_projections["date"] = mlb_projections["date"].apply(
                     lambda x: x.replace(hour=0, minute=0, second=0, microsecond=0)
@@ -179,7 +183,7 @@ class PageBuilder:
                     on="Team",
                 )
                 comparison_data["Season Percentile"] = comparison_data.apply(
-                    lambda x: round(results[x["Team"]][str(x["W"])] * 100, 2),
+                    lambda x: round(results[x["Team"]][str(int(x["W"]))] * 100, 2),
                     axis=1,
                 )
                 comparison_data["Projected - Actual Wins"] = (
@@ -197,7 +201,7 @@ class PageBuilder:
                     spans=[1, 7, 3, 2],
                     underline=False,
                 )
-                mlb_projections_table = comparison_table.render_html(
+                mlb_projections_table_html = comparison_table.render_html(
                     table_class="dataframe"
                 )
                 max_diff = comparison_data["Projected - Actual Wins"].abs().max()
@@ -236,6 +240,9 @@ class PageBuilder:
                 # only use the most recent projections
                 max_date = mlb_projections["date"].max()
                 mlb_projections = mlb_projections[mlb_projections["date"] == max_date]
+                mlb_projections["Projected Wins"] = mlb_projections[
+                    "Projected Wins"
+                ].astype(int)
                 mlb_projections.drop("date", axis=1, inplace=True)
                 mlb_projections.sort_values(
                     "Projected Wins", ascending=False, inplace=True
@@ -246,22 +253,50 @@ class PageBuilder:
                     ),
                     axis=1,
                 )
-                mlb_projections.columns = pd.MultiIndex.from_tuples(
-                    MLB_PROJECTION_COLUMNS
+                # order and filter columns
+                mlb_projections = mlb_projections[
+                    [
+                        "Team",
+                        "Wins to Date",
+                        "Losses to Date",
+                        "Wins RoS",
+                        "Losses RoS",
+                        "Projected Wins",
+                        "Projected Losses",
+                        "Make Wild Card (%)",
+                        "Win Division (%)",
+                        "Make Playoffs (%)",
+                        "Win League (%)",
+                        "Win WS (%)",
+                        "Season Percentile",
+                    ]
+                ]
+                col_labels = {
+                    "Wins to Date": "W",
+                    "Losses to Date": "L",
+                    "Wins RoS": "W",
+                    "Losses RoS": "L",
+                    "Projected Wins": "W",
+                    "Projected Losses": "L",
+                }
+                mlb_projections_table = st.tables.GenericTable(
+                    mlb_projections,
+                    include_index=False,
+                    column_labels=col_labels,
+                    sig_digits=2,
+                    formatters={col: lambda x: f"{x:.0f}" for col in col_labels.keys()},
                 )
-                mlb_projections_table = mlb_projections.to_html(index=False)
-                mlb_projections_table = mlb_projections_table.replace(
-                    'halign="left"', 'halign="center"'
+                mlb_projections_table.add_multicolumns(
+                    ["", "To Date", "RoS", "Projections"],
+                    spans=[1, 2, 2, 8],
+                    underline=False,
                 )
-                mlb_projections_table = mlb_projections_table.replace(
-                    "<tr>", '<tr class="bottomheader">', 2
-                )
-                mlb_projections_table = mlb_projections_table.replace(
-                    '<tr class="bottomheader">', '<tr class="topheader">', 1
+                mlb_projections_table_html = mlb_projections_table.render_html(
+                    table_class="dataframe"
                 )
                 last_modified_date = max_date.strftime("%B %d, %Y")
                 css = "projections_css.css"
-                summary_stats = None
+                summary_stats = ""
             mlb_projections_template = Path(
                 TEMPLATE_PATH, "mlb_projections_template.html"
             )
@@ -271,7 +306,7 @@ class PageBuilder:
                 mlb_projections_pathout,
                 mlb_projections_template,
                 content=mlb_projections_content,
-                projections=mlb_projections_table,
+                projections=mlb_projections_table_html,
                 last_modified=last_modified_date,
                 css=css,
                 summary_stats=summary_stats,
