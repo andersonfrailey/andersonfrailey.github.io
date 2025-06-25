@@ -5,3 +5,4 @@ beautifulsoup4
 lxml
 statstables
 pybaseball
+scipy<1.13
