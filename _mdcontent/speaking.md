@@ -4,7 +4,9 @@
 
 **2025**
 
-Allied Social Sciences Association Annual Meeting, San Francisco, CA (Scheduled)
+2025 Workshop on the Economics of Information Security (WEIS), Tokyo, Japan
+
+Allied Social Sciences Association Annual Meeting, San Francisco, CA
 
 **2024**
 

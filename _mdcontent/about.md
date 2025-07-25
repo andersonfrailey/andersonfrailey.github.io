@@ -2,12 +2,11 @@
 
 ---
 
-I'm currently an Economics PhD candidate at the University of Virginia. In my spare time I work on a number of open source projects including tax models in the [Policy Simulation Library](https://www.pslmodels.org)
+I'm an assistant professor in the UMBC economics department. In my spare time I work on a number of open source projects including tax models in the [Policy Simulation Library](https://www.pslmodels.org)
 (PSL), [blackjack simulators](https://github.com/andersonfrailey/blackjack), and [MLB projection models](https://github.com/andersonfrailey/satchel). Previously, I worked as a research associate in the
 [Open Source Policy Center](https://www.ospc.org) within the [American Enterprise Institute](https://www.aei.org).
 
-I earned a BA in Economics from The University of Texas at Austin and MA in
-Economics from the University of Virginia.
+I earned my BA in Economics from The University of Texas at Austin, and MA and PhD in Economics from the University of Virginia.
 
 My CV can be found [here](https://drive.google.com/file/d/1lVFmPya0iHnaV6ptNQFdAu7LKA4hGFuA/view?usp=sharing).
 
