@@ -1,3 +1,7 @@
+body {
+    background-color: rgb(242, 240, 239);
+}
+
 .container {
     max-width: 45em;
 }
@@ -78,7 +82,7 @@ a {
 }
 
 .navbar-header {
-    color: rgb(105, 112, 119);
+    color: rgb(250, 240, 230);
 }
 
 code {
