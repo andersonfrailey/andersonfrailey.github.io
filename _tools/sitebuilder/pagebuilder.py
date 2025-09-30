@@ -19,7 +19,7 @@ BLOG_PATH = Path(CUR_PATH, "..", "..", "blog")
 HOME_PATH = Path(CUR_PATH, "..", "..")
 DATA_PATH = Path(CUR_PATH, "..", "..", "code", "data")
 YEAR = 2025
-OPENING_DAY = "03272025"
+OPENING_DAY = "03262025"
 FINAL_DAY = "09282025"
 SATCHEL_URL = f"https://raw.githubusercontent.com/andersonfrailey/satchel/refs/heads/main/projections/satchel{YEAR}.csv"
 PERCENTILES_URL = f"https://raw.githubusercontent.com/andersonfrailey/satchel/refs/heads/main/projections/percentiles{YEAR}.json"
@@ -190,9 +190,9 @@ class PageBuilder:
                     comparison_data["Projected Wins"] - comparison_data["W"]
                 )
                 comparison_data.sort_values("W", inplace=True, ascending=False)
-                comparison_table = st.tables.GenericTable(comparison_data)
-                comparison_table.sig_digits = 2
-                comparison_table.include_index = False
+                comparison_table = st.tables.GenericTable(
+                    comparison_data, include_index=False, sig_digits=2
+                )
                 comparison_table.rename_columns(
                     {"Projected Wins": "W", "Projected Losses": "L"}
                 )
