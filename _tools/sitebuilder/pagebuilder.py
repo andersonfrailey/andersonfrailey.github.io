@@ -190,9 +190,10 @@ class PageBuilder:
                     comparison_data["Projected Wins"] - comparison_data["W"]
                 )
                 comparison_data.sort_values("W", inplace=True, ascending=False)
-                comparison_table = st.tables.GenericTable(comparison_data)
+                comparison_table = st.tables.GenericTable(
+                    comparison_data, include_index=False, sig_digits=2
+                )
                 comparison_table.sig_digits = 2
-                comparison_table.include_index = False
                 comparison_table.rename_columns(
                     {"Projected Wins": "W", "Projected Losses": "L"}
                 )

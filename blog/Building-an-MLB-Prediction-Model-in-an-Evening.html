@@ -51,8 +51,7 @@ the winner. The coin flips are weighted based on the probability
 each team has of winning a given game, which is determined using the Bradley-Terry
 model. In a game between team <em>A</em> and <em>B</em>, the probability of
 team <em>A</em> winning is given by:</p>
-<center><i>P(A Wins) = exp(T<sub>A</sub>) &#247; [exp(T<sub>A</sub>) + exp(T<sub>B</sub>)]</i></center>
-
+<p><center><i>P(A Wins) = exp(T<sub>A</sub>) &#247; [exp(T<sub>A</sub>) + exp(T<sub>B</sub>)]</i></center></p>
 <p>where <em><span>T<sub>i</sub></span></em> is the talent level of team <em>i</em>.</p>
 <p>To calculate talent I use the average of the ZiPS and Steamer WAR projections from
 <a href="https://www.fangraphs.com/projections.aspx?pos=all&amp;stats=bat&amp;type=zips">FanGraphs</a>
@@ -102,8 +101,7 @@ is the percentage above or below median total team WAR they are. Given a median 
 <p>As an example of how the probabilities are calculated, the Houston Astros open
 their season against the Oakland A's. Based on
 each team's talent, the probability the Astros win is</p>
-<center> <i>P(Astros Win) = exp(0.273917) &#247; [exp(0.273917) + exp(-0.017171)] = 0.568.</i></center>
-
+<p><center> <i>P(Astros Win) = exp(0.273917) &#247; [exp(0.273917) + exp(-0.017171)] = 0.568.</i></center></p>
 <p>Using the same talent level for each simulated season would be boring, so in the
 actual simulations I add some noise by randomly increasing or decreasing each team's talent
 in each one. You can think of this as teams over or under performing relative
