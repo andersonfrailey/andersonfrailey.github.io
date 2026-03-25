@@ -4,7 +4,7 @@ import requests
 import markdown
 import pandas as pd
 import statstables as st
-from datetime import datetime
+from datetime import datetime, timedelta
 from jinja2 import Template
 from bs4 import BeautifulSoup
 from pathlib import Path
@@ -18,9 +18,9 @@ CONTENT_PATH = Path(CUR_PATH, "..", "..", "_mdcontent")
 BLOG_PATH = Path(CUR_PATH, "..", "..", "blog")
 HOME_PATH = Path(CUR_PATH, "..", "..")
 DATA_PATH = Path(CUR_PATH, "..", "..", "code", "data")
-YEAR = 2025
-OPENING_DAY = "03262025"
-FINAL_DAY = "09282025"
+YEAR = 2026
+OPENING_DAY = "03252026"
+FINAL_DAY = "09272026"
 SATCHEL_URL = f"https://raw.githubusercontent.com/andersonfrailey/satchel/refs/heads/main/projections/satchel{YEAR}.csv"
 PERCENTILES_URL = f"https://raw.githubusercontent.com/andersonfrailey/satchel/refs/heads/main/projections/percentiles{YEAR}.json"
 
@@ -253,9 +253,23 @@ class PageBuilder:
                     ),
                     axis=1,
                 )
-                # order and filter columns
-                mlb_projections = mlb_projections[
-                    [
+                # fewer columns are available on and before opening day
+                projection_cols = [
+                    "Team",
+                    "Projected Wins",
+                    "Projected Losses",
+                    "Make Wild Card (%)",
+                    "Win Division (%)",
+                    "Make Playoffs (%)",
+                    "Win League (%)",
+                    "Win WS (%)",
+                ]
+                col_labels = {}
+                post_opening_day = datetime.today() > datetime.strptime(
+                    OPENING_DAY, "%m%d%Y"
+                ) + timedelta(days=1)
+                if post_opening_day:
+                    projection_cols = [
                         "Team",
                         "Wins to Date",
                         "Losses to Date",
@@ -270,15 +284,16 @@ class PageBuilder:
                         "Win WS (%)",
                         "Season Percentile",
                     ]
-                ]
-                col_labels = {
-                    "Wins to Date": "W",
-                    "Losses to Date": "L",
-                    "Wins RoS": "W",
-                    "Losses RoS": "L",
-                    "Projected Wins": "W",
-                    "Projected Losses": "L",
-                }
+                    col_labels = {
+                        "Wins to Date": "W",
+                        "Losses to Date": "L",
+                        "Wins RoS": "W",
+                        "Losses RoS": "L",
+                        "Projected Wins": "W",
+                        "Projected Losses": "L",
+                    }
+                # order and filter columns
+                mlb_projections = mlb_projections[projection_cols]
                 mlb_projections_table = st.tables.GenericTable(
                     mlb_projections,
                     include_index=False,
@@ -286,11 +301,12 @@ class PageBuilder:
                     sig_digits=2,
                     formatters={col: lambda x: f"{x:.0f}" for col in col_labels.keys()},
                 )
-                mlb_projections_table.add_multicolumns(
-                    ["", "To Date", "RoS", "Projections"],
-                    spans=[1, 2, 2, 8],
-                    underline=False,
-                )
+                if post_opening_day:
+                    mlb_projections_table.add_multicolumns(
+                        ["", "To Date", "RoS", "Projections"],
+                        spans=[1, 2, 2, 8],
+                        underline=False,
+                    )
                 mlb_projections_table_html = mlb_projections_table.render_html(
                     table_class="dataframe"
                 )
