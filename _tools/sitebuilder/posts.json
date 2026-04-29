@@ -1,4 +1,12 @@
 {
+    "Reliever Contract Values": {
+        "author": "Anderson Frailey",
+        "template": "post_template.html",
+        "written": "April 11, 2026",
+        "last_modified": "April 11, 2026",
+        "cdn": [],
+        "md_file": "reliever-contracts.md"
+    },
     "Can We Get the 2022 Angels to the Postseason": {
         "author": "Anderson Frailey",
         "template": "post_template.html",
@@ -8,7 +16,7 @@
         "md_file": "get_the_angels_to_the_postseason.md"
     },
     "Satchel 2021 Autopsy": {
-        "author":"Anderson Frailey",
+        "author": "Anderson Frailey",
         "template": "post_template.html",
         "written": "December 21, 2021",
         "last_modified": "December 21, 2021",
