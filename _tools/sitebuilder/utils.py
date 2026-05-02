@@ -3,6 +3,41 @@ Helper functions for the page builder utility
 """
 
 import re
+from pathlib import Path
+
+
+def replace_math_blocks(text):
+    """
+    Wraps $$...$$ (display) and $...$ (inline) in raw HTML so the markdown
+    converter doesn't mangle LaTeX content (underscores, asterisks, etc.).
+    Converts to MathJax's default delimiters: \[...\] and \(...\).
+    Display math must be matched first to avoid double-matching.
+    """
+    text = re.sub(
+        r'\$\$(.+?)\$\$',
+        lambda m: f'<div>$${m.group(1)}$$</div>',
+        text,
+        flags=re.DOTALL
+    )
+    text = re.sub(
+        r'\$(.+?)\$',
+        lambda m: f'<span>${m.group(1)}$</span>',
+        text
+    )
+    return text
+
+
+def replace_table_includes(text, base_path):
+    """
+    Replaces {{table: path/to/table.html}} placeholders with the contents
+    of the referenced HTML file. Paths are relative to base_path (repo root).
+    """
+    pattern = r"(?:<p>)?\{\{table:\s*(.+?)\}\}(?:</p>)?"
+    for match in re.finditer(pattern, text):
+        filepath = Path(base_path, match.group(1).strip())
+        table_html = filepath.read_text()
+        text = text.replace(match.group(0), table_html)
+    return text
 
 
 def replace_code_blocks(text):

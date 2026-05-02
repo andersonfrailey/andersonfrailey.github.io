@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(242, 240, 239);
+    background-color: rgb(#d7d6d4);
 }
 
 .container {
@@ -134,8 +134,34 @@ td {
     margin-right: auto;
 }
 
+table {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+}
+
 tr:nth-child(even) {
     background-color: lightgray;
+}
+
+table.regression {
+    margin-top: 1em;
+    margin-bottom: 1.5em;
+    border-left-style: hidden;
+    border-right-style: hidden;
+    border-top-style: hidden;
+    border-bottom-style: hidden;
+}
+
+table.regression tr:nth-child(even) {
+    background-color: unset;
+}
+
+table.regression th,
+td {
+    border-top: none;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
 }
 
 .bluesky-follow-button {

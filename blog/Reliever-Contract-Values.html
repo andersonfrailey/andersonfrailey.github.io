@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Reliever Contract Values | Anderson Frailey</title>
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/post_css.css">
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/atom-one-light.min.css">
+
+    <script>MathJax = { tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] } };</script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="navbar-header">
+                <a href="../index.html" class="navbar-brand" id="home_link">Anderson Frailey</a>
+            </div>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a href="../about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="index.html" class="nav-link">Blog</a></li>
+                <li class="nav-item"><a href="../speaking.html" class="nav-link">Speaking</a></li>
+                <li class="nav-item"><a href="../research.html" class="nav-link">Research</a></li>
+                <li class="nav-item"><a href="../mlb-projections.html" class="nav-link">MLB Projections</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="container">
+        <div class="container" max-width=500px>
+            <i>
+                <p>April 11, 2026</p>
+            </i>
+            <h1>Do Reliever Contracts Actually Make Sense? Kinda</h1>
+<p>Months ago, Michael Rosen wrote <a href="https://blogs.fangraphs.com/reliever-contracts-make-plenty-of-sense/">an article</a> for FanGraphs about how reliever contracts make sense if you view them through the lens of paying for playoff performance. I've been wanting to revisit that topic with a slightly different approach ever since reading the article and have finally gotten around to it.</p>
+<p>In the original article, Rosen regresses the average annual value (AAV) of each contract on player wins above replacement (WAR) and the signing team's playoff odds. He doesn't report the coefficients of that regression, but implies they're positive. The results are interpreted as supporting the view that relievers are really getting paid for playoff wins&mdash;teams with higher playoff odds pay relievers more.</p>
+<p>A couple of things stood out to me. First, it isn't immediately obvious why this wouldn't apply to all players, regardless of position. It should certainly apply to starting pitchers, who take on a bulk of postseason innings. Where the difference may lie is in how much of the variation in AAV is explained by differences in postseason odds. If a reliever's value really is their playoff performance, I would suspect that variation in playoff odds would explain more of the AAV variation than it would for other positions.</p>
+<p>Second, I believe it is also necessary to include an interaction term between WAR and playoff odds. If the argument is that teams are paying for playoff wins, then teams with a greater chance of making the postseason should be willing to pay more for the same amount of WAR than teams who are already planning October vacations. The marginal utility of WAR for the former should be higher than the latter.</p>
+<h2>Data</h2>
+<p>Using free agent and projection data from FanGraphs, I created an updated version the dataset Rosen used. Free agent signings and AAV's are from FanGraph's <a href="https://www.fangraphs.com/roster-resource/free-agent-tracker">Free Agent trackers</a>. As in the original article, only contacts with an AAV above $2.5 million are included. Player WAR observations are their ZiPs preseason projections for the year they signed. From here on out when I say "WAR" you can assume I'm referring to projected WAR unless otherwise indicated.</p>
+<p>Playoff odds are also <a href="https://www.fangraphs.com/standings/playoff-odds/fg/div">downloaded from FanGraphs</a>. Players are assigned the opening day playoff odds of the team that signs them. There is a potential problem with this: those playoff odds are calculated after all the free agent signings. These odds will be different from the odds the team faces prior to the signing. I don't believe this totally invalidates their use. If we assume a team can reasonably anticipate the moves they and others are planning to make over the course of the offseason, then these odds are a reasonable approximation for their beliefs when making an offer to a player. Plus I don't have a better option immediately available so we're going to roll with it.</p>
+<!-- Unfortunately, I do not know of any official source that projects championship probability added for relievers, so I did it myself. Using my projections model, Satchel, I estimated how each free agent signing changed the probability their signing team won both the league and the World Series. To do so I first estimated the baseline probabilities for each of those outcomes, including all free agent signings. Then I re-ran the model, this time removing each free agent from their signing team one at a time. In this model, this is equivalent to replacing them with a player worth 0 WAR. By no means is this perfect, if a team misses one signing they'll likely sign another player worth positive WAR, but it's the best option immediately available to me. -->
+
+<h3>Summary Stats</h3>
+<p>Looking at the data, there is a clear positive correlation between AAV and projected WAR, but not between AAV and team playoff odds.</p>
+<p><img alt="AAV Correlations" src="../images/aav_war_correlations_2021_26.png" /></p>
+<p>Breaking things down by position, the correlation between WAR and AAV is highest for starting pitchers and position players&mdash;0.761 and 0.798, respectively. For relievers, that falls to 0.474. The correlation between AAV and playoff odds is higher for pitchers (both starters and relievers) than position players, but is still only 0.344 for starters and 0.356 for relievers.</p>
+<p>The other thing that stood out to me is that the correlation between WAR and playoff odds is fairly low for all positions, though higher for pitchers than position players. The best players on the market aren't all just signing with the playoff favorites.</p>
+<p><center><strong>AAV, WAR, and Playoff Odds Correlations</strong></center></p>
+<table class="regression">
+  <thead>
+    <tr><th  colspan="4" style="text-align:center">All Positions (N=619)</th></tr>
+    <tr>
+    <td colspan='100%' style='border-top: 1px solid black;'></td>
+    </tr>
+    <tr>
+    <td colspan='100%' style='border-top: 1px solid black;'></td>
+    </tr>
+    <tr>
+      <th></th>
+      <th style="text-align:center;">AAV</th>
+      <th style="text-align:center;">WAR</th>
+      <th style="text-align:center;">Playoff Odds</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left;">AAV</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">0.757</td>
+      <td style="text-align: center;">0.272</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;">WAR</td>
+      <td style="text-align: center;">0.757</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">0.181</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;">Playoff Odds</td>
+      <td style="text-align: center;">0.272</td>
+      <td style="text-align: center;">0.181</td>
+      <td style="text-align: center;">1</td>
+    </tr>
+    <tr>
+      <td colspan='100%' style='border-top: 1px solid black;'></td>
+    </tr>
+  </tbody>
+</table>
+<table class="regression">
+  <thead>
+    <tr><th  colspan="4" style="text-align:center">Relief Pitchers (N=168)</th></tr>
+    <tr>
+    <td colspan='100%' style='border-top: 1px solid black;'></td>
+    </tr>
+    <tr>
+    <td colspan='100%' style='border-top: 1px solid black;'></td>
+    </tr>
+    <tr>
+      <th></th>
+      <th style="text-align:center;">AAV</th>
+      <th style="text-align:center;">WAR</th>
+      <th style="text-align:center;">Playoff Odds</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left;">AAV</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">0.474</td>
+      <td style="text-align: center;">0.356</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;">WAR</td>
+      <td style="text-align: center;">0.474</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">0.295</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;">Playoff Odds</td>
+      <td style="text-align: center;">0.356</td>
+      <td style="text-align: center;">0.295</td>
+      <td style="text-align: center;">1</td>
+    </tr>
+    <tr>
+      <td colspan='100%' style='border-top: 1px solid black;'></td>
+    </tr>
+  </tbody>
+</table>
+<table class="regression">
+  <thead>
+    <tr><th  colspan="4" style="text-align:center">Starting Pitchers (N=206)</th></tr>
+    <tr>
+    <td colspan='100%' style='border-top: 1px solid black;'></td>
+    </tr>
+    <tr>
+    <td colspan='100%' style='border-top: 1px solid black;'></td>
+    </tr>
+    <tr>
+      <th></th>
+      <th style="text-align:center;">AAV</th>
+      <th style="text-align:center;">WAR</th>
+      <th style="text-align:center;">Playoff Odds</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left;">AAV</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">0.761</td>
+      <td style="text-align: center;">0.344</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;">WAR</td>
+      <td style="text-align: center;">0.761</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">0.396</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;">Playoff Odds</td>
+      <td style="text-align: center;">0.344</td>
+      <td style="text-align: center;">0.396</td>
+      <td style="text-align: center;">1</td>
+    </tr>
+    <tr>
+      <td colspan='100%' style='border-top: 1px solid black;'></td>
+    </tr>
+  </tbody>
+</table>
+<table class="regression">
+  <thead>
+    <tr><th  colspan="4" style="text-align:center">Position Players (N=245)</th></tr>
+    <tr>
+    <td colspan='100%' style='border-top: 1px solid black;'></td>
+    </tr>
+    <tr>
+    <td colspan='100%' style='border-top: 1px solid black;'></td>
+    </tr>
+    <tr>
+      <th></th>
+      <th style="text-align:center;">AAV</th>
+      <th style="text-align:center;">WAR</th>
+      <th style="text-align:center;">Playoff Odds</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left;">AAV</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">0.798</td>
+      <td style="text-align: center;">0.292</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;">WAR</td>
+      <td style="text-align: center;">0.798</td>
+      <td style="text-align: center;">1</td>
+      <td style="text-align: center;">0.201</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;">Playoff Odds</td>
+      <td style="text-align: center;">0.292</td>
+      <td style="text-align: center;">0.201</td>
+      <td style="text-align: center;">1</td>
+    </tr>
+    <tr>
+      <td colspan='100%' style='border-top: 1px solid black;'></td>
+    </tr>
+  </tbody>
+</table>
+<p>Relievers have a much narrower distribution of projected WAR compared to starters and position players. This may make demand for any one reliever more elastic than because they are more substitutable from a projected performance perspective.</p>
+<p><img alt="WAR Distribution by Position" src="../images/free_agent_war_distribution_2021_26.png" /></p>
+<h2>AVV, WAR, and Playoff Odds</h2>
+<p>To test the relationship between AAV, projected WAR, and playoff odds, I run the following regression:</p>
+<div>$$
+    AAV = \alpha + \beta_1 WAR + \beta_2 P.O. + \beta_3 WAR \times P.O. + \epsilon
+$$</div>
+<p>where <span>$P.O.$</span> is the signing team's playoff odds. I first estimate the model using all free agent signings, then run separate regressions for each position group (relievers, starters, and position players). The tables below contain my results</p>
+<p><center><strong>Regression Results</strong></center></p>
+<table class="regression">
+  <thead>
+    <tr><th  colspan="4" style="text-align:center">All Signings</th></tr>
+    <tr>
+    <td colspan='100%' style='border-top: 1px solid black;'></td>
+    </tr>
+    <tr>
+    <td colspan='100%' style='border-top: 1px solid black;'></td>
+    </tr>
+    <tr>
+      <th style="text-align:left;"></th>
+       <th colspan="3" style="text-align:c;"><u>Dependent Variable: AAV (Mill)</u></th>
+    </tr>
+    <tr>
+      <th></th>
+      <th style="text-align:center;">(1)</th>
+      <th style="text-align:center;">(2)</th>
+      <th style="text-align:center;">(3)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left;">Intercept</td>
+      <td style="text-align: center;">3.057***</td>
+      <td style="text-align: center;">1.673***</td>
+      <td style="text-align: center;">3.118***</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"></td>
+      <td style="text-align: center;">(0.325)</td>
+      <td style="text-align: center;">(0.410)</td>
+      <td style="text-align: center;">(0.543)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;">WAR</td>
+      <td style="text-align: center;">5.107***</td>
+      <td style="text-align: center;">4.936***</td>
+      <td style="text-align: center;">3.724***</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"></td>
+      <td style="text-align: center;">(0.177)</td>
+      <td style="text-align: center;">(0.176)</td>
+      <td style="text-align: center;">(0.350)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;">Playoff Odds</td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;">3.824***</td>
+      <td style="text-align: center;">0.727</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"></td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;">(0.715)</td>
+      <td style="text-align: center;">(1.049)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;">WAR x Playoff Odds</td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;">2.382***</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"></td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;">(0.597)</td>
+    </tr>
+    <tr>
+      <td colspan='100%' style='border-top: 1px solid black;'></td>
+    </tr>
+    <tr>
+      <td style="text-align: left;">Observations</td>
+      <td style="text-align: center;">619</td>
+      <td style="text-align: center;">619</td>
+      <td style="text-align: center;">619</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;">R<sup>2</sup></td>
+      <td style="text-align: center;">0.574</td>
+      <td style="text-align: center;">0.593</td>
+      <td style="text-align: center;">0.603</td>
+    </tr>
+    <tr>
+      <td colspan='100%' style='border-top: 1px solid black;'></td>
+    </tr>
+    <tr><td colspan="4" style="text-align:left;"><i>*p<0.1, **p<0.05, ***p<0.01</i></td></tr>
+  </tbody>
+</table>
+<table class="regression">
+  <thead>
+    <tr><th  colspan="4" style="text-align:center">Relief Pitchers</th></tr>
+    <tr>
+    <td colspan='100%' style='border-top: 1px solid black;'></td>
+    </tr>
+    <tr>
+    <td colspan='100%' style='border-top: 1px solid black;'></td>
+    </tr>
+    <tr>
+      <th style="text-align:left;"></th>
+       <th colspan="3" style="text-align:c;"><u>Dependent Variable: AAV (Mill)</u></th>
+    </tr>
+    <tr>
+      <th></th>
+      <th style="text-align:center;">(1)</th>
+      <th style="text-align:center;">(2)</th>
+      <th style="text-align:center;">(3)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left;">Intercept</td>
+      <td style="text-align: center;">4.404***</td>
+      <td style="text-align: center;">3.377***</td>
+      <td style="text-align: center;">4.225***</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"></td>
+      <td style="text-align: center;">(0.437)</td>
+      <td style="text-align: center;">(0.520)</td>
+      <td style="text-align: center;">(0.722)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;">WAR</td>
+      <td style="text-align: center;">5.997***</td>
+      <td style="text-align: center;">5.114***</td>
+      <td style="text-align: center;">2.811*</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"></td>
+      <td style="text-align: center;">(0.865)</td>
+      <td style="text-align: center;">(0.877)</td>
+      <td style="text-align: center;">(1.626)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;">Playoff Odds</td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;">3.018***</td>
+      <td style="text-align: center;">0.983</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"></td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;">(0.885)</td>
+      <td style="text-align: center;">(1.497)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;">WAR x Playoff Odds</td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;">4.773*</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"></td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;">(2.842)</td>
+    </tr>
+    <tr>
+      <td colspan='100%' style='border-top: 1px solid black;'></td>
+    </tr>
+    <tr>
+      <td style="text-align: left;">Observations</td>
+      <td style="text-align: center;">168</td>
+      <td style="text-align: center;">168</td>
+      <td style="text-align: center;">168</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;">R<sup>2</sup></td>
+      <td style="text-align: center;">0.225</td>
+      <td style="text-align: center;">0.276</td>
+      <td style="text-align: center;">0.288</td>
+    </tr>
+    <tr>
+      <td colspan='100%' style='border-top: 1px solid black;'></td>
+    </tr>
+    <tr><td colspan="4" style="text-align:left;"><i>*p<0.1, **p<0.05, ***p<0.01</i></td></tr>
+  </tbody>
+</table>
+<table class="regression">
+  <thead>
+    <tr><th  colspan="4" style="text-align:center">Starting Pitchers</th></tr>
+    <tr>
+    <td colspan='100%' style='border-top: 1px solid black;'></td>
+    </tr>
+    <tr>
+    <td colspan='100%' style='border-top: 1px solid black;'></td>
+    </tr>
+    <tr>
+      <th style="text-align:left;"></th>
+       <th colspan="3" style="text-align:c;"><u>Dependent Variable: AAV (Mill)</u></th>
+    </tr>
+    <tr>
+      <th></th>
+      <th style="text-align:center;">(1)</th>
+      <th style="text-align:center;">(2)</th>
+      <th style="text-align:center;">(3)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left;">Intercept</td>
+      <td style="text-align: center;">1.228*</td>
+      <td style="text-align: center;">0.932</td>
+      <td style="text-align: center;">2.125*</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"></td>
+      <td style="text-align: center;">(0.726)</td>
+      <td style="text-align: center;">(0.781)</td>
+      <td style="text-align: center;">(1.178)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;">WAR</td>
+      <td style="text-align: center;">6.567***</td>
+      <td style="text-align: center;">6.394***</td>
+      <td style="text-align: center;">5.528***</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"></td>
+      <td style="text-align: center;">(0.392)</td>
+      <td style="text-align: center;">(0.427)</td>
+      <td style="text-align: center;">(0.770)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;">Playoff Odds</td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;">1.482</td>
+      <td style="text-align: center;">-1.372</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"></td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;">(1.443)</td>
+      <td style="text-align: center;">(2.558)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;">WAR x Playoff Odds</td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;">1.799</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"></td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;">(1.333)</td>
+    </tr>
+    <tr>
+      <td colspan='100%' style='border-top: 1px solid black;'></td>
+    </tr>
+    <tr>
+      <td style="text-align: left;">Observations</td>
+      <td style="text-align: center;">206</td>
+      <td style="text-align: center;">206</td>
+      <td style="text-align: center;">206</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;">R<sup>2</sup></td>
+      <td style="text-align: center;">0.579</td>
+      <td style="text-align: center;">0.581</td>
+      <td style="text-align: center;">0.585</td>
+    </tr>
+    <tr>
+      <td colspan='100%' style='border-top: 1px solid black;'></td>
+    </tr>
+    <tr><td colspan="4" style="text-align:left;"><i>*p<0.1, **p<0.05, ***p<0.01</i></td></tr>
+  </tbody>
+</table>
+<table class="regression">
+  <thead>
+    <tr><th  colspan="4" style="text-align:center">Position Players</th></tr>
+    <tr>
+    <td colspan='100%' style='border-top: 1px solid black;'></td>
+    </tr>
+    <tr>
+    <td colspan='100%' style='border-top: 1px solid black;'></td>
+    </tr>
+    <tr>
+      <th style="text-align:left;"></th>
+       <th colspan="3" style="text-align:c;"><u>Dependent Variable: AAV (Mill)</u></th>
+    </tr>
+    <tr>
+      <th></th>
+      <th style="text-align:center;">(1)</th>
+      <th style="text-align:center;">(2)</th>
+      <th style="text-align:center;">(3)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left;">Intercept</td>
+      <td style="text-align: center;">0.652</td>
+      <td style="text-align: center;">-0.848</td>
+      <td style="text-align: center;">1.641</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"></td>
+      <td style="text-align: center;">(0.626)</td>
+      <td style="text-align: center;">(0.743)</td>
+      <td style="text-align: center;">(1.030)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;">WAR</td>
+      <td style="text-align: center;">5.532***</td>
+      <td style="text-align: center;">5.341***</td>
+      <td style="text-align: center;">3.809***</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"></td>
+      <td style="text-align: center;">(0.268)</td>
+      <td style="text-align: center;">(0.268)</td>
+      <td style="text-align: center;">(0.520)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;">Playoff Odds</td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;">4.309***</td>
+      <td style="text-align: center;">-0.994</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"></td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;">(1.214)</td>
+      <td style="text-align: center;">(1.957)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;">WAR x Playoff Odds</td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;">3.013***</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"></td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;">(0.883)</td>
+    </tr>
+    <tr>
+      <td colspan='100%' style='border-top: 1px solid black;'></td>
+    </tr>
+    <tr>
+      <td style="text-align: left;">Observations</td>
+      <td style="text-align: center;">245</td>
+      <td style="text-align: center;">245</td>
+      <td style="text-align: center;">245</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;">R<sup>2</sup></td>
+      <td style="text-align: center;">0.636</td>
+      <td style="text-align: center;">0.654</td>
+      <td style="text-align: center;">0.670</td>
+    </tr>
+    <tr>
+      <td colspan='100%' style='border-top: 1px solid black;'></td>
+    </tr>
+    <tr><td colspan="4" style="text-align:left;"><i>*p<0.1, **p<0.05, ***p<0.01</i></td></tr>
+  </tbody>
+</table>
+<p>WAR is, unsurprisingly, important when determining AAV. Consistent with the original article, playoff contenders appear to pay a premium for WAR. A team with 80 percent playoff odds pays about $2.86 million more per WAR than a playoff with a 20 percent change of making the playoffs. The playoff odds effect is primarily through the interaction with WAR---the standalone playoff odds term is always statistically insignificant once the interaction term is introduced.</p>
+<p>However, this isn't unique to relievers. The only position group without that premium is starting pitchers (which does seem very odd. This is worthy of further exploration). In fact, the effect is statistically weaker for relievers than it is for position players.</p>
+<p>The other finding that stands out to me is how low the r-squareds in the reliever-only regressions are relative to those in the starting pitcher and position player regressions. WAR and playoff odds explain less of the variation in AAV for relievers than other players. Even the WAR coefficient is also only marginally significant in the full model for relievers, while it is always significant at the 1 percent level for starters and position players. I hope to conduct a more detailed analysis in the future to explain that lack of explanatory power. A few potential explanations:</p>
+<ul>
+<li>Standout relievers are rare. In terms of projected WAR, relievers fall into a relatively narrow range.</li>
+<li>Related to the first point, relievers may be more substitutable than other positions. If they all are projected to perform similarly, the model in this article won't capture whatever information teams use to determine their offers.</li>
+<li>Relievers may offer the best chance for surplus value. If teams believe they can get more out of a guy than his previous team, their internal projections, and therefore willingness to pay for him, will be higher than external sources. If relievers are particularly viable candidates for internal development, that would influence their AAV variation.<sup>1</sup></li>
+</ul>
+<p>To sum it all up, yes, teams with high preseason playoff odds pay a premium for WAR. But that is also true for position players, not just relievers. In fact, WAR and playoff odds explain less of the variation in AAV for relievers than other players. The argument that relievers become significantly more important in the postseason makes sense to me, and presumably everyone else who has watched their team blow a late lead in October. What I have found here supports the hypothesis that playoff-bound teams recognize this and pay relievers more. But more research needs to be done to fully understand what's going on with reliever contracts.</p>
+<h3>Footnotes</h3>
+<p><sup>1</sup> To be clear, I have no idea if relievers actually do offer more surplus value.</p>
+        </div>
+        <p style="margin-top:2em">
+            <i>Last Updated: April 11, 2026</i>
+        </p>
+        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-via="andersonfrailey"
+            data-show-count="false">Tweet</a>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+    <!-- Social media stuff -->
+    <div class="container">
+        <hr class="bottom-div">
+        <a href="https://bsky.app/profile/andersonfrailey.bsky.social" class="bluesky-follow-button" target="_blank">
+            Follow @andersonfrailey.bsky.social on Bluesky
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18l6-6-6-6" />
+            </svg>
+        </a>
+    </div>
+</body>
+<script>hljs.initHighlightingOnLoad();</script>
+
+</html>

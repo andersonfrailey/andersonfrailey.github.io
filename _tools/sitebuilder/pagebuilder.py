@@ -8,7 +8,13 @@ from datetime import datetime, timedelta
 from jinja2 import Template
 from bs4 import BeautifulSoup
 from pathlib import Path
-from utils import replace_code_blocks, MLB_PROJECTION_COLUMNS, NAME_TO_ABBR
+from utils import (
+    replace_code_blocks,
+    replace_math_blocks,
+    replace_table_includes,
+    MLB_PROJECTION_COLUMNS,
+    NAME_TO_ABBR,
+)
 from pybaseball import standings
 
 
@@ -18,6 +24,7 @@ CONTENT_PATH = Path(CUR_PATH, "..", "..", "_mdcontent")
 BLOG_PATH = Path(CUR_PATH, "..", "..", "blog")
 HOME_PATH = Path(CUR_PATH, "..", "..")
 DATA_PATH = Path(CUR_PATH, "..", "..", "code", "data")
+TABLE_PATH = Path(CUR_PATH, "..", "..", "tables")
 YEAR = 2026
 OPENING_DAY = "03252026"
 FINAL_DAY = "09272026"
@@ -78,9 +85,11 @@ class PageBuilder:
             pathout = Path(BLOG_PATH, web_page)
             template_path = Path(TEMPLATE_PATH, attrs["template"])
             md_text = Path(CONTENT_PATH, attrs["md_file"]).open("r").read()
-            _md_text = replace_code_blocks(md_text)
+            _md_text = replace_math_blocks(md_text)
+            _md_text = replace_code_blocks(_md_text)
             md = markdown.Markdown()
             content = md.convert(_md_text)
+            content = replace_table_includes(content, TABLE_PATH)
 
             # write page
             post_attrs = {
