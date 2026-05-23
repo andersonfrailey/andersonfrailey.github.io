@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Don't Trust LLMs with Open-Ended Text Analysis | Anderson Frailey</title>
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/post_css.css">
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/atom-one-light.min.css">
+
+    <script>MathJax = { tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] } };</script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="navbar-header">
+                <a href="../index.html" class="navbar-brand" id="home_link">Anderson Frailey</a>
+            </div>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a href="../about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="index.html" class="nav-link">Blog</a></li>
+                <li class="nav-item"><a href="../speaking.html" class="nav-link">Speaking</a></li>
+                <li class="nav-item"><a href="../research.html" class="nav-link">Research</a></li>
+                <li class="nav-item"><a href="../mlb-projections.html" class="nav-link">MLB Projections</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="container">
+        <div class="container" max-width=500px>
+            <i>
+                <p>May 22, 2026</p>
+            </i>
+            <h1>Don't Trust LLMs with Open-Ended Text Analysis</h1>
+<p>In a recent <a href="https://kucharski.substack.com/p/real-signals-or-artificial-stereotypes">blog post</a>, Adam Kucharski ran an experiment asking Microsoft Copilot to compare survey responses of individuals purportedly from different countries. The model dutifully returned a detailed analysis highlighting many differences between respondents in each country. The problem? The data was simulated and there was zero actual difference in the responses. Copilot's analysis seemed to be based on its preconceived ideas of people from each country. Turns out, LLMs don't even need to rely on embedded stereotypes triggered by assigned country to find differences where differences do not exist.</p>
+<p>Using the two datasets of duplicated survey responses that Kucharski provided, I re-ran the experiment, swapping actual country names for dummy categories (country one, two, etc.). I made no other changes, leaving the responses exactly the same for each country. I hypothesized that, without explicit country names, Copilot may not default to pre-existing ideas about those countries and instead find that there were no real differences between the groups. That hypothesis was incorrect.</p>
+<p>When asked to perform a sentiment analysis of survey responses by people in two countries, Copilot obliged:</p>
+<p><img alt="Copilot's &quot;Quick Takeaway&quot; claiming Country 1 expresses emotions in a &quot;vivid, metaphorical, and sensory-rich way&quot; while Country 2 expresses emotions in a &quot;more direct, intense, and absolute way&quot;" src="../images/copilot_sentiment_comparison.png" /></p>
+<p>When asked to compare how people allegedly from five different countries describe their career ambitions, Copilot once again claimed to find significant differences between them:</p>
+<p><img alt="Copilot claiming the five countries express career aspirations differently, citing differences in verb choice (&quot;I dream...&quot;, &quot;I plan...&quot;, etc.) and how aspirational, practical, or mission-driven their language tends to be" src="../images/copilot_cross_country_career_response.png" /></p>
+<p>Copilot also assigned the flag emoji of a real country to each of the dummy labels!</p>
+<p><img alt="Copilot labeling Country 1 as &quot;Direct, practical, service-oriented&quot; and assigning it a Canadian flag" src="../images/copilot_career_country1.png" />
+<img alt="Copilot characterizing Country 2 as &quot;Entrepreneurial, ambitious, future-focused&quot; and assigning it a Brazilian flag" src="../images/copilot_career_country2.png" />
+<img alt="Copilot describing Country 3 as &quot;Reflective, socially conscious, globally minded&quot; and assigning it a Japanese flag" src="../images/copilot_career_country3.png" />
+<img alt="Copilot categorizing Country 4 as &quot;Structured, professional, policy-oriented&quot; and assigning it a German flag" src="../images/copilot_career_country4.png" />
+<img alt="Copilot labeling Country 5 as &quot;Creative, expressive, mission-driven&quot; and assigning it a South African flag" src="../images/copilot_career_country5.png" /></p>
+<p>To reiterate, there was no difference between the countries. Every country had the exact same responses.</p>
+<p>Now, I was trying this with Copilot's "smart" model, which decides to "think deeply or quickly depending on the task". Maybe it was only thinking quickly. But even after switching to the "think deeper" version for the sentiment analysis, Copilot still claimed to have found differences between the respondents:</p>
+<p><img alt="Copilot's &quot;think deeper&quot; response still claiming to find differences between the two countries, noting Country 1 uses &quot;vivid, metaphorical, and bodily imagery&quot; while Country 2 favors &quot;concise evaluative adjectives and idioms&quot;" src="../images/copilot_think_deeper.png" /></p>
+<p>For comparison, I gave Claude Opus 4.6 the same datasets and prompts and each time Claude figured out that the responses were the exact same and even suggested the dataset may be being used as a test. First for the sentiment response:</p>
+<p><img alt="Claude Opus 4.6 reporting that after analyzing all 4,000 responses, the two countries show &quot;no differences whatsoever&quot; in how people express emotions, finding the dataset contains 400 unique statements each appearing in both countries with identical frequency" src="../images/claude_sentiment_opus_46.png" /></p>
+<p>And for the career comparison:</p>
+<p><img alt="Claude finding no differences between the five countries' career aspiration responses, noting the dataset contains 200 unique statements each appearing across all five countries in identical proportions" src="../images/claude_career.png" /></p>
+<p>As others responding to the original post found, Claude was able to determine that every country had the exact same statements by writing and running a series of Python scripts that performed rudimentary text analysis before responding to my prompt. Copilot doesn't share its "thought" process in the same way Claude does (or at least it doesn't on the free plan), so I can't say with certainty whether it did anything similar or just raw dogged the analysis. I assume the latter.</p>
+<p>Claude's ability to recognize all the survey responses were the same was more a product of the obvious data duplication than the model's ability. To experiment further, I had Claude cook up 1,000 unique survey responses, randomly assigned country numbers to them, and asked for a new analysis. I was given a series of charts and a short write-up of the "real but moderate" differences.</p>
+<p><img alt="Claude's write-up of &quot;real but moderate&quot; differences between the five countries across opening verb choice, certainty level, sentence framing, and thematic priorities — differences that exist only due to random chance in the simulated data" src="../images/claude_random_differences.png" /></p>
+<p>Those differences may exist, but they're purely due to random chance.</p>
+<p>My big takeaway: don't trust LLMs to perform open-ended text analysis on their own. They very well may find differences, but knowing what differences are actually meaningful still requires a human touch. This touches on a point similar to ones <a href="https://joshuagans.substack.com/p/reflections-on-vibe-researching">other</a> <a href="https://www.theverge.com/ai-artificial-intelligence/930522/ai-research-papers-slop-peer-review-problem">researchers</a> have made: AI has significantly reduced the cost of finding a result or idea that can be written into a paper. With enough nudging, it's probably possible to finding a paper in most datasets. It remains the job of the research to determine whether the output is any good.</p>
+<h2>Prompts</h2>
+<p>If interested, these are the prompts I gave to both Copilot and Claude.</p>
+<p>For the sentiment analysis:</p>
+<p><code>The attached file contains survey responses from two different countries. Can you look for differences in how people in each country express emotions?</code></p>
+<p>For the career aspiration analysis:</p>
+<p><code>The attached file contains survey responses about career aspirations from five different countries. Can you look for differences in how people in each country express their desires?</code></p>
+        </div>
+        <p style="margin-top:2em">
+            <i>Last Updated: May 22, 2026</i>
+        </p>
+        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-via="andersonfrailey"
+            data-show-count="false">Tweet</a>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+    <!-- Social media stuff -->
+    <div class="container">
+        <hr class="bottom-div">
+        <a href="https://bsky.app/profile/andersonfrailey.bsky.social" class="bluesky-follow-button" target="_blank">
+            Follow @andersonfrailey.bsky.social on Bluesky
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18l6-6-6-6" />
+            </svg>
+        </a>
+    </div>
+</body>
+<script>hljs.initHighlightingOnLoad();</script>
+
+</html>

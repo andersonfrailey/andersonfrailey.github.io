@@ -1,4 +1,12 @@
 {
+    "Don't Trust LLMs with Open-Ended Text Analysis": {
+        "author": "Anderson Frailey",
+        "template": "post_template.html",
+        "written": "May 22, 2026",
+        "last_modified": "May 22, 2026",
+        "cdn": [],
+        "md_file": "dont-trust-llm-text-analysis.md"
+    },
     "Reliever Contract Values": {
         "author": "Anderson Frailey",
         "template": "post_template.html",
