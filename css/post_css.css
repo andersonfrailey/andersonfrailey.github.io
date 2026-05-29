@@ -34,6 +34,10 @@ nav {
     margin-bottom: 3em;
 }
 
+.navbar-nav {
+    align-items: center;
+}
+
 div {
     max-width: 45em;
 }
