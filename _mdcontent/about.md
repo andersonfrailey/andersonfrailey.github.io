@@ -8,7 +8,7 @@ I'm an assistant professor in the UMBC economics department. In my spare time I 
 
 I earned my BA in Economics from The University of Texas at Austin, and MA and PhD in Economics from the University of Virginia.
 
-My CV can be found [here](https://drive.google.com/file/d/1lVFmPya0iHnaV6ptNQFdAu7LKA4hGFuA/view?usp=sharing).
+My CV can be found [here](https://drive.google.com/file/d/1CtpoV6CTSxw7VPxAg1qpXbRNGifN56qJ/view?usp=sharing).
 
 **Open Source Work**
 
