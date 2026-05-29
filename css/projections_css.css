@@ -252,3 +252,7 @@ th:nth-child(5) {
 th:nth-child(1) {
     border-right: 2px solid black;
 }
+
+.navbar-nav {
+    align-items: center;
+}

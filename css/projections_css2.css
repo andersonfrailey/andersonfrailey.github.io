@@ -210,3 +210,7 @@ tr.bottomheader th:nth-child(1) {
 .bluesky-follow-button svg {
     stroke: white;
 }
+
+.navbar-nav {
+    align-items: center;
+}
