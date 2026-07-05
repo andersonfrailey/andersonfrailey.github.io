@@ -54,6 +54,19 @@
             </svg>
         </a>
     </div>
+    <script>
+        document.addEventListener("click", function (e) {
+            var toggle = e.target.closest(".abstract-toggle");
+            if (toggle) {
+                e.preventDefault();
+                var target = document.getElementById(toggle.dataset.target);
+                if (target) {
+                    target.hidden = !target.hidden;
+                    toggle.classList.toggle("expanded", !target.hidden);
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>

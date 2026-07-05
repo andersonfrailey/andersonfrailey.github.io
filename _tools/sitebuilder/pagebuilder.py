@@ -12,6 +12,7 @@ from utils import (
     replace_code_blocks,
     replace_math_blocks,
     replace_table_includes,
+    build_papers_html,
     MLB_PROJECTION_COLUMNS,
     NAME_TO_ABBR,
 )
@@ -25,6 +26,7 @@ BLOG_PATH = Path(CUR_PATH, "..", "..", "blog")
 HOME_PATH = Path(CUR_PATH, "..", "..")
 DATA_PATH = Path(CUR_PATH, "..", "..", "code", "data")
 TABLE_PATH = Path(CUR_PATH, "..", "..", "tables")
+PAPERS_PATH = Path(CUR_PATH, "papers.json")
 YEAR = 2026
 OPENING_DAY = "03252026"
 FINAL_DAY = "09272026"
@@ -147,8 +149,20 @@ class PageBuilder:
         self.write_page(speaking_pathout, speaking_template, content=speaking_content)
 
         # create research page
+        # the markdown file holds the intro paragraph and the Media Coverage
+        # and Features section; the Working Papers/Published Papers/Other
+        # Publications sections in between are generated from papers.json
         research_md_text = Path(CONTENT_PATH, "research.md").open("r").read()
-        research_content = markdown.markdown(research_md_text)
+        media_marker = "## Media Coverage and Features"
+        if media_marker in research_md_text:
+            intro_md, media_md = research_md_text.split(media_marker, 1)
+            media_md = media_marker + media_md
+        else:
+            intro_md, media_md = research_md_text, ""
+        intro_content = markdown.markdown(intro_md)
+        media_content = markdown.markdown(media_md) if media_md else ""
+        papers_content = build_papers_html(PAPERS_PATH)
+        research_content = intro_content + papers_content + media_content
         research_template = Path(TEMPLATE_PATH, "research_template.html")
         research_pathout = Path(HOME_PATH, "research.html")
         self.write_page(research_pathout, research_template, content=research_content)

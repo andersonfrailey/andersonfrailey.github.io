@@ -190,3 +190,34 @@ td {
 .bluesky-follow-button svg {
     stroke: white;
 }
+
+.paper {
+    margin-bottom: 1.5em;
+}
+
+.paper-title,
+.paper-coauthors,
+.paper-meta,
+.paper-abstract-toggle {
+    margin-bottom: 0.25em;
+}
+
+.abstract-toggle {
+    cursor: pointer;
+}
+
+.abstract-arrow {
+    display: inline-block;
+    font-size: 0.67em;
+    transition: transform 0.15s ease;
+}
+
+.abstract-toggle.expanded .abstract-arrow {
+    transform: rotate(90deg);
+}
+
+.paper-abstract {
+    margin-top: 0.5em;
+    padding-left: 0.75em;
+    border-left: 0.2em solid lightgray;
+}
