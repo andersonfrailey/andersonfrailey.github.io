@@ -7,12 +7,12 @@ import re
 from datetime import datetime
 from pathlib import Path
 
-
 # order sections should appear in on the research page, and the heading to
 # use for each paper "type" found in papers.json
 PAPER_SECTIONS = [
-    ("working_paper", "Working Papers"),
     ("published", "Published Papers"),
+    ("working_paper", "Working Papers"),
+    ("work_in_progress", "Works in Progress"),
     ("other", "Other Publications"),
 ]
 
@@ -35,38 +35,49 @@ def _render_paper(title, attrs, section_type):
     Dates are only shown for published/other work, not working papers.
     """
     link = attrs.get("link", "")
-    if link:
-        title_html = f'<a href="{link}"><strong><em>{title}</em></strong></a>'
+    status = attrs.get("status", "")
+    if status == "submitted":
+        status_html = " <i>(Submitted)</i>"
     else:
-        title_html = f"<strong><em>{title}</em></strong>"
+        status_html = ""
+    if link:
+        title_html = (
+            f'<a href="{link}"><strong><em>{title}</em></strong></a>{status_html}'
+        )
+    else:
+        title_html = f"<strong><em>{title}</em></strong>{status_html}"
 
-    lines = [f'<p class="paper-title">{title_html}</p>']
+    lines = [f'<p style="margin-left:5%;" class="paper-title">{title_html}</p>']
 
     coauthors = attrs.get("coauthors", "")
     if coauthors:
-        lines.append(f'<p class="paper-coauthors">with {coauthors}</p>')
+        lines.append(
+            f'<p style="margin-left:5%;" class="paper-coauthors">with {coauthors}</p>'
+        )
 
     outlet = attrs.get("outlet", "")
-    if section_type == "working_paper":
+    if section_type in ["working_paper", "work_in_progress"]:
         meta = outlet
     else:
         date_str = _format_paper_date(attrs["date"])
         meta = f"{outlet}, {date_str}" if outlet else date_str
     if meta:
-        lines.append(f'<p class="paper-meta"><em>{meta}</em></p>')
+        lines.append(
+            f'<p style="margin-left:5%;" class="paper-meta"><em>{meta}</em></p>'
+        )
 
     abstract = attrs.get("abstract", "")
     if abstract:
         anchor = f"abstract-{_slugify(title)}"
         lines.append(
-            '<p class="paper-abstract-toggle">'
+            '<p style="margin-left:5%;" class="paper-abstract-toggle">'
             f'<a href="#" class="abstract-toggle" data-target="{anchor}">'
             '<span class="abstract-arrow">&#9654;</span> Abstract'
             "</a></p>"
         )
         lines.append(f'<p class="paper-abstract" id="{anchor}" hidden>{abstract}</p>')
 
-    return "<div class=\"paper\">\n" + "\n".join(lines) + "\n</div>"
+    return '<div class="paper">\n' + "\n".join(lines) + "\n</div>"
 
 
 def build_papers_html(papers_path):
@@ -104,16 +115,12 @@ def replace_math_blocks(text):
     Display math must be matched first to avoid double-matching.
     """
     text = re.sub(
-        r'\$\$(.+?)\$\$',
-        lambda m: f'<div>$${m.group(1)}$$</div>',
+        r"\$\$(.+?)\$\$",
+        lambda m: f"<div>$${m.group(1)}$$</div>",
         text,
-        flags=re.DOTALL
+        flags=re.DOTALL,
     )
-    text = re.sub(
-        r'\$(.+?)\$',
-        lambda m: f'<span>${m.group(1)}$</span>',
-        text
-    )
+    text = re.sub(r"\$(.+?)\$", lambda m: f"<span>${m.group(1)}$</span>", text)
     return text
 
 

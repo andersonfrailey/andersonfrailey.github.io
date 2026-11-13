@@ -1,23 +1,23 @@
 import argparse
 import json
-import requests
+from datetime import datetime, timedelta
+from pathlib import Path
+
 import markdown
 import pandas as pd
+import requests
 import statstables as st
-from datetime import datetime, timedelta
-from jinja2 import Template
 from bs4 import BeautifulSoup
-from pathlib import Path
+from jinja2 import Template
+from pybaseball import standings
 from utils import (
+    MLB_PROJECTION_COLUMNS,
+    NAME_TO_ABBR,
+    build_papers_html,
     replace_code_blocks,
     replace_math_blocks,
     replace_table_includes,
-    build_papers_html,
-    MLB_PROJECTION_COLUMNS,
-    NAME_TO_ABBR,
 )
-from pybaseball import standings
-
 
 CUR_PATH = Path(__file__).resolve().parent
 TEMPLATE_PATH = Path(CUR_PATH, "templates")
@@ -185,7 +185,7 @@ class PageBuilder:
                 )
                 opening_day = mlb_projections[
                     mlb_projections["date"] == datetime.strptime(OPENING_DAY, "%m%d%Y")
-                ]
+                ].copy()
                 final_standings = pd.concat(standings(YEAR))
                 final_standings["Team"] = final_standings["Tm"].map(NAME_TO_ABBR)
                 final_standings["W"] = final_standings["W"].astype(int)
@@ -239,6 +239,7 @@ class PageBuilder:
                 min_diff_team = ", ".join(min_diff_team)
                 avg_diff = comparison_data["Projected - Actual Wins"].abs().mean()
                 avg_diff_all = comparison_data["Projected - Actual Wins"].mean()
+                mse = (comparison_data["Projected - Actual Wins"] ** 2).mean()
                 max_over = comparison_data["Projected - Actual Wins"].max()
                 max_over_team = comparison_data["Team"][
                     comparison_data["Projected - Actual Wins"] == max_over
@@ -252,6 +253,7 @@ class PageBuilder:
                 summary_stats = (
                     f"Average difference between projected and actual wins: {avg_diff_all:.2f} wins<br>"
                     f"Average difference between projected and actual wins (absolute value): {avg_diff:.2f} wins<br>"
+                    f"Mean Squared Error: {mse:.2f}<br>"
                     f"Largest over projection: {max_over} wins ({max_over_team})<br>"
                     f"Largest under projection: {max_under} wins ({max_under_team})<br>"
                     f"Maximum difference between projected and actual wins (absolute value): {max_diff} wins ({max_diff_team})<br>"
