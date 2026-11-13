@@ -1,8 +1,28 @@
 {
+  "AI Job Exposure and Voting Behavior": {
+      "coauthors": "",
+      "type": "work_in_progress",
+      "status": "in_progress",
+      "outlet": "",
+      "link": "",
+      "online_appendix": "",
+      "date": "2026-11-10",
+      "abstract": ""
+  },
+  "Risk Preferences Among Skilled and Unskilled Prediction Market Bettors": {
+        "coauthors": "",
+        "type": "work_in_progress",
+        "status": "in_progress",
+        "outlet": "",
+        "link": "",
+        "online_appendix": "",
+        "date": "2026-11-10",
+        "abstract": ""
+    },
     "The Effects of Privacy Regulation on the Supply of Stolen Data": {
         "coauthors": "",
         "type": "working_paper",
-        "status": "in_progress",
+        "status": "submitted",
         "outlet": "",
         "link": "https://andersonfrailey.github.io/files/supply_of_stolen_data.pdf",
         "online_appendix": "https://andersonfrailey.github.io/files/supplyofstolendata_onlineappendix.pdf",
